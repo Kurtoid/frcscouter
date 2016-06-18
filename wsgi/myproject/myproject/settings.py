@@ -42,6 +42,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = (
+    'scoutingapp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

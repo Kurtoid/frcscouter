@@ -1,0 +1,36 @@
+{% include 'scoutingapp/base.html' %}
+{% load app_filters %}
+<a href="{% url 'scoutingapp:fieldsetupcontrol' %}" class="btn">Change Field Setup</a>
+{% if setupkey %}
+{{ setupkey }} 
+{% endif %} 
+<br>
+<br>
+<form action="{% url 'scoutingapp:scout' %}" method="POST">
+	{% csrf_token %}
+	{% for field in form %}
+    <div class="input-field">
+        {{ field }} {{ field.label_tag }}
+        {{ field.errors }}
+				{% if field.field.widget|klass == "NumberInput" %}
+				<a class="btn" onclick="document.getElementById('{{ field.auto_id}}').stepUp()"><i class="material-icons">add</i></a>
+				<a class="btn" onclick="document.getElementById('{{ field.auto_id}}').stepDown()"><i class="material-icons">remove</i></a>
+				<br>
+				<br>
+				{% endif %}
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+    </div>
+{% endfor %}
+<button class="btn waves-effect waves-light" type="submit" name="action">Submit <i class="material-icons right">send</i> </button>
+</form>	
+
+
+{% if form.subject.errors %}
+    <ol>
+    {% for error in form.subject.errors %}
+        <li><strong>{{ error|escape }}</strong></li>
+    {% endfor %}
+    </ol>
+{% endif %}

@@ -1,0 +1,15 @@
+{% include 'scoutingapp/base.html' %}
+<form action="{% url 'scoutingapp:userlogin' %}" method="POST">
+	{% csrf_token %}
+	{{ form }} 
+	<input type="submit" value="Submit" class="btn"/>
+</form>	
+<br>
+<a href="{% url 'scoutingapp:signup' %}" class="btn waves-effect waves-light">Sign Up</a>
+{% if form.username.errors %}
+    <ol>
+    {% for error in form.username.errors %}
+        <li><strong>{{ error|escape }}</strong></li>
+    {% endfor %}
+    </ol>
+{% endif %}
