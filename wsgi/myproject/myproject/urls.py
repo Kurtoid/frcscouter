@@ -17,6 +17,6 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^scoutingapp/', include('scoutingapp.urls', namespace="scoutingapp")),
+    url(r'^', include('scoutingapp.urls', namespace="scoutingapp")),
     url(r'^admin/', admin.site.urls),
 ]
