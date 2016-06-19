@@ -4,7 +4,7 @@ this module handles how forms are generated and sent to views
 from django.contrib.auth import authenticate
 from django.forms import ModelForm
 from django import forms
-from scoutingapp.models import MyUser, Match, FieldSetup
+from scoutingapp.models import MyUser, Match, FieldSetup, Defense
 
 
 class FieldSetupForm(ModelForm):
@@ -17,7 +17,7 @@ class FieldSetupForm(ModelForm):
 
     def save(self, commit=True):
         setup= super(FieldSetupForm, self).save(commit=False)
-        setup.defense1=FieldSetup.objects.get(code="XX")
+        setup.defense1=Defense.objects.get(code="XX")
         if commit:
             setup.save(commit=True)
         return setup
