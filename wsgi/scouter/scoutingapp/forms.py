@@ -19,7 +19,7 @@ class FieldSetupForm(ModelForm):
         setup= super(FieldSetupForm, self).save(commit=False)
         setup.defense1=Defense.objects.get(code="XX")
         if commit:
-            setup.save(commit=True)
+            setup.save()
         return setup
 
 class SignUpForm(ModelForm):
