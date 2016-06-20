@@ -1,13 +1,10 @@
 {% include 'scoutingapp/base.html' %}
 {% load app_filters %}
-<a href="{% url 'scoutingapp:fieldsetupcontrol' %}" class="btn">Change Field Setup</a>
-{% if setupkey %}
-{{ setupkey }} 
-{% endif %} 
 <br>
 <br>
 <form action="{% url 'scoutingapp:scout' %}" method="POST">
 	{% csrf_token %}
+	{{ fieldsetform }}
 	{% for field in form %}
     <div class="input-field">
         {{ field }} {{ field.label_tag }}

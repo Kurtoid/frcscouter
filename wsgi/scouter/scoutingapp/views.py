@@ -89,12 +89,12 @@ def scout(request):
     if request.user.is_authenticated():
         if request.method == 'POST':
             form = ScoutingForm(request.POST)
-            if form.is_valid():
+            fieldsetform = FieldSetupForm(request.POST)
+            if form.is_valid() and fieldsetform.is_valid():
                 match = form.save(commit=False)
+                fieldset = fieldsetform.save()
                 match.scouted_by = request.user
-                if request.session.get('fsetup'):
-                    print(request.session.get('fsetup'))
-                    match.field_setup = FieldSetup.objects.get(id=request.session['fsetup'])
+                match.field_setup = fieldset
                 match.save()
                 # proccess form
                 return HttpResponseRedirect('/scoutingapp/')
@@ -102,9 +102,12 @@ def scout(request):
                 print(form.errors)
         else:
             form = ScoutingForm()
+            fieldsetform = FieldSetupForm()
 
         if request.session.get('fsetup'):
             return render(request, 'scoutingapp/scout.html', {'form': form,
+                                                              'fieldsetform':
+                                                              fieldsetform,
                                                               'setupkey':
                                                               FieldSetup.objects.get(id=request.session.get('fsetup'))})
         return render(request, 'scoutingapp/scout.html', {'form': form})
