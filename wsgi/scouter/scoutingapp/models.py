@@ -6,6 +6,10 @@ from django.contrib.auth.models import (
 # Create your models here.
 
 
+class Tournament(models.Model):
+    name = models.CharField(max_length=200, default="UNAMED")
+
+
 class Team(models.Model):
     team_number = models.DecimalField(max_digits=5, decimal_places=0,
                                       default=0000, primary_key=True)
@@ -113,10 +117,14 @@ class Defense(models.Model):
 class FieldSetup(models.Model):
     defense1 = models.ForeignKey(Defense, related_name="Defense_1",
                                  on_delete=models.CASCADE)
-    defense2 = models.ForeignKey(Defense, related_name="Defense_2", on_delete=models.CASCADE)
-    defense3 = models.ForeignKey(Defense, related_name="Defense_3", on_delete=models.CASCADE)
-    defense4 = models.ForeignKey(Defense, related_name="Defense_4", on_delete=models.CASCADE)
-    defense5 = models.ForeignKey(Defense, related_name="Defense_5", on_delete=models.CASCADE)
+    defense2 = models.ForeignKey(Defense, related_name="Defense_2",
+                                 on_delete=models.CASCADE)
+    defense3 = models.ForeignKey(Defense, related_name="Defense_3",
+                                 on_delete=models.CASCADE)
+    defense4 = models.ForeignKey(Defense, related_name="Defense_4",
+                                 on_delete=models.CASCADE)
+    defense5 = models.ForeignKey(Defense, related_name="Defense_5",
+                                 on_delete=models.CASCADE)
 
     def __str__(self):
         result = self.defense1.name + " "
@@ -127,7 +135,6 @@ class FieldSetup(models.Model):
         return result
 
 
-
 class Match(models.Model):
     match_number = models.DecimalField(max_digits=100, decimal_places=0,
                                        default=0)
@@ -136,13 +143,16 @@ class Match(models.Model):
     scouted_by = models.ForeignKey(MyUser, on_delete=models.CASCADE)
     crossed_defense_on_auto = models.BooleanField(default=False)
     auto_defense_crossed = models.DecimalField(max_digits=1, decimal_places=0,
-                                               default=False )
-    auto_balls = models.DecimalField(max_digits=10, decimal_places=0, default=0)
-    high_balls = models.DecimalField(max_digits=10, decimal_places=0, default=0)
-    low_balls = models.DecimalField(max_digits=10, decimal_places=0, default=0)
-    score = models.DecimalField(max_digits=10, decimal_places=0, default=0)
-    did_loops = models.DecimalField(max_digits=100, decimal_places=0,
+                                               default=False)
+    auto_balls = models.DecimalField(max_digits=10, decimal_places=0,
+                                     default=0)
+    high_balls = models.DecimalField(max_digits=10, decimal_places=0,
+                                     default=0)
+    low_balls = models.DecimalField(max_digits=10, decimal_places=0,
                                     default=0)
+    score = models.DecimalField(max_digits=10, decimal_places=0, default=0)
+    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
+                                   null=True)
 
     class Meta:
         verbose_name = "Match"
