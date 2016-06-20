@@ -14,6 +14,7 @@ DJ_PROJECT_DIR = os.path.dirname(__file__)
 BASE_DIR = os.path.dirname(DJ_PROJECT_DIR)
 WSGI_DIR = os.path.dirname(BASE_DIR)
 REPO_DIR = os.path.dirname(WSGI_DIR)
+print(WSGI_DIR)
 
 ON_OPENSHIFT=False
 if 'OPENSHIFT_REPO_DIR' in os.environ:
@@ -35,7 +36,10 @@ SECRETS = secrets.getter(os.path.join(DATA_DIR, 'secrets.json'))
 SECRET_KEY = SECRETS['secret_key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG') == 'True'
+if ON_OPENSHIFT:
+    DEBUG = os.environ.get('DEBUG') == 'True'
+else:
+    DEBUG=True
 
 AUTH_USER_MODEL='scoutingapp.MyUser'
 
@@ -124,4 +128,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(WSGI_DIR, 'static')
+STATIC_ROOT = os.path.join(DATA_DIR, 'static')
