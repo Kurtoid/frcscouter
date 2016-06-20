@@ -81,3 +81,4 @@ class ScoutingForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(ScoutingForm, self).__init__(*args, **kwargs)
         self.fields['auto_defense_crossed'].required = False
+        self.fields['tournament'].required = False
