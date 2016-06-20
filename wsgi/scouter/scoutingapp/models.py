@@ -9,6 +9,9 @@ from django.contrib.auth.models import (
 class Tournament(models.Model):
     name = models.CharField(max_length=200, default="UNAMED")
 
+    def __str__(self):
+        return self.name
+
 
 class Team(models.Model):
     team_number = models.DecimalField(max_digits=5, decimal_places=0,

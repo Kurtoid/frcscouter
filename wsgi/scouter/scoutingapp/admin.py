@@ -7,7 +7,8 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from scoutingapp.models import MyUser, Team, Match, FieldSetup, Defense
+from scoutingapp.models import (MyUser, Team, Match, FieldSetup, Defense,
+                                Tournament)
 
 
 class DefenseAdmin(admin.ModelAdmin):
@@ -116,6 +117,7 @@ admin.site.register(Team, TeamAdmin)
 admin.site.register(Match, MatchAdmin)
 admin.site.register(Defense, DefenseAdmin)
 admin.site.register(FieldSetup)
+admin.site.register(Tournament)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
 admin.site.unregister(Group)
