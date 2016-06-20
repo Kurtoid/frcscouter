@@ -14,7 +14,6 @@ DJ_PROJECT_DIR = os.path.dirname(__file__)
 BASE_DIR = os.path.dirname(DJ_PROJECT_DIR)
 WSGI_DIR = os.path.dirname(BASE_DIR)
 REPO_DIR = os.path.dirname(WSGI_DIR)
-print(WSGI_DIR)
 
 ON_OPENSHIFT=False
 if 'OPENSHIFT_REPO_DIR' in os.environ:
@@ -109,7 +108,7 @@ DATABASES = {
         'NAME': os.path.join(DATA_DIR, 'db.sqlite3'),
     }
 }
-
+print(os.path.join(DATA_DIR, 'db.sqlite3'))
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
