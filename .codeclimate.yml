@@ -30,3 +30,4 @@ ratings:
   - "**.rb"
 exclude_paths:
   - "wsgi/scouter/scoutingapp/static/scoutingapp/materialize"
+  - "wsgi/scouter/scoutingapp/migrations"
