@@ -4,7 +4,12 @@
 <br>
 <form action="{% url 'scoutingapp:scout' %}" method="POST">
 	{% csrf_token %}
-	{{ fieldsetform }}
+	{% for field in fieldsetform %}
+	<div class = "input-field">
+        {{ field }} {{ field.label_tag }}
+        {{ field.errors }}
+	</div>
+	{% endfor %}
 	{% for field in form %}
     <div class="input-field">
         {{ field }} {{ field.label_tag }}
@@ -24,10 +29,3 @@
 </form>	
 
 
-{% if form.subject.errors %}
-    <ol>
-    {% for error in form.subject.errors %}
-        <li><strong>{{ error|escape }}</strong></li>
-    {% endfor %}
-    </ol>
-{% endif %}

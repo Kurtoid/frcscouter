@@ -110,6 +110,7 @@ def scout(request):
                                                               fieldsetform,
                                                               'setupkey':
                                                               FieldSetup.objects.get(id=request.session.get('fsetup'))})
-        return render(request, 'scoutingapp/scout.html', {'form': form})
+        return render(request, 'scoutingapp/scout.html', {'form': form,
+                                                          'fieldsetform': fieldsetform})
     else:
         return HttpResponseRedirect('/scoutingapp/userlogin/')
