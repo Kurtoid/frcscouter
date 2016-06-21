@@ -15,13 +15,13 @@ BASE_DIR = os.path.dirname(DJ_PROJECT_DIR)
 WSGI_DIR = os.path.dirname(BASE_DIR)
 REPO_DIR = os.path.dirname(WSGI_DIR)
 
-ON_OPENSHIFT=False
+ON_OPENSHIFT = False
 if 'OPENSHIFT_REPO_DIR' in os.environ:
-    ON_OPENSHIFT=True
+    ON_OPENSHIFT = True
 if ON_OPENSHIFT:
     DATA_DIR = os.environ.get('OPENSHIFT_DATA_DIR', BASE_DIR)
 else:
-    DATA_DIR=DJ_PROJECT_DIR
+    DATA_DIR = DJ_PROJECT_DIR
 
 import sys
 sys.path.append(os.path.join(REPO_DIR, 'libs'))
@@ -38,20 +38,22 @@ SECRET_KEY = SECRETS['secret_key']
 if ON_OPENSHIFT:
     DEBUG = os.environ.get('DEBUG') == 'True'
 else:
-    DEBUG=True
+    DEBUG = True
 
-AUTH_USER_MODEL='scoutingapp.MyUser'
+AUTH_USER_MODEL = 'scoutingapp.MyUser'
 
 if ON_OPENSHIFT:
     from socket import gethostname
     ALLOWED_HOSTS = [
-        gethostname(), # For internal OpenShift load balancer security purposes.
-        os.environ.get('OPENSHIFT_APP_DNS'), # Dynamically map to the OpenShift gear name.
+        # For internal OpenShift load balancer security purposes.
+        gethostname(),
+        # Dynamically map to the OpenShift gear name.
+        os.environ.get('OPENSHIFT_APP_DNS'),
         #'example.com', # First DNS alias (set up in the app)
         #'www.example.com', # Second DNS alias (set up in the app)
     ]
 else:
-    ALLOWED_HOSTS=[]
+    ALLOWED_HOSTS = []
 
 
 # Application definition
