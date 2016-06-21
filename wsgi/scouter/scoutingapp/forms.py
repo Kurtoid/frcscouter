@@ -16,11 +16,12 @@ class FieldSetupForm(ModelForm):
         exclude = ['defense1']
 
     def save(self, commit=True):
-        setup= super(FieldSetupForm, self).save(commit=False)
-        setup.defense1=Defense.objects.get(code="XX")
+        setup = super(FieldSetupForm, self).save(commit=False)
+        setup.defense1 = Defense.objects.get(code="XX")
         if commit:
             setup.save()
         return setup
+
 
 class SignUpForm(ModelForm):
     """ handles generation of the sign up form """

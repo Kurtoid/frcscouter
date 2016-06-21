@@ -51,7 +51,7 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save(commit=False)
-            form.scouted_by=request.user
+            form.scouted_by = request.user
             form.save()
             # proccess form
             return HttpResponseRedirect('/scoutingapp/signupcomplete/')
@@ -75,7 +75,7 @@ def signupcomplete(request):
 def usercontrolpanel(request):
     if request.user.is_authenticated():
         return render(request, 'scoutingapp/usercontrolpanel.html', {'user':
-                                                                      request.user})
+                                                                     request.user})
     return HttpResponse("usercontrolpanel")
 
 

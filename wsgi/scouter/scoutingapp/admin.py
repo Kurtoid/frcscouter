@@ -102,6 +102,7 @@ class UserAdmin(BaseUserAdmin):
 
 
 class MatchAdmin(admin.ModelAdmin):
+
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'scouted_by':
             kwargs['initial'] = request.user.id

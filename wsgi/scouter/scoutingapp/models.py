@@ -34,6 +34,7 @@ class Team(models.Model):
 
 
 class MyUserManager(BaseUserManager):
+
     def create_user(self, email, password=None):
         """
         creates and saves a user
