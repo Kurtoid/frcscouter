@@ -29,7 +29,7 @@ def fieldsetupcontrol(request):
 
         return render(request, 'scoutingapp/fieldsetupcontrol.html', {'form': form})
     else:
-        return HttpResponseRedirect('/scoutingapp/userlogin')
+        return HttpResponseRedirect('/scoutingapp/userlogin/')
 
 
 def userlogin(request):
@@ -112,4 +112,4 @@ def scout(request):
                                                               FieldSetup.objects.get(id=request.session.get('fsetup'))})
         return render(request, 'scoutingapp/scout.html', {'form': form})
     else:
-        return HttpResponseRedirect('/scoutingapp/userlogin')
+        return HttpResponseRedirect('/scoutingapp/userlogin/')
