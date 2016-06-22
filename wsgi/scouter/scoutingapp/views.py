@@ -3,6 +3,7 @@ from django.shortcuts import render
 from .forms import SignUpForm, LoginForm, ScoutingForm, FieldSetupForm
 from .models import FieldSetup
 from django.contrib.auth import logout, login
+from django.contrib import messages
 # Create your views here.
 
 
@@ -39,6 +40,8 @@ def userlogin(request):
             login(request, form.getuser())
             if(request.user.is_authenticated()):
                 print("auth done")
+                messages.add_message(request, messages.INFO, 'You are now'
+                                     ' logged in.')
             # TODO process
             return HttpResponseRedirect('/scoutingapp/')
     else:
