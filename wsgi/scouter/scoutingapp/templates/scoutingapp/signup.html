@@ -1,5 +1,4 @@
-{% extends "base.html" %}
-
+{% extends "scouting/base.html" %}
 {% block content %}
 <form action="{% url 'scoutingapp:signup' %}" method="POST">
 	{% csrf_token %}
