@@ -19,20 +19,46 @@
 		</script>
 	</head>
   <body>
+		<header>
+			<nav>
+				<div class="nav-wrapper green">
+					<a href="#" class="brand-logo">Team 179's Scouting App</a>
+				</div>
+			</nav>
+		</header>
+		<main>
+			{% block content %}{% endblock content %}
+			{% if messages %}
+						{% for message in messages %}
+							<script>Materialize.toast('{{ message}}')</script>
+						{% endfor %}
+			{% endif %}
+		</main>
+
+		 <footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">By Team 179</h5>
+                <p class="grey-text text-lighten-4">Currently in development</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="http://www.179swampthing.org/!">Team Website</a></li>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2016 Team 179 
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+        </footer>
+
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script type="text/javascript" src="{% static "scoutingapp/materialize/js/materialize.js" %}"></script>
 		<script type="text/javascript" src="{% static "scoutingapp/main.js" %}"></script>
-		<nav>
-			<div class="nav-wrapper green">
-				<a href="#" class="brand-logo">Team 179's Scouting App</a>
-			</div>
-  	</nav>
-		<br>
-		{% block content %}{% endblock content %}
-		{% if messages %}
-			    {% for message in messages %}
-						<script>Materialize.toast('{{ message}}')</script>
-					{% endfor %}
-		{% endif %}
 	</body>
 </html>

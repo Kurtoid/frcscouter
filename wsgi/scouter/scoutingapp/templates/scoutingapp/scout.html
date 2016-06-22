@@ -1,4 +1,6 @@
-{% include 'scoutingapp/base.html' %}
+{% extends "scoutingapp/base.html" %}
+
+{% block content %}
 {% load app_filters %}
 <br>
 <form action="{% url 'scoutingapp:scout' %}" method="POST">
@@ -35,4 +37,4 @@
 <button class="btn waves-effect waves-light" type="submit" name="action">Submit <i class="material-icons right">send</i> </button>
 </form>	
 
-
+{% endblock content %}
