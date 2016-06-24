@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from .forms import SignUpForm, LoginForm, ScoutingForm, FieldSetupForm
-from .models import FieldSetup
+from .models import FieldSetup, Match
 from django.contrib.auth import logout, login
 from django.contrib import messages
 # Create your views here.
@@ -31,6 +31,11 @@ def fieldsetupcontrol(request):
         return render(request, 'scoutingapp/fieldsetupcontrol.html', {'form': form})
     else:
         return HttpResponseRedirect('/scoutingapp/userlogin/')
+
+
+def viewrounds(request):
+    matches = Match.objects.all()
+    return render(request, 'scoutingapp/viewrounds.html', {'rounds': matches})
 
 
 def userlogin(request):
