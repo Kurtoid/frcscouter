@@ -19,7 +19,7 @@ class SortViewMatchForm(forms.Form):
 class MatchNumberAttribs(forms.Form):
     scouted_team = forms.ModelMultipleChoiceField(
         queryset=Team.objects.all(), widget=forms.SelectMultiple)
-    crossed_def = forms.NullBooleanField()
+    crossed_def = forms.NullBooleanField(label="Crossed defense on auto")
 
     def __init__(self, *args, **kwargs):
             super(MatchNumberAttribs, self).__init__(*args, **kwargs)
