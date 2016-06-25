@@ -53,6 +53,9 @@ def viewrounds(request):
             if matchattribform.cleaned_data['scouted_team']:
                 teamlist = matchattribform.cleaned_data['scouted_team']
                 matchlist = matchlist.filter(scouted_team__in=teamlist)
+            if matchattribform.cleaned_data['crossed_def'] is not None:
+                crossdef= matchattribform.cleaned_data['crossed_def']
+                matchlist = matchlist.filter(crossed_defense_on_auto=crossdef)
     matches = MatchTable(matchlist)
     RequestConfig(request).configure(matches)
 
