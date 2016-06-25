@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from .forms import SignUpForm, LoginForm, ScoutingForm, FieldSetupForm, SortViewMatchForm
+from .forms import SignUpForm, LoginForm, ScoutingForm, FieldSetupForm, SortViewMatchForm, MatchNumberAttribs
 from .models import FieldSetup, Match, Tournament
 from django.contrib.auth import logout, login
 from django.contrib import messages
@@ -40,21 +40,28 @@ def fieldsetupcontrol(request):
 
 def viewrounds(request):
     tform = SortViewMatchForm()
-    matches = MatchTable(Match.objects.all())
+    matchattribform = MatchNumberAttribs()
+    matchlist = Match.objects.all()
     # enables ordering
     if request.method=="POST":
         tform = SortViewMatchForm(request.POST)
-        if tform.is_valid():
+        if tform.is_valid() and tform.cleaned_data['tourney_select']:
             tlist = tform.cleaned_data['tourney_select']
-            print(type(tlist))
-            print(tlist)
-            matches =MatchTable(Match.objects.filter(tournament__in=tlist))
+            matchlist = matchlist.filter(tournament__in=tlist)
+        matchattribform = MatchNumberAttribs(request.POST)
+        if matchattribform.is_valid():
+            if matchattribform.cleaned_data['scouted_team']:
+                teamlist = matchattribform.cleaned_data['scouted_team']
+                matchlist = matchlist.filter(scouted_team__in=teamlist)
+    matches = MatchTable(matchlist)
     RequestConfig(request).configure(matches)
 
     return render(request, 'scoutingapp/viewrounds.html', {'rounds': matches,
                                                            'tournaments':
                                                            Tournament.objects.all(),
-                                                           'tform': tform})
+                                                           'tform': tform,
+                                                           'matchattribform':
+                                                           matchattribform})
 
 
 def userlogin(request):
