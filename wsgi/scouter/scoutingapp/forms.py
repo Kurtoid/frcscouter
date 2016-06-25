@@ -4,7 +4,12 @@ this module handles how forms are generated and sent to views
 from django.contrib.auth import authenticate
 from django.forms import ModelForm
 from django import forms
-from scoutingapp.models import MyUser, Match, FieldSetup, Defense
+from scoutingapp.models import MyUser, Match, FieldSetup, Defense, Tournament
+
+
+class SortViewMatchForm(forms.Form):
+    tourney_select = forms.ModelMultipleChoiceField(
+        queryset=Tournament.objects.all(), widget=forms.SelectMultiple)
 
 
 class FieldSetupForm(ModelForm):

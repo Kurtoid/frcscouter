@@ -1,9 +1,12 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from .forms import SignUpForm, LoginForm, ScoutingForm, FieldSetupForm
-from .models import FieldSetup, Match
+from .forms import SignUpForm, LoginForm, ScoutingForm, FieldSetupForm, SortViewMatchForm
+from .models import FieldSetup, Match, Tournament
 from django.contrib.auth import logout, login
 from django.contrib import messages
+from .tables import MatchTable
+from django_tables2 import RequestConfig
+
 # Create your views here.
 
 
@@ -28,14 +31,30 @@ def fieldsetupcontrol(request):
         else:
             form = FieldSetupForm()
 
-        return render(request, 'scoutingapp/fieldsetupcontrol.html', {'form': form})
+        return render(request,
+                      'scoutingapp/fieldsetupcontrol.html',
+                      {'form': form})
     else:
         return HttpResponseRedirect('/scoutingapp/userlogin/')
 
 
 def viewrounds(request):
-    matches = Match.objects.all()
-    return render(request, 'scoutingapp/viewrounds.html', {'rounds': matches})
+    tform = SortViewMatchForm()
+    matches = MatchTable(Match.objects.all())
+    # enables ordering
+    if request.method=="POST":
+        tform = SortViewMatchForm(request.POST)
+        if tform.is_valid():
+            tlist = tform.cleaned_data['tourney_select']
+            print(type(tlist))
+            print(tlist)
+            matches =MatchTable(Match.objects.filter(tournament__in=tlist))
+    RequestConfig(request).configure(matches)
+
+    return render(request, 'scoutingapp/viewrounds.html', {'rounds': matches,
+                                                           'tournaments':
+                                                           Tournament.objects.all(),
+                                                           'tform': tform})
 
 
 def userlogin(request):
@@ -71,7 +90,9 @@ def signup(request):
 
 def logincomplete(request):
     if request.user.is_authenticated():
-        return render(request, 'scoutingapp/logincomplete.html', {'user': request.user})
+        return render(request,
+                      'scoutingapp/logincomplete.html',
+                      {'user': request.user})
     else:
         return HttpResponse("user not logged in!")
 
@@ -82,8 +103,9 @@ def signupcomplete(request):
 
 def usercontrolpanel(request):
     if request.user.is_authenticated():
-        return render(request, 'scoutingapp/usercontrolpanel.html', {'user':
-                                                                     request.user})
+        return render(
+            request, 'scoutingapp/usercontrolpanel.html',
+            {'user': request.user})
     return HttpResponse("usercontrolpanel")
 
 
@@ -113,12 +135,13 @@ def scout(request):
             fieldsetform = FieldSetupForm()
 
         if request.session.get('fsetup'):
-            return render(request, 'scoutingapp/scout.html', {'form': form,
-                                                              'fieldsetform':
-                                                              fieldsetform,
-                                                              'setupkey':
-                                                              FieldSetup.objects.get(id=request.session.get('fsetup'))})
-        return render(request, 'scoutingapp/scout.html', {'form': form,
-                                                          'fieldsetform': fieldsetform})
+            return render(
+                request, 'scoutingapp/scout.html',
+                {'form': form, 'fieldsetform': fieldsetform,
+                 'setupkey': FieldSetup.objects.get(
+                     id=request.session.get('fsetup'))})
+        return render(
+            request, 'scoutingapp/scout.html',
+            {'form': form, 'fieldsetform': fieldsetform})
     else:
         return HttpResponseRedirect('/scoutingapp/userlogin/')
