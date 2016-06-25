@@ -56,6 +56,9 @@ def viewrounds(request):
             if matchattribform.cleaned_data['crossed_def'] is not None:
                 crossdef= matchattribform.cleaned_data['crossed_def']
                 matchlist = matchlist.filter(crossed_defense_on_auto=crossdef)
+            if matchattribform.cleaned_data['auto_defense_crossed'] is not None:
+                crossdef= matchattribform.cleaned_data['auto_defense_crossed']
+                matchlist = matchlist.filter(auto_defense_crossed=crossdef)
     matches = MatchTable(matchlist)
     RequestConfig(request).configure(matches)
 

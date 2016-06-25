@@ -20,11 +20,13 @@ class MatchNumberAttribs(forms.Form):
     scouted_team = forms.ModelMultipleChoiceField(
         queryset=Team.objects.all(), widget=forms.SelectMultiple)
     crossed_def = forms.NullBooleanField(label="Crossed defense on auto")
+    auto_defense_crossed = forms.DecimalField(max_digits=1, decimal_places=0)
 
     def __init__(self, *args, **kwargs):
             super(MatchNumberAttribs, self).__init__(*args, **kwargs)
             self.fields['scouted_team'].required = False
             self.fields['crossed_def'].required = False
+            self.fields['auto_defense_crossed'].required = False
 
 
 class FieldSetupForm(ModelForm):

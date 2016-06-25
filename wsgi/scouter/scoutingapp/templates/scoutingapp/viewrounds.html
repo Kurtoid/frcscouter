@@ -30,7 +30,13 @@ div.collapsible-body {
 							Match Attributes
 						</div>
 						<div class="collapsible-body white" >
-								{{ matchattribform }}
+							{% for field in matchattribform %}
+							<div class="input-field">
+								{{ field }}
+								{{ field.label_tag }}
+							</div>
+							<br>
+								{% endfor %}
 						</div>
 
 					</li>
