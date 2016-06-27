@@ -22,17 +22,21 @@
 		<header>
 			<nav>
 				<div class="nav-wrapper green">
-					<a href="#" class="brand-logo">Team 179's Scouting App</a>
+					<a href="{% url "scoutingapp:index" %}" class="brand-logo">Team 179's Scouting App</a>
+					<ul class="right hide-on-med-and-down">
+						<a href="{% url 'scoutingapp:index' %}">Main</a>
+            <a class="right hide-on-med-and-down" href="http://www.179swampthing.org/!">Team Website</a>
+					</ul>
 				</div>
 			</nav>
 		</header>
 		<main>
-			{% block content %}{% endblock content %}
-			{% if messages %}
-						{% for message in messages %}
-							<script>Materialize.toast('{{ message}}')</script>
-						{% endfor %}
-			{% endif %}
+				{% block content %}{% endblock content %}
+				{% if messages %}
+							{% for message in messages %}
+								<script>Materialize.toast('{{ message}}')</script>
+							{% endfor %}
+				{% endif %}
 		</main>
 
 		 <footer class="page-footer green">
@@ -60,6 +64,7 @@
         </footer>
 
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="{% static "scoutingapp/jquery.smoothState.min.js" %}"></script>
 		<script type="text/javascript" src="{% static "scoutingapp/materialize/js/materialize.js" %}"></script>
 		<script type="text/javascript" src="{% static "scoutingapp/main.js" %}"></script>
 	</body>
