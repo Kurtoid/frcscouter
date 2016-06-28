@@ -43,7 +43,7 @@ def viewrounds(request):
     matchattribform = MatchNumberAttribs()
     matchlist = Match.objects.all()
     # enables ordering
-    if request.method=="POST":
+    if request.method == "POST":
         tform = SortViewMatchForm(request.POST)
         if tform.is_valid() and tform.cleaned_data['tourney_select']:
             tlist = tform.cleaned_data['tourney_select']
@@ -54,10 +54,10 @@ def viewrounds(request):
                 teamlist = matchattribform.cleaned_data['scouted_team']
                 matchlist = matchlist.filter(scouted_team__in=teamlist)
             if matchattribform.cleaned_data['crossed_def'] is not None:
-                crossdef= matchattribform.cleaned_data['crossed_def']
+                crossdef = matchattribform.cleaned_data['crossed_def']
                 matchlist = matchlist.filter(crossed_defense_on_auto=crossdef)
             if matchattribform.cleaned_data['auto_defense_crossed'] is not None:
-                crossdef= matchattribform.cleaned_data['auto_defense_crossed']
+                crossdef = matchattribform.cleaned_data['auto_defense_crossed']
                 matchlist = matchlist.filter(auto_defense_crossed=crossdef)
     matches = MatchTable(matchlist)
     RequestConfig(request).configure(matches)
@@ -158,3 +158,11 @@ def scout(request):
             {'form': form, 'fieldsetform': fieldsetform})
     else:
         return HttpResponseRedirect('/scoutingapp/userlogin/')
+
+
+def demo_scout_page(request):
+    fieldsetform = FieldSetupForm()
+    form = ScoutingForm()
+    return render(request, 'scoutingapp/scout.html', {'form': form,
+                                                      'fieldsetform':
+                                                      fieldsetform})

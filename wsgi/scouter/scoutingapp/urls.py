@@ -15,6 +15,7 @@ urlpatterns = [
         name='usercontrolpanel'),
     url(r'^logoutuser/$', views.logoutuser, name='logoutuser'),
     url(r'^scout/$', views.scout, name='scout'),
+    url(r'^demoscout/$', views.demo_scout_page, name='demo_scout_page'),
     url(r'^fieldsetup/$', views.fieldsetupcontrol, name='fieldsetupcontrol'),
     url(r'^viewrounds/$', views.viewrounds, name='viewrounds'),
 ]
