@@ -24,8 +24,14 @@
         {{ field }} {{ field.label_tag }}
         {{ field.errors }}
 				{% if field.field.widget|klass == "NumberInput" %}
-					<a class="btn-large" onclick="document.getElementById('{{ field.auto_id}}').stepUp()"><i class="material-icons">add</i></a>
-				<a class="btn-large" onclick="document.getElementById('{{ field.auto_id}}').stepDown()"><i class="material-icons">remove</i></a>
+				<div class="row">
+				<div class = "col s6">
+					<a class="btn-large" style="width: 100%" onclick="document.getElementById('{{ field.auto_id}}').stepUp()"><i class="material-icons">add</i></a>
+					</div>
+				<div class = "col s6">
+				<a class="btn-large" style="width: 100%" onclick="document.getElementById('{{ field.auto_id}}').stepDown()"><i class="material-icons">remove</i></a>
+					</div>
+				</div>
 				<br>
 				<br>
 				{% endif %}
