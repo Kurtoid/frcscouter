@@ -2,8 +2,15 @@
 {% block content %}
 <form action="{% url 'scoutingapp:signup' %}" method="POST">
 	{% csrf_token %}
-	{{ form.as_p }}
-	<input type="submit" class="btn" value="Submit" />
+	{% for field in form %}
+	<div class = "input-field">
+		{{ field }} {{ field.label_tag }}
+		{{ field.errors }}
+	</div>
+	{% endfor %}
+	<div style="text-align: center">
+		<input type="submit" class="btn" value="Submit"  />
+	</div>
 </form>	
 
 

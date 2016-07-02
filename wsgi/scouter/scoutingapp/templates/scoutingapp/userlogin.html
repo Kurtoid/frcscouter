@@ -4,7 +4,12 @@
 <div class="container">
 	<form action="{% url 'scoutingapp:userlogin' %}" method="POST">
 		{% csrf_token %}
-		{{ form }} 
+		{% for field in form %}
+			  <div class = "input-field">
+			   {{ field }} {{ field.label_tag }}
+			   {{ field.errors }}
+			  </div>
+			  {% endfor %}
 		<div style="text-align: center">
 			<input type="submit" value="Submit" class="btn"/>
 			<a href="{% url 'scoutingapp:signup' %}" class="btn waves-effect waves-light">Sign Up</a>
