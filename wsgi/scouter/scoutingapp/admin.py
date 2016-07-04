@@ -6,6 +6,7 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.forms.widgets import TextInput
 
 from scoutingapp.models import (MyUser, Team, Match, FieldSetup, Defense,
                                 Tournament)
@@ -15,14 +16,19 @@ class DefenseAdmin(admin.ModelAdmin):
     list_display = ('name', 'code')
 
 
-class TeamAdmin(admin.ModelAdmin):
-    fieldsets = (
-        (None, {
-            'fields': ('team_number', 'team_name')
-        }),
-    )
-    list_display = ('team_number', 'team_name')
+class TeamCreateForm(forms.ModelForm):
+    class Meta:
+        model = Team
+        fields = ('team_name', 'team_number', 'team_color')
+        widgets = {
+                  'team_color': TextInput(attrs={'type': 'color'}),
+                  }
+    
 
+
+class TeamAdmin(admin.ModelAdmin):
+    list_display = ('team_number', 'team_name')
+    form = TeamCreateForm
 
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required

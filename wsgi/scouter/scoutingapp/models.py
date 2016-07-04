@@ -18,6 +18,8 @@ class Team(models.Model):
                                       default=0000, primary_key=True)
     team_name = models.CharField(max_length=200, default="UNNAMED")
 
+    team_color = models.CharField(max_length=7, null=True)
+
     class Meta:
         verbose_name = "Team"
         verbose_name_plural = "Teams"
