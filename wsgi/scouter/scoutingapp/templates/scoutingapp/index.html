@@ -11,7 +11,7 @@
 <a class="waves-effect waves-light btn" href="{% url 'scoutingapp:logoutuser' %}"><i class="material-icons right">exit_to_app</i>Logout</a><br>
 {% else %}
 <br>
-<a class="waves-effect waves-light btn" href="{% url 'scoutingapp:userlogin' %}">Login</a>
+<a class="waves-effect waves-light btn" href="{% url 'scoutingapp:userlogin' %}"><i class="material-icons right">account_box</i>Login</a>
 <a class="waves-effect waves-light btn" href="{% url 'scoutingapp:demo_scout_page' %}">Demo Scouting Page</a>
 <a class="waves-effect waves-light btn" href="{% url 'scoutingapp:signup' %}">Signup</a>
 {% endif %}
