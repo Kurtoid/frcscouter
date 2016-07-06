@@ -142,11 +142,12 @@ class FieldSetup(models.Model):
 
 
 class Match(models.Model):
+    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
+                                   null=True)
     match_number = models.DecimalField(max_digits=100, decimal_places=0,
                                        default=0)
-    field_setup = models.OneToOneField(FieldSetup, on_delete=models.CASCADE)
     scouted_team = models.ForeignKey(Team, on_delete=models.CASCADE)
-    scouted_by = models.ForeignKey(MyUser, on_delete=models.CASCADE)
+    field_setup = models.OneToOneField(FieldSetup, on_delete=models.CASCADE)
     crossed_defense_on_auto = models.BooleanField(default=False)
     auto_defense_crossed = models.DecimalField(max_digits=1, decimal_places=0,
                                                default=False)
@@ -157,8 +158,7 @@ class Match(models.Model):
     low_balls = models.DecimalField(max_digits=10, decimal_places=0,
                                     default=0)
     score = models.DecimalField(max_digits=10, decimal_places=0, default=0)
-    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
-                                   null=True)
+    scouted_by = models.ForeignKey(MyUser, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Match"
