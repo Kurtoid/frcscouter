@@ -106,3 +106,10 @@ class ScoutingForm(ModelForm):
         super(ScoutingForm, self).__init__(*args, **kwargs)
         self.fields['auto_defense_crossed'].required = False
         self.fields['tournament'].required = False
+        """
+        self.fields['defense1_crossed'].widget = forms.NumberInput(attrs={'class': 'col s6', })
+        self.fields['defense2_crossed'].widget = forms.NumberInput(attrs={'class': 'col s6', })
+        self.fields['defense3_crossed'].widget = forms.NumberInput(attrs={'class': 'col s6', })
+        self.fields['defense4_crossed'].widget = forms.NumberInput(attrs={'class': 'col s6', })
+        self.fields['defense5_crossed'].widget = forms.NumberInput(attrs={'class': 'col s6', })
+        """

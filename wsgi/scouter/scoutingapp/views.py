@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from .forms import (SignUpForm, LoginForm, ScoutingForm, FieldSetupForm,
-                    SortViewMatchForm, MatchNumberAttribs, ScoutingSetupForm)
+                    SortViewMatchForm, MatchNumberAttribs)
 from .models import FieldSetup, Match, Tournament
 from django.contrib.auth import logout, login
 from django.contrib import messages

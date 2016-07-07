@@ -153,6 +153,17 @@ class Match(models.Model):
                                                default=False)
     auto_balls = models.DecimalField(max_digits=10, decimal_places=0,
                                      default=0)
+    defense1_crossed = models.DecimalField(max_digits=10, decimal_places=0,
+                                           default=0)
+
+    defense2_crossed = models.DecimalField(max_digits=10, decimal_places=0,
+                                           default=0)
+    defense3_crossed = models.DecimalField(max_digits=10, decimal_places=0,
+                                           default=0)
+    defense4_crossed = models.DecimalField(max_digits=10, decimal_places=0,
+                                           default=0)
+    defense5_crossed = models.DecimalField(max_digits=10, decimal_places=0,
+                                           default=0)
     high_balls = models.DecimalField(max_digits=10, decimal_places=0,
                                      default=0)
     low_balls = models.DecimalField(max_digits=10, decimal_places=0,
