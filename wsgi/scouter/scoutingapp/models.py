@@ -122,15 +122,20 @@ class Defense(models.Model):
 
 class FieldSetup(models.Model):
     defense1 = models.ForeignKey(Defense, related_name="Defense_1",
-                                 on_delete=models.CASCADE)
+                                 on_delete=models.CASCADE,
+                                 verbose_name="Defense 1")
     defense2 = models.ForeignKey(Defense, related_name="Defense_2",
-                                 on_delete=models.CASCADE)
+                                 on_delete=models.CASCADE,
+                                 verbose_name="Defense 2")
     defense3 = models.ForeignKey(Defense, related_name="Defense_3",
-                                 on_delete=models.CASCADE)
+                                 on_delete=models.CASCADE,
+                                 verbose_name="Defense 3")
     defense4 = models.ForeignKey(Defense, related_name="Defense_4",
-                                 on_delete=models.CASCADE)
+                                 on_delete=models.CASCADE,
+                                 verbose_name="Defense 4")
     defense5 = models.ForeignKey(Defense, related_name="Defense_5",
-                                 on_delete=models.CASCADE)
+                                 on_delete=models.CASCADE,
+                                 verbose_name="Defense 5")
 
     def __str__(self):
         result = self.defense1.name + " "
@@ -150,20 +155,22 @@ class Match(models.Model):
     field_setup = models.OneToOneField(FieldSetup, on_delete=models.CASCADE)
     crossed_defense_on_auto = models.BooleanField(default=False)
     auto_defense_crossed = models.DecimalField(max_digits=1, decimal_places=0,
-                                               default=False)
+                                               default=False,
+                                               verbose_name="Auto - Defense"
+                                               "Crossed")
     auto_balls = models.DecimalField(max_digits=10, decimal_places=0,
-                                     default=0)
+                                     default=0, verbose_name="Auto - Balls"
+                                     "Made")
     defense1_crossed = models.DecimalField(max_digits=10, decimal_places=0,
-                                           default=0)
-
+                                           default=0, verbose_name="Defense 1")
     defense2_crossed = models.DecimalField(max_digits=10, decimal_places=0,
-                                           default=0)
+                                           default=0, verbose_name="Defense 2")
     defense3_crossed = models.DecimalField(max_digits=10, decimal_places=0,
-                                           default=0)
+                                           default=0, verbose_name="Defense 3")
     defense4_crossed = models.DecimalField(max_digits=10, decimal_places=0,
-                                           default=0)
+                                           default=0, verbose_name="Defense 4")
     defense5_crossed = models.DecimalField(max_digits=10, decimal_places=0,
-                                           default=0)
+                                           default=0, verbose_name="Defense 5")
     high_balls = models.DecimalField(max_digits=10, decimal_places=0,
                                      default=0)
     low_balls = models.DecimalField(max_digits=10, decimal_places=0,
