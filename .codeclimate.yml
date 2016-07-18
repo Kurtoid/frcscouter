@@ -30,5 +30,5 @@ ratings:
   - "**.rb"
 exclude_paths:
   - "wsgi/scouter/scoutingapp/static/scoutingapp/materialize"
-  - "wsgi/scouter/scoutingapp/static/scoutingapp/jquery**.js"
+  - "wsgi/scouter/scoutingapp/static/scoutingapp/**.js"
   - "wsgi/scouter/scoutingapp/migrations"
