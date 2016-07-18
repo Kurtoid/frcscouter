@@ -120,15 +120,6 @@ def signup(request):
     return render(request, 'scoutingapp/signup.html', {'form': form})
 
 
-def logincomplete(request):
-    if request.user.is_authenticated():
-        return render(request,
-                      'scoutingapp/logincomplete.html',
-                      {'user': request.user})
-    else:
-        return HttpResponse("user not logged in!")
-
-
 def usercontrolpanel(request):
     if request.user.is_authenticated():
         return render(
