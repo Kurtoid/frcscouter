@@ -157,10 +157,10 @@ class Match(models.Model):
     auto_defense_crossed = models.DecimalField(max_digits=1, decimal_places=0,
                                                default=False,
                                                verbose_name="Auto - Defense"
-                                               "Crossed")
+                                               " Crossed")
     auto_balls = models.DecimalField(max_digits=10, decimal_places=0,
                                      default=0, verbose_name="Auto - Balls"
-                                     "Made")
+                                     " Made")
     defense1_crossed = models.DecimalField(max_digits=10, decimal_places=0,
                                            default=0, verbose_name="Defense 1")
     defense2_crossed = models.DecimalField(max_digits=10, decimal_places=0,
