@@ -113,7 +113,7 @@ def signup(request):
             form.scouted_by = request.user
             form.save()
             # proccess form
-            return HttpResponseRedirect('/scoutingapp/signupcomplete/')
+            return HttpResponseRedirect('/scoutingapp/index/')
     else:
         form = SignUpForm()
 
@@ -127,10 +127,6 @@ def logincomplete(request):
                       {'user': request.user})
     else:
         return HttpResponse("user not logged in!")
-
-
-def signupcomplete(request):
-    return HttpResponse('DONE!')
 
 
 def usercontrolpanel(request):
