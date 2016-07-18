@@ -6,4 +6,4 @@ class MatchTable(tables.Table):
     class Meta:
         model = Match
         # add class="bordered"
-        attrs = {'class': 'bordered responsive-table'}
+        attrs = {'class': 'striped responsive-table'}  # materialze class

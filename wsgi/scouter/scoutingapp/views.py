@@ -1,7 +1,8 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from .forms import (SignUpForm, LoginForm, ScoutingForm, FieldSetupForm,
-                    SortViewMatchForm, MatchNumberAttribs)
+                    SortViewMatchForm, MatchNumberAttribs,
+                    MatchViewFormMetaOptions)
 from .models import FieldSetup, Match, Tournament
 from django.contrib.auth import logout, login
 from django.contrib import messages
@@ -42,7 +43,9 @@ def fieldsetupcontrol(request):
 def viewrounds(request):
     tform = SortViewMatchForm()
     matchattribform = MatchNumberAttribs()
+    viewoptionsform = MatchViewFormMetaOptions()
     matchlist = Match.objects.all()
+    fieldstoexclude = (None,)
     # enables ordering
     if request.method == "POST":
         tform = SortViewMatchForm(request.POST)
@@ -60,15 +63,30 @@ def viewrounds(request):
             if matchattribform.cleaned_data['auto_defense_crossed'] is not None:
                 crossdef = matchattribform.cleaned_data['auto_defense_crossed']
                 matchlist = matchlist.filter(auto_defense_crossed=crossdef)
-    matches = MatchTable(matchlist)
+        viewoptionsform = MatchViewFormMetaOptions(request.POST)
+        if viewoptionsform.is_valid():
+            print(viewoptionsform.cleaned_data['show_defense_count'])
+            if viewoptionsform.cleaned_data['show_defense_count'] is False:
+                fieldstoexclude = (
+                    'defense1_crossed', 'defense2_crossed', 'defense3_crossed',
+                    'defense4_crossed', 'defense5_crossed'
+                )
+                print('exclude defenses')
+        else:
+            print(viewoptionsform.errors)
+    matches = MatchTable(matchlist, exclude=fieldstoexclude)
     RequestConfig(request).configure(matches)
 
-    return render(request, 'scoutingapp/viewrounds.html', {'rounds': matches,
-                                                           'tournaments':
-                                                           Tournament.objects.all(),
-                                                           'tform': tform,
-                                                           'matchattribform':
-                                                           matchattribform})
+    return render(request, 'scoutingapp/viewrounds.html', {
+        'rounds': matches,
+        'tournaments':
+        Tournament.objects.all(),
+        'tform': tform,
+        'matchattribform':
+        matchattribform,
+        'viewoptionsform':
+        viewoptionsform
+    })
 
 
 def userlogin(request):

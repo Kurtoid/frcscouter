@@ -17,6 +17,14 @@ class SortViewMatchForm(forms.Form):
             self.fields['tourney_select'].required = False
 
 
+class MatchViewFormMetaOptions(forms.Form):
+    show_defense_count = forms.NullBooleanField(initial=True, 
+                                                widget=forms.CheckboxInput())
+
+    def __init__(self, *args, **kwargs):
+        super(MatchViewFormMetaOptions, self).__init__(*args, **kwargs)
+
+
 class MatchNumberAttribs(forms.Form):
     scouted_team = forms.ModelMultipleChoiceField(
         queryset=Team.objects.all(), widget=forms.SelectMultiple)
