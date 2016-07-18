@@ -13,12 +13,12 @@ class SortViewMatchForm(forms.Form):
         queryset=Tournament.objects.all(), widget=forms.SelectMultiple)
 
     def __init__(self, *args, **kwargs):
-            super(SortViewMatchForm, self).__init__(*args, **kwargs)
-            self.fields['tourney_select'].required = False
+        super(SortViewMatchForm, self).__init__(*args, **kwargs)
+        self.fields['tourney_select'].required = False
 
 
 class MatchViewFormMetaOptions(forms.Form):
-    show_defense_count = forms.NullBooleanField(initial=True, 
+    show_defense_count = forms.NullBooleanField(initial=True,
                                                 widget=forms.CheckboxInput())
 
     def __init__(self, *args, **kwargs):
@@ -32,10 +32,10 @@ class MatchNumberAttribs(forms.Form):
     auto_defense_crossed = forms.DecimalField(max_digits=1, decimal_places=0)
 
     def __init__(self, *args, **kwargs):
-            super(MatchNumberAttribs, self).__init__(*args, **kwargs)
-            self.fields['scouted_team'].required = False
-            self.fields['crossed_def'].required = False
-            self.fields['auto_defense_crossed'].required = False
+        super(MatchNumberAttribs, self).__init__(*args, **kwargs)
+        self.fields['scouted_team'].required = False
+        self.fields['crossed_def'].required = False
+        self.fields['auto_defense_crossed'].required = False
 
 
 class FieldSetupForm(ModelForm):

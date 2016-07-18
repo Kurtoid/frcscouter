@@ -3,6 +3,7 @@ from .models import Match
 
 
 class MatchTable(tables.Table):
+
     class Meta:
         model = Match
         # add class="bordered"

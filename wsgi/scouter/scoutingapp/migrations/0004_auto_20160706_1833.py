@@ -14,26 +14,31 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='match',
             name='defense1_crossed',
-            field=models.DecimalField(default=0, decimal_places=0, max_digits=10),
+            field=models.DecimalField(
+                default=0, decimal_places=0, max_digits=10),
         ),
         migrations.AddField(
             model_name='match',
             name='defense2_crossed',
-            field=models.DecimalField(default=0, decimal_places=0, max_digits=10),
+            field=models.DecimalField(
+                default=0, decimal_places=0, max_digits=10),
         ),
         migrations.AddField(
             model_name='match',
             name='defense3_crossed',
-            field=models.DecimalField(default=0, decimal_places=0, max_digits=10),
+            field=models.DecimalField(
+                default=0, decimal_places=0, max_digits=10),
         ),
         migrations.AddField(
             model_name='match',
             name='defense4_crossed',
-            field=models.DecimalField(default=0, decimal_places=0, max_digits=10),
+            field=models.DecimalField(
+                default=0, decimal_places=0, max_digits=10),
         ),
         migrations.AddField(
             model_name='match',
             name='defense5_crossed',
-            field=models.DecimalField(default=0, decimal_places=0, max_digits=10),
+            field=models.DecimalField(
+                default=0, decimal_places=0, max_digits=10),
         ),
     ]

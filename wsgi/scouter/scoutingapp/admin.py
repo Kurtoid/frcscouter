@@ -17,18 +17,19 @@ class DefenseAdmin(admin.ModelAdmin):
 
 
 class TeamCreateForm(forms.ModelForm):
+
     class Meta:
         model = Team
         fields = ('team_name', 'team_number', 'team_color')
         widgets = {
-                  'team_color': TextInput(attrs={'type': 'color'}),
-                  }
-    
+            'team_color': TextInput(attrs={'type': 'color'}),
+        }
 
 
 class TeamAdmin(admin.ModelAdmin):
     list_display = ('team_number', 'team_name')
     form = TeamCreateForm
+
 
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
