@@ -121,3 +121,8 @@ class ScoutingForm(ModelForm):
         self.fields['defense4_crossed'].widget = forms.NumberInput(attrs={'class': 'col s6', })
         self.fields['defense5_crossed'].widget = forms.NumberInput(attrs={'class': 'col s6', })
         """
+
+
+class importTeamForm(forms.Form):
+    team_number_begin = forms.IntegerField()
+    team_number_end= forms.IntegerField()

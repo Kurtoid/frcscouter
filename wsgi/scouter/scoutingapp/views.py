@@ -2,12 +2,14 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from .forms import (SignUpForm, LoginForm, ScoutingForm, FieldSetupForm,
                     SortViewMatchForm, MatchNumberAttribs,
-                    MatchViewFormMetaOptions)
-from .models import FieldSetup, Match, Tournament
+                    MatchViewFormMetaOptions, importTeamForm)
+from .models import FieldSetup, Match, Tournament, Team
 from django.contrib.auth import logout, login
 from django.contrib import messages
 from .tables import MatchTable
 from django_tables2 import RequestConfig
+from django.core.exceptions import ObjectDoesNotExist
+import requests
 
 # Create your views here.
 
@@ -172,3 +174,31 @@ def demo_scout_page(request):
     return render(request, 'scoutingapp/scout.html', {'form': form,
                                                       'fieldsetform':
                                                       fieldsetform})
+def import_from_TBA(request):
+    importform = importTeamForm()
+    if request.user.is_authenticated and request.user.is_admin:
+        if(request.method == 'POST'):
+            importform = importTeamForm(request.POST)
+            if importform.is_valid():
+                # process and return redirect
+                begin = importform.cleaned_data['team_number_begin']
+                end = importform.cleaned_data['team_number_end']
+                for x in range(begin, end):
+                    r = requests.get("http://www.thebluealliance.com/api/v2/team/frc{}".format(x),
+                                     headers={'X-TBA-App-Id':
+                                              'frc179:scoutingapp:v1'})
+                    if r.status_code == 200:
+                        print("Checking {}".format(x))
+                        try:
+                            Team.objects.get(team_number=x)
+                        except ObjectDoesNotExist:
+                            print('we dont know '
+                                  '{}'.format(r.json()['nickname']))
+                            team = Team(team_number=x,
+                                        team_name=r.json()['nickname'])
+                            team.save()
+                        print('{}: {}'.format(x, r.json()['nickname']))
+        return render(request, 'scoutingapp/importfromtba.html', {'form':
+                                                                  importform})
+    else:
+        return HttpResponse("Not logged in")
