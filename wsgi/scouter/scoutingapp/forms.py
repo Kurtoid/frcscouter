@@ -126,3 +126,7 @@ class ScoutingForm(ModelForm):
 class importTeamForm(forms.Form):
     team_number_begin = forms.IntegerField()
     team_number_end= forms.IntegerField()
+
+
+class importEventForm(forms.Form):
+    event_code = forms.CharField()

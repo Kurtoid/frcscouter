@@ -17,4 +17,6 @@ urlpatterns = [
     url(r'^fieldsetup/$', views.fieldsetupcontrol, name='fieldsetupcontrol'),
     url(r'^viewrounds/$', views.viewrounds, name='viewrounds'),
     url(r'^importfromtba/$', views.import_from_TBA, name='import_from_TBA'),
+    url(r'^importeventfromtba/$', views.import_event_from_TBA,
+        name='import_event_from_TBA'),
 ]

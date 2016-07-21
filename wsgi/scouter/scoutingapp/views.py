@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from .forms import (SignUpForm, LoginForm, ScoutingForm, FieldSetupForm,
                     SortViewMatchForm, MatchNumberAttribs,
-                    MatchViewFormMetaOptions, importTeamForm)
+                    MatchViewFormMetaOptions, importTeamForm, importEventForm)
 from .models import FieldSetup, Match, Tournament, Team
 from django.contrib.auth import logout, login
 from django.contrib import messages
@@ -174,6 +174,8 @@ def demo_scout_page(request):
     return render(request, 'scoutingapp/scout.html', {'form': form,
                                                       'fieldsetform':
                                                       fieldsetform})
+
+
 def import_from_TBA(request):
     importform = importTeamForm()
     if request.user.is_authenticated and request.user.is_admin:
@@ -194,11 +196,44 @@ def import_from_TBA(request):
                         except ObjectDoesNotExist:
                             print('we dont know '
                                   '{}'.format(r.json()['nickname']))
-                            team = Team(team_number=x,
-                                        team_name=r.json()['nickname'])
-                            team.save()
-                        print('{}: {}'.format(x, r.json()['nickname']))
+                            if(r.json()['nickname'] is not None):
+                                team = Team(team_number=x,
+                                            team_name=r.json()['nickname'])
+                                team.save()
+                        if(r.json()['nickname'] is not None):
+                            print('{}: {}'.format(x, r.json()['nickname']))
         return render(request, 'scoutingapp/importfromtba.html', {'form':
+                                                                  importform})
+    else:
+        return HttpResponse("Not logged in")
+
+
+def import_event_from_TBA(request):
+    importform = importEventForm()
+    if request.user.is_authenticated and request.user.is_admin:
+        if(request.method == 'POST'):
+            importform = importEventForm(request.POST)
+            if importform.is_valid():
+                # process and return redirect
+                event_code = importform.cleaned_data['event_code']
+                r = requests.get("http://www.thebluealliance.com/api/v2/event/{}/teams".format(event_code),
+                                 headers={'X-TBA-App-Id':
+                                          'frc179:scoutingapp:v1'})
+                if r.status_code == 200:
+                    print("Checking {}".format(event_code))
+                    for x in r.json():
+                        try:
+                            Team.objects.get(team_number=x['team_number'])
+                        except ObjectDoesNotExist:
+                            print('we dont know '
+                                  '{}'.format(x['nickname']))
+                            if(x['nickname'] is not None):
+                                team = Team(team_number=x['team_number'],
+                                            team_name=x['nickname'])
+                                team.save()
+                        if(x['nickname'] is not None):
+                            print('{}: {}'.format(x['team_number'], x['nickname']))
+        return render(request, 'scoutingapp/importeventfromtba.html', {'form':
                                                                   importform})
     else:
         return HttpResponse("Not logged in")
