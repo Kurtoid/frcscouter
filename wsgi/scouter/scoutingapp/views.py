@@ -216,6 +216,14 @@ def import_event_from_TBA(request):
             if importform.is_valid():
                 # process and return redirect
                 event_code = importform.cleaned_data['event_code']
+                r = requests.get("http://www.thebluealliance.com/api/v2/event/{}".format(event_code),
+                                 headers={'X-TBA-App-Id':
+                                          'frc179:scoutingapp:v1'})
+                try:
+                    Tournament.objects.get(name=r.json()['name'])
+                except ObjectDoesNotExist:
+                    newEvent = Tournament(name=r.json()['name'])
+                    newEvent.save()
                 r = requests.get("http://www.thebluealliance.com/api/v2/event/{}/teams".format(event_code),
                                  headers={'X-TBA-App-Id':
                                           'frc179:scoutingapp:v1'})
