@@ -20,5 +20,5 @@ from django.views.generic.base import RedirectView
 urlpatterns = [
     url(r'^scoutingapp/', include('scoutingapp.urls', namespace="scoutingapp")),
     url(r'^admin/', admin.site.urls),
-    url(r'^.*$', RedirectView.as_view(url='/scoutingapp/', permanent=True), name='index')
+    url(r'^./$', RedirectView.as_view(url='/scoutingapp/', permanent=True), name='index')
 ]
