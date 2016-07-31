@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
+from .models import MyUser
 
 # Create your tests here.
 
@@ -47,3 +48,13 @@ class ItemsInViewTests(TestCase):
         self.assertTrue('tform' in response.context)
         self.assertTrue('matchattribform' in response.context)
         self.assertTrue('viewoptionsform' in response.context)
+
+
+    def test_scout(self):
+        user= MyUser.objects.create_user(email='testuser@example.com')
+        user.set_password('12345')
+        user.save()
+
+        self.client.login(username='testuser@example.com', password='12345')
+        response = self.client.get('/scoutingapp/scout/')
+        self.assertEqual(response.status_code, 200)
