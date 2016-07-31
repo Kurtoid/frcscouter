@@ -21,7 +21,8 @@ class UrlRedirects(TestCase):
                              status_code=301)
 
 
-class FormInViewTests(TestCase):
+class ItemsInViewTests(TestCase):
+    fixtures = ['testdata.json']
 
     def test_signup(self):
         self.client.logout()
@@ -37,3 +38,8 @@ class FormInViewTests(TestCase):
         self.assertTrue('form' in response.context)
 
 
+    def test_viewrounds(self):
+        self.client.logout()
+        response = self.client.get('/scoutingapp/viewrounds/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('form' in response.context)
