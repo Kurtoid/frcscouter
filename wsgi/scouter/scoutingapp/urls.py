@@ -14,7 +14,6 @@ urlpatterns = [
     url(r'^logoutuser/$', views.logoutuser, name='logoutuser'),
     url(r'^scout/$', views.scout, name='scout'),
     url(r'^demoscout/$', views.demo_scout_page, name='demo_scout_page'),
-    url(r'^fieldsetup/$', views.fieldsetupcontrol, name='fieldsetupcontrol'),
     url(r'^viewrounds/$', views.viewrounds, name='viewrounds'),
     url(r'^importfromtba/$', views.import_from_TBA, name='import_from_TBA'),
     url(r'^importeventfromtba/$', views.import_event_from_TBA,

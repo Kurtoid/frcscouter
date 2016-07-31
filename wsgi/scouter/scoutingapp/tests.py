@@ -35,3 +35,5 @@ class FormInViewTests(TestCase):
         response = self.client.get('/scoutingapp/userlogin/')
         self.assertEqual(response.status_code, 200)
         self.assertTrue('form' in response.context)
+
+

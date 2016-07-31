@@ -19,29 +19,6 @@ def index(request):
     return render(request, 'scoutingapp/index.html')
 
 
-def fieldsetupcontrol(request):
-    if request.user.is_authenticated():
-        if request.method == 'POST':
-            form = FieldSetupForm(request.POST)
-            if form.is_valid():
-                setup = form.save()
-                print(setup.id)
-                request.session['fsetup'] = setup.id
-                # proccess form
-                return HttpResponseRedirect('/scoutingapp/scout',
-                                            {'fieldsetup': setup})
-            else:
-                print(form.errors)
-        else:
-            form = FieldSetupForm()
-
-        return render(request,
-                      'scoutingapp/fieldsetupcontrol.html',
-                      {'form': form})
-    else:
-        return HttpResponseRedirect('/scoutingapp/userlogin/')
-
-
 def viewrounds(request):
     tform = SortViewMatchForm()
     matchattribform = MatchNumberAttribs()
