@@ -1,0 +1,16 @@
+language: python
+python:
+        - "3.2"
+        - "3.3"
+        - "3.4"
+
+        - "pypy3"
+
+install:
+        - pip3 install .
+        - pip3 install -r requirements.txt
+
+after_script:
+        - codeclimate-test-reporter
+
+script: coverage run --source='.' wsgi/scouter/manage.py test scoutingapp
