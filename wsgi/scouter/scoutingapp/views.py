@@ -9,6 +9,7 @@ from django.contrib import messages
 from .tables import MatchTable
 from django_tables2 import RequestConfig
 from django.core.exceptions import ObjectDoesNotExist
+import csv
 import requests
 
 # Create your views here.
@@ -17,6 +18,34 @@ import requests
 def index(request):
     # return HttpResponse("Hello World!")
     return render(request, 'scoutingapp/index.html')
+
+
+def export_to_gdocs(request):
+    qs = Match.objects.all()
+    outfile_path = 'test.csv'
+    model = qs.model
+    writer = csv.writer(open(outfile_path, 'w'))
+
+    headers = []
+    for field in model._meta.fields:
+        headers.append(field.verbose_name)
+    writer.writerow(headers)
+
+    headers = []
+    for field in model._meta.fields:
+        headers.append(field.name)
+
+    for obj in qs:
+        row = []
+        for field in headers:
+            val = getattr(obj, field)
+            if callable(val):
+                val = val()
+            if type(val) == str:
+                val = val.encode("utf-8")
+            row.append(val)
+        writer.writerow(row)
+    return render(request, 'scoutingapp/exporttogdocs.html')
 
 
 def viewrounds(request):

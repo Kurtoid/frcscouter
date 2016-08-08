@@ -2,3 +2,4 @@ django==1.8
 django_tables2
 requests
 codeclimate-test-reporter
+google-api-python-client

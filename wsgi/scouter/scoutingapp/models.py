@@ -117,7 +117,7 @@ class Defense(models.Model):
     code = models.CharField(max_length=2)
 
     def __str__(self):
-        return self.code + ": " + self.name
+        return self.name
 
 
 class FieldSetup(models.Model):
@@ -154,10 +154,8 @@ class Match(models.Model):
     scouted_team = models.ForeignKey(Team, on_delete=models.CASCADE)
     field_setup = models.OneToOneField(FieldSetup, on_delete=models.CASCADE)
     crossed_defense_on_auto = models.BooleanField(default=False)
-    auto_defense_crossed = models.DecimalField(max_digits=1, decimal_places=0,
-                                               default=False,
-                                               verbose_name="Auto - Defense"
-                                               " Crossed")
+    auto_defense_crossed = models.ForeignKey(Defense,
+                                             on_delete=models.CASCADE)
     auto_balls = models.DecimalField(max_digits=10, decimal_places=0,
                                      default=0, verbose_name="Auto - Balls"
                                      " Made")

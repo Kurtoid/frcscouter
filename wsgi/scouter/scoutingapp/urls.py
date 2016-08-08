@@ -8,6 +8,7 @@ app_name = 'scoutingapp'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^userlogin/$', views.userlogin, name='userlogin'),
+    url(r'^exporttogdocs/$', views.export_to_gdocs, name='export_to_gdocs'),
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^usercontrolpanel/$', views.usercontrolpanel,
         name='usercontrolpanel'),
