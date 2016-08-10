@@ -3,16 +3,44 @@ from django.shortcuts import render
 from .forms import (SignUpForm, LoginForm, ScoutingForm, FieldSetupForm,
                     SortViewMatchForm, MatchNumberAttribs,
                     MatchViewFormMetaOptions, importTeamForm, importEventForm)
-from .models import FieldSetup, Match, Tournament, Team
+from .models import FieldSetup, Match, Tournament, Team, CredentialsModel
 from django.contrib.auth import logout, login
 from django.contrib import messages
 from .tables import MatchTable
+from scouter import settings
 from django_tables2 import RequestConfig
 from django.core.exceptions import ObjectDoesNotExist
 import csv
 import requests
 
 # Create your views here.
+
+import os
+import logging
+import httplib2
+
+from googleapiclient.discovery import build
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse
+from django.http import HttpResponseBadRequest
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from oauth2client.contrib import xsrfutil
+from oauth2client.client import flow_from_clientsecrets
+from oauth2client.contrib.django_orm import Storage
+from apiclient.http import MediaFileUpload
+
+# CLIENT_SECRETS, name of a file containing the OAuth 2.0 information for this
+# application, including client_id and client_secret, which are found
+# on the API Access tab on the Google APIs
+# Console <http://code.google.com/apis/console>
+CLIENT_SECRETS = os.path.join(os.path.dirname(__file__),
+                              'client_secrets.json')
+
+FLOW = flow_from_clientsecrets(
+        CLIENT_SECRETS,
+        scope='https://www.googleapis.com/auth/drive',
+        redirect_uri='http://localhost:8000/scoutingapp/oauth2callback')
 
 
 def index(request):
@@ -22,7 +50,7 @@ def index(request):
 
 def export_to_gdocs(request):
     qs = Match.objects.all()
-    outfile_path = 'test.csv'
+    outfile_path = os.getcwd() + '/scoutingapp/export.csv'
     model = qs.model
     writer = csv.writer(open(outfile_path, 'w'))
 
@@ -45,9 +73,38 @@ def export_to_gdocs(request):
                 val = val.encode("utf-8")
             row.append(val)
         writer.writerow(row)
+    storage = Storage(CredentialsModel, 'id', request.user, 'credential')
+    credential = storage.get()
+    if credential is None or credential.invalid is True:
+        FLOW.params['state'] = xsrfutil.generate_token(settings.SECRET_KEY,
+                                                       request.user)
+        authorize_url = FLOW.step1_get_authorize_url()
+        return HttpResponseRedirect(authorize_url)
+    else:
+        http = httplib2.Http()
+        http = credential.authorize(http)
+        service = build("drive", "v3", http=http)
+        file_metadata = {
+                'mimeType': 'application/vnd.google-apps.spreadsheet'
+        }
+        media = MediaFileUpload('export.csv',
+                                mimetype='text/csv',
+                                resumable=True)
+        file = service.files().create(body=file_metadata,
+                                      media_body=media,).execute()
+
     return render(request, 'scoutingapp/exporttogdocs.html')
 
 
+def auth_return(request):
+    if not xsrfutil.validate_token(settings.SECRET_KEY,
+                                   bytes(request.REQUEST['state'], 'utf-8'),
+                                   request.user):
+        return  HttpResponseBadRequest()
+    credential = FLOW.step2_exchange(request.REQUEST)
+    storage = Storage(CredentialsModel, 'id', request.user, 'credential')
+    storage.put(credential)
+    return HttpResponseRedirect("/scoutingapp/exporttogdocs")
 def viewrounds(request):
     tform = SortViewMatchForm()
     matchattribform = MatchNumberAttribs()
