@@ -40,7 +40,7 @@ if ON_OPENSHIFT:
     OAUTH_REDIR = 'http://scouter-team179.rhcloud.com/scoutingapp/oauth2callback'
 else:
     DEBUG = True
-
+GOOGLE_OAUTH2_CLIENT_SECRETS_JSON=BASE_DIR+'/scoutingapp/client_secrets.json'
 AUTH_USER_MODEL = 'scoutingapp.MyUser'
 
 if ON_OPENSHIFT:

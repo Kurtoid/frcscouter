@@ -12,13 +12,7 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from django.db import models
 
-from oauth2client.contrib.django_orm import FlowField
-from oauth2client.contrib.django_orm import CredentialsField
-
-
-
-
-
+from oauth2client.contrib.django_util.models import CredentialsField
 
 class Tournament(models.Model):
     name = models.CharField(max_length=200, default="UNAMED")
