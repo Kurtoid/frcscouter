@@ -33,10 +33,11 @@ SECRETS = secrets.getter(os.path.join(DATA_DIR, 'secrets.json'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = SECRETS['secret_key']
-
+OAUTH_REDIR = 'http://localhost:8000/scoutingapp/oauth2callback'
 # SECURITY WARNING: don't run with debug turned on in production!
 if ON_OPENSHIFT:
     DEBUG = os.environ.get('DEBUG') == 'True'
+    OAUTH_REDIR = 'http://scouter-team179.rhcloud.com/scoutingapp/oauth2callback'
 else:
     DEBUG = True
 

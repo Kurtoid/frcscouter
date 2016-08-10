@@ -40,7 +40,7 @@ CLIENT_SECRETS = os.path.join(os.path.dirname(__file__),
 FLOW = flow_from_clientsecrets(
         CLIENT_SECRETS,
         scope='https://www.googleapis.com/auth/drive',
-        redirect_uri='http://localhost:8000/scoutingapp/oauth2callback')
+        redirect_uri=settings.OAUTH_REDIR)
 
 
 def index(request):
