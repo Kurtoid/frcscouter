@@ -1,4 +1,5 @@
 django_tables2
 requests
 codeclimate-test-reporter
+oauth2client
 google-api-python-client-py3
