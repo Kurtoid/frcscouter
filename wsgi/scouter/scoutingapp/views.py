@@ -88,7 +88,7 @@ def export_to_gdocs(request):
         file_metadata = {
                 'mimeType': 'application/vnd.google-apps.spreadsheet'
         }
-        media = MediaFileUpload('export.csv',
+        media = MediaFileUpload(outfile_path,
                                 mimetype='text/csv',
                                 resumable=True)
         file = service.files().create(body=file_metadata,
