@@ -15,6 +15,7 @@ import requests
 # Create your views here.
 import os
 import httplib2
+import csv
 
 from googleapiclient.discovery import build
 from django.http import HttpResponseBadRequest
@@ -42,9 +43,8 @@ def index(request):
 
 
 def export_to_gdocs(request):
-    import csv
     qs = Match.objects.all()
-    outfile_path = os.getcwd() + '/scoutingapp/export.csv'
+    outfile_path = 'exported_data.csv'
     print(outfile_path)
     model = qs.model
     writer = csv.writer(open(outfile_path, 'w'))
@@ -78,8 +78,8 @@ def export_to_gdocs(request):
     else:
         http = httplib2.Http()
         http = credential.authorize(http)
-        import csv
-        with open(os.getcwd() + '/scoutingapp/export.csv', 'r') as csvfile:
+        print('printing file at ' + outfile_path)
+        with open(outfile_path, 'r') as csvfile:
             spamreader = csv.reader(csvfile, delimiter=' ',
                                     quotechar='|')
             for row in spamreader:
@@ -88,7 +88,7 @@ def export_to_gdocs(request):
         file_metadata = {
                 'mimeType': 'application/vnd.google-apps.spreadsheet'
         }
-        media = MediaFileUpload(os.getcwd() + '/scoutingapp/export.csv',
+        media = MediaFileUpload('export.csv',
                                 mimetype='text/csv',
                                 resumable=True)
         file = service.files().create(body=file_metadata,
