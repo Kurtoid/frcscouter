@@ -10,11 +10,9 @@ from .tables import MatchTable
 from scouter import settings
 from django_tables2 import RequestConfig
 from django.core.exceptions import ObjectDoesNotExist
-import csv
 import requests
 
 # Create your views here.
-
 import os
 import httplib2
 
@@ -44,8 +42,10 @@ def index(request):
 
 
 def export_to_gdocs(request):
+    import csv
     qs = Match.objects.all()
     outfile_path = os.getcwd() + '/scoutingapp/export.csv'
+    print(outfile_path)
     model = qs.model
     writer = csv.writer(open(outfile_path, 'w'))
 
@@ -78,11 +78,17 @@ def export_to_gdocs(request):
     else:
         http = httplib2.Http()
         http = credential.authorize(http)
+        import csv
+        with open(os.getcwd() + '/scoutingapp/export.csv', 'r') as csvfile:
+            spamreader = csv.reader(csvfile, delimiter=' ',
+                                    quotechar='|')
+            for row in spamreader:
+                print(', '.join(row))
         service = build("drive", "v3", http=http)
         file_metadata = {
                 'mimeType': 'application/vnd.google-apps.spreadsheet'
         }
-        media = MediaFileUpload('export.csv',
+        media = MediaFileUpload(os.getcwd() + '/scoutingapp/export.csv',
                                 mimetype='text/csv',
                                 resumable=True)
         file = service.files().create(body=file_metadata,
