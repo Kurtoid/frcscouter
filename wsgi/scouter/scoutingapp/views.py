@@ -45,7 +45,6 @@ def index(request):
 def export_to_gdocs(request):
     qs = Match.objects.all()
     outfile_path = os.path.join(settings.DATA_DIR, 'exported_data.csv')
-    print(outfile_path)
     model = qs.model
     writer = csv.writer(open(outfile_path, 'w'))
 
@@ -68,6 +67,7 @@ def export_to_gdocs(request):
                 val = val.encode("utf-8")
             row.append(val)
         writer.writerow(row)
+    del writer
     storage = DjangoORMStorage(CredentialsModel, 'id', request.user, 'credential')
     credential = storage.get()
     if credential is None or credential.invalid is True:
@@ -76,6 +76,7 @@ def export_to_gdocs(request):
         authorize_url = FLOW.step1_get_authorize_url()
         return HttpResponseRedirect(authorize_url)
     else:
+        outfile_path = os.path.join(settings.DATA_DIR, 'exported_data.csv')
         http = httplib2.Http()
         http = credential.authorize(http)
         print('printing file at ' + outfile_path)
