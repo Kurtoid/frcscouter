@@ -44,7 +44,7 @@ def index(request):
 
 def export_to_gdocs(request):
     qs = Match.objects.all()
-    outfile_path = 'exported_data.csv'
+    outfile_path = os.path.join(settings.DATA_DIR, 'exported_data.csv')
     print(outfile_path)
     model = qs.model
     writer = csv.writer(open(outfile_path, 'w'))
