@@ -195,6 +195,9 @@ class CredentialsModel(models.Model):
     id = models.OneToOneField(MyUser, primary_key=True)
     credential = CredentialsField()
 
+    def __str__(self):
+        return self.id
+
 
 class CredentialsAdmin(admin.ModelAdmin):
     pass
