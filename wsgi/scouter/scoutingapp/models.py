@@ -192,7 +192,7 @@ class Match(models.Model):
         return str(self.match_number)
 
 class CredentialsModel(models.Model):
-    id = models.ForeignKey(MyUser, primary_key=True)
+    id = models.OneToOneField(MyUser, primary_key=True)
     credential = CredentialsField()
 
 
