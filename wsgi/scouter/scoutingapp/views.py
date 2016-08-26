@@ -268,7 +268,7 @@ def import_from_TBA(request):
                         if(r.json()['nickname'] is not None):
                             print('{}: {}'.format(x, r.json()['nickname']))
         return render(request, 'scoutingapp/importfromtba.html', {'form':
-                                                                  importform})
+                                                                  importform, 'done': importform.is_valid()})
     else:
         return HttpResponse("Not logged in")
 
@@ -307,6 +307,6 @@ def import_event_from_TBA(request):
                         if(x['nickname'] is not None):
                             print('{}: {}'.format(x['team_number'], x['nickname']))
         return render(request, 'scoutingapp/importeventfromtba.html', {'form':
-                                                                  importform})
+                                                                  importform, 'done': importform.is_valid()})
     else:
         return HttpResponse("Not logged in")

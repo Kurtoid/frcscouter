@@ -2,6 +2,9 @@
 {% block content %}
 <form action="{% url 'scoutingapp:import_from_TBA' %}" method="POST">
 	{% csrf_token %}
+	{% if done %}
+	DONE
+	{% endif %}
 	{% for field in form %}
 	<div class = "input-field">
 		{{ field }} {{ field.label_tag }}
