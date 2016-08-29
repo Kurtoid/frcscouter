@@ -92,9 +92,9 @@ def export_to_gdocs(request):
         media = MediaFileUpload(outfile_path,
                                 mimetype='text/csv',
                                 resumable=True)
-        file = service.files().create(body=file_metadata,
-                                      media_body=media,).execute()
-
+        uploadfile = service.files().create(body=file_metadata,
+                                      media_body=media,fields='webViewLink').execute()
+        return render(request, 'scoutingapp/exporttogdocs.html', {'urlLink': uploadfile['webViewLink']})
     return render(request, 'scoutingapp/exporttogdocs.html')
 
 
