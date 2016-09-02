@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='credentialsmodel',
             name='id',
-            field=models.OneToOneField(primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL),
+            field=models.OneToOneField(to=settings.AUTH_USER_MODEL, serialize=False, primary_key=True),
         ),
     ]
