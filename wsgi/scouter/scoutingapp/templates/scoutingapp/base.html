@@ -27,11 +27,6 @@
 		</header>
 		<main>
 				{% block content %}{% endblock content %}
-				{% if messages %}
-							{% for message in messages %}
-								<script>Materialize.toast('{{ message}}')</script>
-							{% endfor %}
-				{% endif %}
 		</main>
 
 		 <footer class="page-footer green">
@@ -68,5 +63,10 @@
 		<script type="text/javascript" src="{% static "scoutingapp/jquery.smoothState.min.js" %}"></script>
 		<script type="text/javascript" src="{% static "scoutingapp/materialize/js/materialize.js" %}"></script>
 		<script type="text/javascript" src="{% static "scoutingapp/main.js" %}"></script>
+				{% if messages %}
+							{% for message in messages %}
+								<script>Materialize.toast('{{ message}}')</script>
+							{% endfor %}
+				{% endif %}
 	</body>
 </html>
