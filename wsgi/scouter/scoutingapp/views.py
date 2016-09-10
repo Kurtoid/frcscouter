@@ -32,9 +32,9 @@ CLIENT_SECRETS = os.path.join(os.path.dirname(__file__),
                               'client_secrets.json')
 
 FLOW = flow_from_clientsecrets(
-        CLIENT_SECRETS,
-        scope='https://www.googleapis.com/auth/drive',
-        redirect_uri=settings.OAUTH_REDIR)
+    CLIENT_SECRETS,
+    scope='https://www.googleapis.com/auth/drive',
+    redirect_uri=settings.OAUTH_REDIR)
 
 
 def index(request):
@@ -68,7 +68,8 @@ def export_to_gdocs(request):
             row.append(val)
         writer.writerow(row)
     del writer
-    storage = DjangoORMStorage(CredentialsModel, 'id', request.user, 'credential')
+    storage = DjangoORMStorage(
+        CredentialsModel, 'id', request.user, 'credential')
     credential = storage.get()
     if credential is None or credential.invalid is True:
         FLOW.params['state'] = xsrfutil.generate_token(settings.SECRET_KEY,
@@ -87,13 +88,13 @@ def export_to_gdocs(request):
                 print(', '.join(row))
         service = build("drive", "v3", http=http)
         file_metadata = {
-                'mimeType': 'application/vnd.google-apps.spreadsheet'
+            'mimeType': 'application/vnd.google-apps.spreadsheet'
         }
         media = MediaFileUpload(outfile_path,
                                 mimetype='text/csv',
                                 resumable=True)
         uploadfile = service.files().create(body=file_metadata,
-                                      media_body=media,fields='webViewLink').execute()
+                                            media_body=media, fields='webViewLink').execute()
         return render(request, 'scoutingapp/exporttogdocs.html', {'urlLink': uploadfile['webViewLink']})
     return render(request, 'scoutingapp/exporttogdocs.html')
 
@@ -102,11 +103,14 @@ def auth_return(request):
     if not xsrfutil.validate_token(settings.SECRET_KEY,
                                    bytes(request.REQUEST['state'], 'utf-8'),
                                    request.user):
-        return  HttpResponseBadRequest()
+        return HttpResponseBadRequest()
     credential = FLOW.step2_exchange(request.REQUEST)
-    storage = DjangoORMStorage(CredentialsModel, 'id', request.user, 'credential')
+    storage = DjangoORMStorage(
+        CredentialsModel, 'id', request.user, 'credential')
     storage.put(credential)
     return HttpResponseRedirect("/scoutingapp/exporttogdocs")
+
+
 def viewrounds(request):
     tform = SortViewMatchForm()
     matchattribform = MatchNumberAttribs()
@@ -305,8 +309,9 @@ def import_event_from_TBA(request):
                                             team_name=x['nickname'])
                                 team.save()
                         if(x['nickname'] is not None):
-                            print('{}: {}'.format(x['team_number'], x['nickname']))
+                            print('{}: {}'.format(
+                                x['team_number'], x['nickname']))
         return render(request, 'scoutingapp/importeventfromtba.html', {'form':
-                                                                  importform, 'done': importform.is_valid()})
+                                                                       importform, 'done': importform.is_valid()})
     else:
         return HttpResponse("Not logged in")
