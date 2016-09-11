@@ -20,4 +20,6 @@ urlpatterns = [
     url(r'^importfromtba/$', views.import_from_TBA, name='import_from_TBA'),
     url(r'^importeventfromtba/$', views.import_event_from_TBA,
         name='import_event_from_TBA'),
+    url(r'^exporthtml/(?P<team_number>[0-9]+)', views.exporthtml,
+        name='exporthtml')
 ]
