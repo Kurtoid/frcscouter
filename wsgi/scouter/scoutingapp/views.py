@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from .forms import (SignUpForm, LoginForm, ScoutingForm, FieldSetupForm,
                     SortViewMatchForm, MatchNumberAttribs,
-                    MatchViewFormMetaOptions, importTeamForm, importEventForm)
+                    MatchViewFormMetaOptions, importTeamForm, importEventForm, UserControlForm)
 from .models import FieldSetup, Match, Tournament, Team, CredentialsModel
 from django.contrib.auth import logout, login
 from django.contrib import messages
@@ -195,10 +195,21 @@ def signup(request):
 
 def usercontrolpanel(request):
     if request.user.is_authenticated():
+	    if request.method == 'POST':
+		form = UserControlForm(request.POST)
+		if form.is_valid():
+		    form.save(commit=False)
+		    form.save()
+		    # proccess form
+		    return HttpResponseRedirect('/scoutingapp/index/')
+	    else:
+		form = UserControlForm()
+
         return render(
             request, 'scoutingapp/usercontrolpanel.html',
-            {'user': request.user})
-    return HttpResponse("usercontrolpanel")
+            {'user': request.user, 'form': form})
+   return render(
+       request, 'scoutingapp/index.html')
 
 
 def logoutuser(request):
