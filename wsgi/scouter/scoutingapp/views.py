@@ -326,3 +326,16 @@ def import_event_from_TBA(request):
                                                                        importform, 'done': importform.is_valid()})
     else:
         return HttpResponse("Not logged in")
+
+
+
+def exporthtml(request, team_number):
+    matchlist = Match.objects.all()
+    matchlist = matchlist.filter(scouted_by__team__team_number=team_number)
+    # enables ordering
+    matches = MatchTable(matchlist)
+    RequestConfig(request).configure(matches)
+
+    return render(request, 'scoutingapp/exporthtml.html', {
+        'rounds': matches,
+    })
