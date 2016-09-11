@@ -116,7 +116,7 @@ def viewrounds(request):
     matchattribform = MatchNumberAttribs()
     viewoptionsform = MatchViewFormMetaOptions()
     matchlist = Match.objects.all()
-    currentTeam = request.user.team
+    #currentTeam = request.user.team
     #matchlist = matchlist.filter(scouted_by__team=currentTeam)
     fieldstoexclude = (None,)
     # enables ordering
