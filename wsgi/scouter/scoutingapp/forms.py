@@ -125,7 +125,7 @@ class ScoutingForm(ModelForm):
 class UserControlForm(ModelForm):
     class Meta:
         model = MyUser
-	include = ['team']
+        fields = ['team']
 
 
 

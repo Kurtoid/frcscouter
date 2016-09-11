@@ -195,21 +195,19 @@ def signup(request):
 
 def usercontrolpanel(request):
     if request.user.is_authenticated():
-	    if request.method == 'POST':
-		form = UserControlForm(request.POST)
-		if form.is_valid():
-		    form.save(commit=False)
-		    form.save()
-		    # proccess form
-		    return HttpResponseRedirect('/scoutingapp/index/')
-	    else:
-		form = UserControlForm()
+        if request.method == 'POST':
+            form = UserControlForm(request.POST)
+            if form.is_valid():
+                form.save(commit=False)
+                form.save()
+                # proccess form
+                return HttpResponseRedirect('/scoutingapp/index/')
+        else:
+            form = UserControlForm()
 
-        return render(
-            request, 'scoutingapp/usercontrolpanel.html',
-            {'user': request.user, 'form': form})
-   return render(
-       request, 'scoutingapp/index.html')
+        return render(request, 'scoutingapp/usercontrolpanel.html',
+                      {'user': request.user, 'form': form})
+    return render(request, 'scoutingapp/index.html')
 
 
 def logoutuser(request):
