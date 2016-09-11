@@ -32,11 +32,17 @@ class ItemsInViewTests(TestCase):
         self.assertTrue('form' in response.context)
 
 
-    def test_login(self):
+    def test_login(self):  # creates and logs into a user
         self.client.logout()
-        response = self.client.get('/scoutingapp/userlogin/')
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('form' in response.context)
+        user= MyUser.objects.create_user(email='testuser@example.com')
+        user.set_password('12345')
+        user.save()
+        response = self.client.post('/scoutingapp/userlogin/', {'email':
+                                                                'testuser@example.com',
+                                                                'password':
+                                                                '12345'})
+        self.assertRedirects(response, '/scoutingapp/',
+                             status_code=302)
 
 
     def test_viewrounds(self):
