@@ -116,6 +116,8 @@ def viewrounds(request):
     matchattribform = MatchNumberAttribs()
     viewoptionsform = MatchViewFormMetaOptions()
     matchlist = Match.objects.all()
+    currentTeam = request.user.team
+    matchlist = matchlist.filter(scouted_by__team=currentTeam)
     fieldstoexclude = (None,)
     # enables ordering
     if request.method == "POST":
@@ -184,7 +186,7 @@ def signup(request):
             form.scouted_by = request.user
             form.save()
             # proccess form
-            return HttpResponseRedirect('/scoutingapp/index/')
+            return HttpResponseRedirect('/scoutingapp/')
     else:
         form = SignUpForm()
 
