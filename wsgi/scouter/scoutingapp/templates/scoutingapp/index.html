@@ -10,10 +10,13 @@
 <a class="waves-effect waves-light btn"  href="{% url 'scoutingapp:viewrounds' %}"><i class="material-icons right">pageview</i>View Rounds</a>
 <a class="waves-effect waves-light btn"  href="{% url 'scoutingapp:usercontrolpanel' %}"><i class="material-icons right">pageview</i>User Control Panel</a>
 {% if user.is_admin %}
+<hr>
+<h4>Admin Options</h4>
 <a class="waves-effect waves-light btn"  href="{% url 'scoutingapp:import_from_TBA' %}"><i class="material-icons right">import_contacts</i>Import Teams from TBA</a>
 <a class="waves-effect waves-light btn"  href="{% url 'scoutingapp:import_event_from_TBA' %}"><i class="material-icons right">event</i>Import Event from TBA</a>
 <a class="waves-effect waves-light btn"  href="{% url 'scoutingapp:export_to_gdocs' %}"><i class="material-icons right">highlight</i>Export Data to Google Docs</a>
 {% endif %}
+<hr>
 <a class="waves-effect waves-light btn" href="{% url 'scoutingapp:logoutuser' %}"><i class="material-icons right">exit_to_app</i>Logout</a><br>
 {% else %}
 <br>
