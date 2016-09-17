@@ -240,13 +240,15 @@ class AllianceMatch(models.Model):
                                     default=0)
     robot_1_end_game = models.ForeignKey(EndGameState,
                                          on_delete=models.CASCADE,
-                                         related_name='robot1endgame')
+                                         related_name='robot1endgame',
+                                         null=True)
     robot_2_end_game = models.ForeignKey(EndGameState,
                                          on_delete=models.CASCADE,
-                                         related_name='robot2endgame')
+                                         related_name='robot2endgame',
+                                         null=True)
     robot_3_end_game = models.ForeignKey(EndGameState,
                                          on_delete=models.CASCADE,
-                                         related_name='robot3endgame')
+                                         related_name='robot3endgame', null=True)
     robot_1_card = models.ForeignKey(Card, on_delete=models.CASCADE, null=True,
                                      related_name='Robot1card')
     robot_2_card = models.ForeignKey(Card, on_delete=models.CASCADE, null=True,
