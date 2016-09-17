@@ -132,6 +132,12 @@ class AllianceScoutingForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(AllianceScoutingForm, self).__init__(*args, **kwargs)
+        self.fields['robot_1_card'].required = False
+        self.fields['robot_2_card'].required = False
+        self.fields['robot_3_card'].required = False
+        self.fields['robot_1_end_game'].required = False
+        self.fields['robot_2_end_game'].required = False
+        self.fields['robot_3_end_game'].required = False
 
 
 class UserControlForm(ModelForm):
