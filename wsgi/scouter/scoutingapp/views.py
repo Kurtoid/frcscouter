@@ -2,11 +2,12 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from .forms import (SignUpForm, LoginForm, ScoutingForm, FieldSetupForm,
                     SortViewMatchForm, MatchNumberAttribs,
-                    MatchViewFormMetaOptions, importTeamForm, importEventForm, UserControlForm)
+                    MatchViewFormMetaOptions, importTeamForm, importEventForm,
+                    UserControlForm, AllianceScoutingForm, AllianceMatch)
 from .models import FieldSetup, Match, Tournament, Team, CredentialsModel
 from django.contrib.auth import logout, login
 from django.contrib import messages
-from .tables import MatchTable
+from .tables import MatchTable, AllianceMatchTable
 from scouter import settings
 from django_tables2 import RequestConfig
 from django.core.exceptions import ObjectDoesNotExist
@@ -220,6 +221,32 @@ def scout(request):
     if request.user.is_authenticated():
         if request.method == 'POST':
             form = ScoutingForm(request.POST)
+            if form.is_valid():
+                match = form.save(commit=False)
+                match.scouted_by = request.user
+                match.save()
+                # proccess form
+                return HttpResponseRedirect('/scoutingapp/')
+            else:
+                print(form.errors)
+        else:
+            form = ScoutingForm()
+
+        if request.session.get('fsetup'):
+            return render(
+                request, 'scoutingapp/scout.html',
+                {'form': form, })
+        return render(
+            request, 'scoutingapp/scout.html',
+            {'form': form, })
+    else:
+        return HttpResponseRedirect('/scoutingapp/userlogin/')
+
+
+def alliance_scout(request):
+    if request.user.is_authenticated():
+        if request.method == 'POST':
+            form = AllianceScoutingForm(request.POST)
             fieldsetform = FieldSetupForm(request.POST)
             if form.is_valid() and fieldsetform.is_valid():
                 match = form.save(commit=False)
@@ -232,21 +259,20 @@ def scout(request):
             else:
                 print(form.errors)
         else:
-            form = ScoutingForm()
+            form = AllianceScoutingForm()
             fieldsetform = FieldSetupForm()
 
         if request.session.get('fsetup'):
             return render(
-                request, 'scoutingapp/scout.html',
+                request, 'scoutingapp/alliancescout.html',
                 {'form': form, 'fieldsetform': fieldsetform,
                  'setupkey': FieldSetup.objects.get(
                      id=request.session.get('fsetup'))})
         return render(
-            request, 'scoutingapp/scout.html',
+            request, 'scoutingapp/alliancescout.html',
             {'form': form, 'fieldsetform': fieldsetform})
     else:
         return HttpResponseRedirect('/scoutingapp/userlogin/')
-
 
 def demo_scout_page(request):
     fieldsetform = FieldSetupForm()
@@ -334,6 +360,19 @@ def exporthtml(request, team_number):
     matchlist = matchlist.filter(scouted_by__team__team_number=team_number)
     # enables ordering
     matches = MatchTable(matchlist)
+    RequestConfig(request).configure(matches)
+
+    return render(request, 'scoutingapp/exporthtml.html', {
+        'rounds': matches,
+    })
+
+
+
+def allianceexporthtml(request, team_number):
+    matchlist = AllianceMatch.objects.all()
+    matchlist = matchlist.filter(scouted_by__team__team_number=team_number)
+    # enables ordering
+    matches = AllianceMatchTable(matchlist)
     RequestConfig(request).configure(matches)
 
     return render(request, 'scoutingapp/exporthtml.html', {

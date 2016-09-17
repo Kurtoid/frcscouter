@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate
 from django.forms import ModelForm
 from django import forms
 from scoutingapp.models import (MyUser, Match, FieldSetup, Defense, Tournament,
-                                Team)
+                                Team, AllianceMatch)
 
 
 class SortViewMatchForm(forms.Form):
@@ -121,6 +121,18 @@ class ScoutingForm(ModelForm):
         self.fields['defense4_crossed'].widget = forms.NumberInput(attrs={'class': 'col s6', })
         self.fields['defense5_crossed'].widget = forms.NumberInput(attrs={'class': 'col s6', })
         """
+
+
+class AllianceScoutingForm(ModelForm):
+    """ generates the scouting form """
+    class Meta:
+        """ controls which model and fields are displayed """
+        model = AllianceMatch
+        exclude = ['scouted_by', 'field_setup']
+
+    def __init__(self, *args, **kwargs):
+        super(AllianceScoutingForm, self).__init__(*args, **kwargs)
+
 
 class UserControlForm(ModelForm):
     class Meta:

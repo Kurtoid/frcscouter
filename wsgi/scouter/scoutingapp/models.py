@@ -167,7 +167,6 @@ class Match(models.Model):
     auto_dropped_ball = models.BooleanField(default=False)
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
                                    null=True)
-    field_setup = models.OneToOneField(FieldSetup, on_delete=models.CASCADE)
     low_bar_crossed = models.DecimalField(max_digits=10, decimal_places=0,
                                            default=0, verbose_name="Low bar")
     defense2_crossed = models.DecimalField(max_digits=10, decimal_places=0,
@@ -197,6 +196,63 @@ class Match(models.Model):
 
     def __str__(self):
         return str(self.match_number)
+
+
+
+class Alliance(models.Model):
+    color = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.color
+
+
+class EndGameState(models.Model):
+    state = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.state
+
+
+class Card(models.Model):
+    card_name = models.CharField(max_length=23)
+
+    def __str__(self):
+        return self.card_name
+
+
+class AllianceMatch(models.Model):
+    match_number = models.DecimalField(max_digits=100, decimal_places=0,
+                                       default=0)
+    alliance = models.ForeignKey(Alliance, on_delete=models.CASCADE)
+    scouted_by = models.ForeignKey(MyUser, on_delete=models.CASCADE)
+    field_setup = models.OneToOneField(FieldSetup, on_delete=models.CASCADE)
+    robot_1_driver_skill = models.DecimalField(max_digits=10, decimal_places=0,
+                                    default=0)
+    robot_2_driver_skill = models.DecimalField(max_digits=10, decimal_places=0,
+                                    default=0)
+    robot_3_driver_skill = models.DecimalField(max_digits=10, decimal_places=0,
+                                    default=0)
+    robot_1_breach_ability = models.DecimalField(max_digits=10, decimal_places=0,
+                                    default=0)
+    robot_2_breach_ability = models.DecimalField(max_digits=10, decimal_places=0,
+                                    default=0)
+    robot_3_breach_ability = models.DecimalField(max_digits=10, decimal_places=0,
+                                    default=0)
+    robot_1_end_game = models.ForeignKey(EndGameState,
+                                         on_delete=models.CASCADE,
+                                         related_name='robot1endgame')
+    robot_2_end_game = models.ForeignKey(EndGameState,
+                                         on_delete=models.CASCADE,
+                                         related_name='robot2endgame')
+    robot_3_end_game = models.ForeignKey(EndGameState,
+                                         on_delete=models.CASCADE,
+                                         related_name='robot3endgame')
+    robot_1_card = models.ForeignKey(Card, on_delete=models.CASCADE, null=True,
+                                     related_name='Robot1card')
+    robot_2_card = models.ForeignKey(Card, on_delete=models.CASCADE, null=True,
+                                    related_name='Robot2card')
+    robot_3_card = models.ForeignKey(Card, on_delete=models.CASCADE, null=True,
+                                    related_name='Robot3card')
 
 class CredentialsModel(models.Model):
     id = models.OneToOneField(MyUser, primary_key=True)

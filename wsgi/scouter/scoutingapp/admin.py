@@ -9,7 +9,8 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.forms.widgets import TextInput
 
 from scoutingapp.models import (MyUser, Team, Match, FieldSetup, Defense,
-                                Tournament)
+                                Tournament, Alliance, AllianceMatch,
+                                EndGameState, Card)
 
 
 class DefenseAdmin(admin.ModelAdmin):
@@ -126,6 +127,10 @@ admin.site.register(Match, MatchAdmin)
 admin.site.register(Defense, DefenseAdmin)
 admin.site.register(FieldSetup)
 admin.site.register(Tournament)
+admin.site.register(Alliance)
+admin.site.register(AllianceMatch)
+admin.site.register(EndGameState)
+admin.site.register(Card)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
 admin.site.unregister(Group)
