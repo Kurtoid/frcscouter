@@ -155,20 +155,21 @@ class FieldSetup(models.Model):
 
 
 class Match(models.Model):
-    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
-                                   null=True)
     match_number = models.DecimalField(max_digits=100, decimal_places=0,
                                        default=0)
     scouted_team = models.ForeignKey(Team, on_delete=models.CASCADE)
-    field_setup = models.OneToOneField(FieldSetup, on_delete=models.CASCADE)
-    crossed_defense_on_auto = models.BooleanField(default=False)
+    team_missed_match = models.BooleanField(default=False)
     auto_defense_crossed = models.ForeignKey(Defense,
-                                             on_delete=models.CASCADE)
-    auto_balls = models.DecimalField(max_digits=10, decimal_places=0,
-                                     default=0, verbose_name="Auto - Balls"
-                                     " Made")
-    defense1_crossed = models.DecimalField(max_digits=10, decimal_places=0,
-                                           default=0, verbose_name="Defense 1")
+                                             on_delete=models.CASCADE,
+                                             null=True)
+    auto_low_balls = models.BooleanField(default=False)
+    auto_high_balls = models.BooleanField(default=False)
+    auto_dropped_ball = models.BooleanField(default=False)
+    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
+                                   null=True)
+    field_setup = models.OneToOneField(FieldSetup, on_delete=models.CASCADE)
+    low_bar_crossed = models.DecimalField(max_digits=10, decimal_places=0,
+                                           default=0, verbose_name="Low bar")
     defense2_crossed = models.DecimalField(max_digits=10, decimal_places=0,
                                            default=0, verbose_name="Defense 2")
     defense3_crossed = models.DecimalField(max_digits=10, decimal_places=0,
@@ -177,6 +178,10 @@ class Match(models.Model):
                                            default=0, verbose_name="Defense 4")
     defense5_crossed = models.DecimalField(max_digits=10, decimal_places=0,
                                            default=0, verbose_name="Defense 5")
+    fed_boulder = models.DecimalField(max_digits=10, decimal_places=0,
+                                      default=0)
+    high_balls_missed = models.DecimalField(max_digits=10, decimal_places=0,
+                                     default=0)
     high_balls = models.DecimalField(max_digits=10, decimal_places=0,
                                      default=0)
     low_balls = models.DecimalField(max_digits=10, decimal_places=0,
