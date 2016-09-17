@@ -184,6 +184,8 @@ class Match(models.Model):
                                      default=0)
     high_balls = models.DecimalField(max_digits=10, decimal_places=0,
                                      default=0)
+    dropped_balls = models.DecimalField(max_digits=10, decimal_places=0,
+                                    default=0)
     low_balls = models.DecimalField(max_digits=10, decimal_places=0,
                                     default=0)
     score = models.DecimalField(max_digits=10, decimal_places=0, default=0)

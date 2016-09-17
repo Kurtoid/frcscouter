@@ -1,9 +1,17 @@
 import django_tables2 as tables
-from .models import Match
+from .models import Match, FieldSetup
+
+
+class FieldTable(tables.Table):
+    class Meta:
+        model = FieldSetup
 
 
 class MatchTable(tables.Table):
-
+    defense2_def = tables.Column(accessor='field_setup.defense2')
+    defense3_def = tables.Column(accessor='field_setup.defense3')
+    defense4_def = tables.Column(accessor='field_setup.defense4')
+    defense5_def = tables.Column(accessor='field_setup.defense5')
     class Meta:
         model = Match
         # add class="bordered"
@@ -12,4 +20,7 @@ class MatchTable(tables.Table):
                     'team_missed_match', 'auto_defense_crossed',
                     'auto_low_balls', 'auto_high_balls', 'auto_dropped_ball',
                     'low_bar_crossed', 'defense2_crossed', 'defense3_crossed',
-                    'defense4_crossed', 'defense5_crossed') 
+                    'defense4_crossed', 'defense5_crossed', 'defense2_def',
+                    'defense3_def', 'defense4_def', 'defense5_def')
+
+        exclude = ('tournament', 'score', 'id', 'field_setup')
