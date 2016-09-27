@@ -154,6 +154,13 @@ class FieldSetup(models.Model):
         return result
 
 
+class EndGameState(models.Model):
+    state = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.state
+
+
 class Match(models.Model):
     match_number = models.DecimalField(max_digits=100, decimal_places=0,
                                        default=0)
@@ -187,6 +194,10 @@ class Match(models.Model):
                                     default=0)
     low_balls = models.DecimalField(max_digits=10, decimal_places=0,
                                     default=0)
+    robot_1_end_game = models.ForeignKey(EndGameState,
+                                         on_delete=models.CASCADE,
+                                         related_name='robot1endgame',
+                                         null=True)
     score = models.DecimalField(max_digits=10, decimal_places=0, default=0)
     scouted_by = models.ForeignKey(MyUser, on_delete=models.CASCADE)
 
@@ -204,13 +215,6 @@ class Alliance(models.Model):
 
     def __str__(self):
         return self.color
-
-
-class EndGameState(models.Model):
-    state = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.state
 
 
 class Card(models.Model):
@@ -238,17 +242,6 @@ class AllianceMatch(models.Model):
                                     default=0)
     robot_3_breach_ability = models.DecimalField(max_digits=10, decimal_places=0,
                                     default=0)
-    robot_1_end_game = models.ForeignKey(EndGameState,
-                                         on_delete=models.CASCADE,
-                                         related_name='robot1endgame',
-                                         null=True)
-    robot_2_end_game = models.ForeignKey(EndGameState,
-                                         on_delete=models.CASCADE,
-                                         related_name='robot2endgame',
-                                         null=True)
-    robot_3_end_game = models.ForeignKey(EndGameState,
-                                         on_delete=models.CASCADE,
-                                         related_name='robot3endgame', null=True)
     robot_1_card = models.ForeignKey(Card, on_delete=models.CASCADE, null=True,
                                      related_name='Robot1card')
     robot_2_card = models.ForeignKey(Card, on_delete=models.CASCADE, null=True,
