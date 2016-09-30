@@ -109,6 +109,7 @@ class ScoutingForm(ModelForm):
         """ controls which model and fields are displayed """
         model = Match
         exclude = ['scouted_by', 'field_setup']
+        widgets = {'scouted_team': forms.NumberInput()}
 
     def __init__(self, *args, **kwargs):
         super(ScoutingForm, self).__init__(*args, **kwargs)
