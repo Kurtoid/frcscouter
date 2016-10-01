@@ -197,9 +197,7 @@ class Match(models.Model):
     robot_end_game = models.ForeignKey(EndGameState,
                                      on_delete=models.CASCADE,
                                      related_name='robot1endgame',
-                                     null=True,
-                                       default=EndGameState.objects.get(state="Missed"
-                                                                        +"end game"))
+                                     null=True)
     score = models.DecimalField(max_digits=10, decimal_places=0, default=0)
     scouted_by = models.ForeignKey(MyUser, on_delete=models.CASCADE)
 

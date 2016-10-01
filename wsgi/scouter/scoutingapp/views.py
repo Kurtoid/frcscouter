@@ -4,7 +4,8 @@ from .forms import (SignUpForm, LoginForm, ScoutingForm, FieldSetupForm,
                     SortViewMatchForm, MatchNumberAttribs,
                     MatchViewFormMetaOptions, importTeamForm, importEventForm,
                     UserControlForm, AllianceScoutingForm, AllianceMatch)
-from .models import FieldSetup, Match, Tournament, Team, CredentialsModel
+from .models import (FieldSetup, Match, Tournament, Team, CredentialsModel,
+EndGameState)
 from django.contrib.auth import logout, login
 from django.contrib import messages
 from .tables import MatchTable, AllianceMatchTable
@@ -230,7 +231,9 @@ def scout(request):
             else:
                 print(form.errors)
         else:
-            form = ScoutingForm()
+            form = ScoutingForm(initial = {'robot_end_game':
+                                           EndGameState.objects.get(state="Missed"+
+                                                                    " End Game")})
 
         if request.session.get('fsetup'):
             return render(

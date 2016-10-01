@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate
 from django.forms import ModelForm
 from django import forms
 from scoutingapp.models import (MyUser, Match, FieldSetup, Defense, Tournament,
-                                Team, AllianceMatch)
+                                Team, AllianceMatch, EndGameState)
 
 
 class SortViewMatchForm(forms.Form):
@@ -105,6 +105,8 @@ class LoginForm(forms.Form):
 
 class ScoutingForm(ModelForm):
     """ generates the scouting form """
+    initial = {'robot_end_game': EndGameState.objects.get(state="Missed" +
+                                                          " End Game")}
     class Meta:
         """ controls which model and fields are displayed """
         model = Match
