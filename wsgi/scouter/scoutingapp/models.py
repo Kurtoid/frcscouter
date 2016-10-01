@@ -161,6 +161,13 @@ class EndGameState(models.Model):
         return self.state
 
 
+class Card(models.Model):
+    card_name = models.CharField(max_length=23)
+
+    def __str__(self):
+        return self.card_name
+
+
 class Match(models.Model):
     match_number = models.DecimalField(max_digits=100, decimal_places=0,
                                        default=0)
@@ -216,13 +223,6 @@ class Alliance(models.Model):
 
     def __str__(self):
         return self.color
-
-
-class Card(models.Model):
-    card_name = models.CharField(max_length=23)
-
-    def __str__(self):
-        return self.card_name
 
 
 class AllianceMatch(models.Model):
