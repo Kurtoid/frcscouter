@@ -198,7 +198,6 @@ class Match(models.Model):
                                      on_delete=models.CASCADE,
                                      related_name='robot1endgame',
                                      null=True)
-    score = models.DecimalField(max_digits=10, decimal_places=0, default=0)
     scouted_by = models.ForeignKey(MyUser, on_delete=models.CASCADE)
 
     class Meta:
