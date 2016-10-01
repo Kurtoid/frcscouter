@@ -1,10 +1,17 @@
 import django_tables2 as tables
-from .models import Match, FieldSetup, AllianceMatch
+from .models import Match, FieldSetup, AllianceMatch, MyUser
 
 
 class FieldTable(tables.Table):
     class Meta:
         model = FieldSetup
+
+
+class UserTable(tables.Table):
+    team_number= tables.Column(accessor='team.team_number')
+    class Meta:
+        model = MyUser
+        fields = ('email', 'team_number')
 
 
 class MatchTable(tables.Table):

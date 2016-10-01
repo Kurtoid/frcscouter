@@ -5,10 +5,10 @@ from .forms import (SignUpForm, LoginForm, ScoutingForm, FieldSetupForm,
                     MatchViewFormMetaOptions, importTeamForm, importEventForm,
                     UserControlForm, AllianceScoutingForm, AllianceMatch)
 from .models import (FieldSetup, Match, Tournament, Team, CredentialsModel,
-EndGameState)
+EndGameState, MyUser)
 from django.contrib.auth import logout, login
 from django.contrib import messages
-from .tables import MatchTable, AllianceMatchTable
+from .tables import MatchTable, AllianceMatchTable, UserTable
 from scouter import settings
 from django_tables2 import RequestConfig
 from django.core.exceptions import ObjectDoesNotExist
@@ -367,6 +367,18 @@ def exporthtml(request, team_number):
 
     return render(request, 'scoutingapp/exporthtml.html', {
         'rounds': matches,
+    })
+
+
+
+def exportusers(request):
+    users = MyUser.objects.all();
+    # enables ordering
+    usertable = UserTable(users)
+    RequestConfig(request).configure(usertable)
+
+    return render(request, 'scoutingapp/exporthtml.html', {
+        'rounds': usertable,
     })
 
 
