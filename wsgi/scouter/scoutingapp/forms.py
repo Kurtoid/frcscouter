@@ -116,6 +116,7 @@ class ScoutingForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(ScoutingForm, self).__init__(*args, **kwargs)
         self.fields['auto_defense_crossed'].required = False
+        self.fields['robot_card'].required = False
         #self.fields['tournament'].required = False
         """
         self.fields['defense1_crossed'].widget = forms.NumberInput(attrs={'class': 'col s6', })
@@ -135,9 +136,6 @@ class AllianceScoutingForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(AllianceScoutingForm, self).__init__(*args, **kwargs)
-        self.fields['robot_1_card'].required = False
-        self.fields['robot_2_card'].required = False
-        self.fields['robot_3_card'].required = False
 
 
 class UserControlForm(ModelForm):
