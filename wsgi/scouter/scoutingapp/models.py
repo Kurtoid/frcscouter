@@ -198,6 +198,8 @@ class Match(models.Model):
                                      on_delete=models.CASCADE,
                                      related_name='robot1endgame',
                                      null=True)
+    robot_card = models.ForeignKey(Card, on_delete=models.CASCADE, null=True,
+                                     related_name='Robot1card')
     scouted_by = models.ForeignKey(MyUser, on_delete=models.CASCADE)
 
     class Meta:
@@ -241,12 +243,6 @@ class AllianceMatch(models.Model):
                                     default=0)
     robot_3_breach_ability = models.DecimalField(max_digits=10, decimal_places=0,
                                     default=0)
-    robot_1_card = models.ForeignKey(Card, on_delete=models.CASCADE, null=True,
-                                     related_name='Robot1card')
-    robot_2_card = models.ForeignKey(Card, on_delete=models.CASCADE, null=True,
-                                    related_name='Robot2card')
-    robot_3_card = models.ForeignKey(Card, on_delete=models.CASCADE, null=True,
-                                    related_name='Robot3card')
 
 class CredentialsModel(models.Model):
     id = models.OneToOneField(MyUser, primary_key=True)

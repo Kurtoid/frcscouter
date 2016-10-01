@@ -15,9 +15,12 @@ class MatchTable(tables.Table):
         attrs = {'class': 'bordered responsive-table'}  # materialze class
         sequence = ('match_number', 'scouted_team', 'scouted_by',
                     'team_missed_match', 'auto_defense_crossed',
-                    'auto_low_balls', 'auto_high_balls', 'auto_dropped_ball',
+                    'auto_low_goal', 'auto_high_goal', 'auto_dropped_ball',
                     'low_bar_crossed', 'defense2_crossed', 'defense3_crossed',
-                    'defense4_crossed', 'defense5_crossed')
+                    'defense4_crossed', 'defense5_crossed', 'fed_boulder',
+                    'dropped_boulder', 'low_goals_scored', 'high_goals_missed',
+                    'high_goals_scored', 'robot_end_game', 'robot_card',
+                   )
         exclude = ('tournament', 'score', 'id')
 
 
@@ -35,7 +38,6 @@ class AllianceMatchTable(tables.Table):
                     'defense5_type', 'robot_1_driver_skill',
                     'robot_2_driver_skill', 'robot_3_driver_skill',
                     'robot_1_breach_ability', 'robot_2_breach_ability',
-                    'robot_3_breach_ability', 'robot_1_card', 'robot_2_card',
-                    'robot_3_card'
+                    'robot_3_breach_ability',
                    )
         exclude = ('id', 'field_setup')
