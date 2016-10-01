@@ -169,8 +169,8 @@ class Match(models.Model):
     auto_defense_crossed = models.ForeignKey(Defense,
                                              on_delete=models.CASCADE,
                                              null=True)
-    auto_low_balls = models.BooleanField(default=False)
-    auto_high_balls = models.BooleanField(default=False)
+    auto_low_goal= models.BooleanField(default=False)
+    auto_high_goal = models.BooleanField(default=False)
     auto_dropped_ball = models.BooleanField(default=False)
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
                                    null=True)
@@ -188,7 +188,7 @@ class Match(models.Model):
                                       default=0)
     high_goals_missed = models.DecimalField(max_digits=10, decimal_places=0,
                                      default=0)
-    high_balls_goals_made = models.DecimalField(max_digits=10, decimal_places=0,
+    high_goals_scored= models.DecimalField(max_digits=10, decimal_places=0,
                                      default=0)
     dropped_boulders = models.DecimalField(max_digits=10, decimal_places=0,
                                     default=0)
