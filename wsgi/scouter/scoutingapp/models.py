@@ -186,18 +186,18 @@ class Match(models.Model):
                                            default=0, verbose_name="Defense 5")
     fed_boulder = models.DecimalField(max_digits=10, decimal_places=0,
                                       default=0)
-    high_balls_missed = models.DecimalField(max_digits=10, decimal_places=0,
+    high_goals_missed = models.DecimalField(max_digits=10, decimal_places=0,
                                      default=0)
-    high_balls = models.DecimalField(max_digits=10, decimal_places=0,
+    high_balls_goals_made = models.DecimalField(max_digits=10, decimal_places=0,
                                      default=0)
-    dropped_balls = models.DecimalField(max_digits=10, decimal_places=0,
+    dropped_boulders = models.DecimalField(max_digits=10, decimal_places=0,
                                     default=0)
-    low_balls = models.DecimalField(max_digits=10, decimal_places=0,
+    low_goals_scored= models.DecimalField(max_digits=10, decimal_places=0,
                                     default=0)
     robot_end_game = models.ForeignKey(EndGameState,
-                                         on_delete=models.CASCADE,
-                                         related_name='robot1endgame',
-                                         null=True)
+                                     on_delete=models.CASCADE,
+                                     related_name='robot1endgame',
+                                     null=True)
     score = models.DecimalField(max_digits=10, decimal_places=0, default=0)
     scouted_by = models.ForeignKey(MyUser, on_delete=models.CASCADE)
 
