@@ -34,7 +34,6 @@ class AllianceMatchTable(tables.Table):
                     'defense2_type', 'defense3_type', 'defense4_type',
                     'defense5_type', 'robot_1_driver_skill',
                     'robot_2_driver_skill', 'robot_3_driver_skill',
-                    'robot_1_end_game', 'robot_2_end_game', 'robot_3_end_game',
                     'robot_1_breach_ability', 'robot_2_breach_ability',
                     'robot_3_breach_ability', 'robot_1_card', 'robot_2_card',
                     'robot_3_card'
