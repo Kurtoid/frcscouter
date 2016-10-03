@@ -44,11 +44,10 @@ class FieldSetupForm(ModelForm):
     class Meta:
         """ controls which model and fields are displayed """
         model = FieldSetup
-        exclude = ['defense1']
+        fields = '__all__'
 
     def save(self, commit=True):
         setup = super(FieldSetupForm, self).save(commit=False)
-        setup.defense1 = Defense.objects.get(code="XX")
         if commit:
             setup.save()
         return setup

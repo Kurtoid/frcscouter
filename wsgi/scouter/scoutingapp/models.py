@@ -129,9 +129,6 @@ class Defense(models.Model):
 
 
 class FieldSetup(models.Model):
-    defense1 = models.ForeignKey(Defense, related_name="Defense_1",
-                                 on_delete=models.CASCADE,
-                                 verbose_name="Defense 1")
     defense2 = models.ForeignKey(Defense, related_name="Defense_2",
                                  on_delete=models.CASCADE,
                                  verbose_name="Defense 2")
