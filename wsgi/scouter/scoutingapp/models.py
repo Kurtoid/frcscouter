@@ -143,8 +143,7 @@ class FieldSetup(models.Model):
                                  verbose_name="Defense 5")
 
     def __str__(self):
-        result = self.defense1.name + " "
-        result = result + self.defense2.name + " "
+        result = self.defense2.name + " "
         result = result + self.defense3.name + " "
         result = result + self.defense4.name + " "
         result = result + self.defense5.name + " "
