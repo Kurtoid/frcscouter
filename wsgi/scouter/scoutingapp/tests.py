@@ -23,7 +23,7 @@ class UrlRedirects(TestCase):
 
 
 class ItemsInViewTests(TestCase):
-    fixtures = ['testdata.json']
+    fixtures = ['initial_data.json']
 
     def test_signup(self):
         self.client.logout()
