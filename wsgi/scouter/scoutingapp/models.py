@@ -245,7 +245,7 @@ class CredentialsModel(models.Model):
     credential = CredentialsField()
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
 
 class CredentialsAdmin(admin.ModelAdmin):
