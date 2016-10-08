@@ -5,5 +5,4 @@
 *~
 .project
 .pydevproject
-wsgi/scouter/scoutingapp/fixtures/*
 wsgi/scouter/manage.py
