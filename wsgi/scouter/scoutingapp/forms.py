@@ -46,6 +46,13 @@ class FieldSetupForm(ModelForm):
         model = FieldSetup
         fields = '__all__'
 
+    def __init__(self, *args, **kwargs):
+        super(FieldSetupForm, self).__init__(*args, **kwargs)
+        self.fields['defense2'].queryset = Defense.objects.exclude(name='Low Bar')
+        self.fields['defense3'].queryset = Defense.objects.exclude(name='Low Bar')
+        self.fields['defense4'].queryset = Defense.objects.exclude(name='Low Bar')
+        self.fields['defense5'].queryset = Defense.objects.exclude(name='Low Bar')
+
     def save(self, commit=True):
         setup = super(FieldSetupForm, self).save(commit=False)
         if commit:
@@ -116,7 +123,6 @@ class ScoutingForm(ModelForm):
         super(ScoutingForm, self).__init__(*args, **kwargs)
         self.fields['auto_defense_crossed'].required = False
         self.fields['robot_card'].required = False
-        self.fields['auto_defense_crossed'].queryset = Defense.objects.exclude(name='Low Bar')
         #self.fields['tournament'].required = False
         """
         self.fields['defense1_crossed'].widget = forms.NumberInput(attrs={'class': 'col s6', })
