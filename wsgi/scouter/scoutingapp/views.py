@@ -363,7 +363,7 @@ def exporthtml(request, team_number):
     matchlist = matchlist.filter(scouted_by__team__team_number=team_number)
     # enables ordering
     matches = MatchTable(matchlist)
-    RequestConfig(request).configure(matches)
+    RequestConfig(request, paginate={'per_page': 9999}).configure(matches)
 
     return render(request, 'scoutingapp/exporthtml.html', {
         'rounds': matches,
