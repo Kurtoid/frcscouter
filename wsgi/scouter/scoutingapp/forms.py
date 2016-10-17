@@ -151,6 +151,14 @@ class AllianceScoutingForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(AllianceScoutingForm, self).__init__(*args, **kwargs)
 
+    def clean(self):
+        print("clean called")
+        cleaned_data = super(ScoutingForm, self).clean()
+        match_num = cleaned_data.get("match_number")
+        if match_num < 1:
+            raise forms.ValidationError("Match must be more than 0!!")
+        return cleaned_data
+
 
 class UserControlForm(ModelForm):
     class Meta:
