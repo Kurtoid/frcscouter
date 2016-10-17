@@ -5,6 +5,7 @@
 	<br>
 	<form action="{% url 'scoutingapp:scout' %}" method="POST">
 		{% csrf_token %}
+		{{ form.errors }}
 		{% for field in form %}
 					{% if field.field.widget|klass == "NumberInput" %}
 						<div class="row">
@@ -19,7 +20,7 @@
 								{{ field.errors }}
 							</div>
 							<div class = "col s4">
-								<a class="btn-large" style="width: 100%" onclick="document.getElementById('{{ field.auto_id}}').stepDown()"><i class="material-icons">remove</i></a>
+								<a class="btn-large" style="width: 100%" onclick="if(document.getElementById('{{ field.auto_id}}').value>0){document.getElementById('{{ field.auto_id}}').stepDown()}"><i class="material-icons">remove</i></a>
 							</div>
 						</div>
 					{% else %}
