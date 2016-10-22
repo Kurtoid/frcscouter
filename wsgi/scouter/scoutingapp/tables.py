@@ -26,7 +26,8 @@ class MatchTable(tables.Table):
                     'low_bar_crossed', 'defense2_crossed', 'defense3_crossed',
                     'defense4_crossed', 'defense5_crossed', 'fed_boulder',
                     'dropped_boulders', 'low_goals_scored', 'high_goals_missed',
-                    'high_goals_scored', 'robot_end_game', 'robot_card',
+                    'high_goals_scored', 'robot_end_game',
+                    'robot_card','auto_high_goal_2'
                    )
         exclude = ('tournament', 'score', 'id')
 

@@ -174,6 +174,7 @@ class Match(models.Model):
                                              null=True, blank=True)
     auto_low_goal= models.BooleanField(default=False)
     auto_high_goal = models.BooleanField(default=False)
+    auto_high_goal_2 = models.BooleanField(default=False)
     auto_dropped_ball = models.BooleanField(default=False)
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
                                    null=True, blank=True)
