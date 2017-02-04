@@ -127,29 +127,6 @@ class Defense(models.Model):
     def __str__(self):
         return self.name
 
-
-class FieldSetup(models.Model):
-    defense2 = models.ForeignKey(Defense, related_name="Defense_2",
-                                 on_delete=models.CASCADE,
-                                 verbose_name="Defense 2")
-    defense3 = models.ForeignKey(Defense, related_name="Defense_3",
-                                 on_delete=models.CASCADE,
-                                 verbose_name="Defense 3")
-    defense4 = models.ForeignKey(Defense, related_name="Defense_4",
-                                 on_delete=models.CASCADE,
-                                 verbose_name="Defense 4")
-    defense5 = models.ForeignKey(Defense, related_name="Defense_5",
-                                 on_delete=models.CASCADE,
-                                 verbose_name="Defense 5")
-
-    def __str__(self):
-        result = self.defense2.name + " "
-        result = result + self.defense3.name + " "
-        result = result + self.defense4.name + " "
-        result = result + self.defense5.name + " "
-        return result
-
-
 class EndGameState(models.Model):
     state = models.CharField(max_length=20)
 
@@ -163,19 +140,44 @@ class Card(models.Model):
     def __str__(self):
         return self.card_name
 
+class HopperLoad(models.Model):
+    name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
+
+class HighEfficiency(models.Model):
+    name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
 
 class Match(models.Model):
     match_number = models.DecimalField(max_digits=100, decimal_places=0,
                                        default=0)
     scouted_team = models.ForeignKey(Team, on_delete=models.CASCADE)
     team_missed_match = models.BooleanField(default=False)
-    auto_defense_crossed = models.ForeignKey(Defense,
-                                             on_delete=models.CASCADE,
-                                             null=True, blank=True)
+    auto_move_yn = models.BooleanField(default=False)
+    auto_score_gear_yn = models.BooleanField(default=False)
     auto_low_goal= models.BooleanField(default=False)
-    auto_high_goal = models.BooleanField(default=False)
-    auto_high_goal_2 = models.BooleanField(default=False)
-    auto_dropped_ball = models.BooleanField(default=False)
+    auto_trigger_hopper = models.DecimalField(default = 0, max_digits=1,
+                                              decimal_places = 0,)
+    auto_hopper_load = models.ForeignKey(HopperLoad)
+    auto_high_efficiency_load = models.ForeignKey(HighEfficiency,
+                                                  related_name="auto_high_efficiency_load")
+    auto_low_efficiency_load = models.ForeignKey(HighEfficiency)
+    trigger_hopper = models.DecimalField(max_digits=1, decimal_places = 0,
+                                         default = 0)
+    gears_aquired = models.DecimalField(max_digits=1, decimal_places = 0,
+                                         default = 0)
+    gears_scored= models.DecimalField(max_digits=1, decimal_places = 0,
+                                         default = 0)
+    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
+                                   null=True, blank=True)
+    low_bar_crossed = models.DecimalField(max_digits=10, decimal_places=0,
+                                           default=0, verbose_name="Low bar")
+    defense2_crossed = models.DecimalField(max_digits=10, decimal_places=0,
+                                           default=0, verbose_name="Defense 2")
+    defense3_crossed = models.DecimalField(max_digits=10, decimal_places=0,
+                                           default=0, verbose_name="Defense 3")
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
                                    null=True, blank=True)
     low_bar_crossed = models.DecimalField(max_digits=10, decimal_places=0,
@@ -227,7 +229,6 @@ class AllianceMatch(models.Model):
                                        default=0)
     alliance = models.ForeignKey(Alliance, on_delete=models.CASCADE)
     scouted_by = models.ForeignKey(MyUser, on_delete=models.CASCADE)
-    field_setup = models.OneToOneField(FieldSetup, on_delete=models.CASCADE)
     robot_1_driver_skill = models.DecimalField(max_digits=10, decimal_places=0,
                                     default=0)
     robot_2_driver_skill = models.DecimalField(max_digits=10, decimal_places=0,

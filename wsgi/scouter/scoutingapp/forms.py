@@ -4,7 +4,7 @@ this module handles how forms are generated and sent to views
 from django.contrib.auth import authenticate
 from django.forms import ModelForm
 from django import forms
-from scoutingapp.models import (MyUser, Match, FieldSetup, Defense, Tournament,
+from scoutingapp.models import (MyUser, Match, Defense, Tournament,
                                 Team, AllianceMatch, EndGameState)
 
 
@@ -28,36 +28,11 @@ class MatchViewFormMetaOptions(forms.Form):
 class MatchNumberAttribs(forms.Form):
     scouted_team = forms.ModelMultipleChoiceField(
         queryset=Team.objects.all(), widget=forms.SelectMultiple)
-    crossed_def = forms.NullBooleanField(label="Crossed defense on auto")
-    auto_defense_crossed = forms.DecimalField(max_digits=1, decimal_places=0)
 
     def __init__(self, *args, **kwargs):
         super(MatchNumberAttribs, self).__init__(*args, **kwargs)
         self.fields['scouted_team'].required = False
         self.fields['crossed_def'].required = False
-        self.fields['auto_defense_crossed'].required = False
-
-
-class FieldSetupForm(ModelForm):
-    """ form for field layout """
-
-    class Meta:
-        """ controls which model and fields are displayed """
-        model = FieldSetup
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        super(FieldSetupForm, self).__init__(*args, **kwargs)
-        self.fields['defense2'].queryset = Defense.objects.exclude(name='Low Bar')
-        self.fields['defense3'].queryset = Defense.objects.exclude(name='Low Bar')
-        self.fields['defense4'].queryset = Defense.objects.exclude(name='Low Bar')
-        self.fields['defense5'].queryset = Defense.objects.exclude(name='Low Bar')
-
-    def save(self, commit=True):
-        setup = super(FieldSetupForm, self).save(commit=False)
-        if commit:
-            setup.save()
-        return setup
 
 
 class SignUpForm(ModelForm):
@@ -113,15 +88,23 @@ class ScoutingForm(ModelForm):
     """ generates the scouting form """
     initial = {'robot_end_game': EndGameState.objects.get(state="Missed" +
                                                           " End Game")}
+
     class Meta:
+        def getSelect(min, max):
+            return forms.Select(choices=[(x,x) for x in range (min, max)])
+
         """ controls which model and fields are displayed """
         model = Match
         exclude = ['scouted_by', 'field_setup', 'tournament']
-        #widgets = {'scouted_team': forms.NumberInput()}
+        widgets = {'auto_trigger_hopper': getSelect(0,6),
+                   'trigger_hopper': getSelect(0,6),
+                   'gears_aquired': getSelect(1,14),
+                   'gears_scored': getSelect(1,14)}
+
+
 
     def __init__(self, *args, **kwargs):
         super(ScoutingForm, self).__init__(*args, **kwargs)
-        self.fields['auto_defense_crossed'].required = False
         self.fields['robot_card'].required = False
         #self.fields['tournament'].required = False
         """

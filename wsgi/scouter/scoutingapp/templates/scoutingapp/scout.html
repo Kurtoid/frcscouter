@@ -2,6 +2,7 @@
 
 {% block content %}
 {% load app_filters %}
+<div class="container">
 	<br>
 	<form action="{% url 'scoutingapp:scout' %}" method="POST">
 		{% csrf_token %}
@@ -13,14 +14,14 @@
 						</div>
 						<div class = "row">
 							<div class = "col s4">
-								<a class="btn-large" style="width: 100%" onclick="document.getElementById('{{ field.auto_id}}').stepUp()"><i class="material-icons">add</i></a>
+								<a class="btn-large" style="width: 100%" onclick="if(document.getElementById('{{ field.auto_id}}').value>0){document.getElementById('{{ field.auto_id}}').stepDown()}"><i class="material-icons">remove</i></a>
 							</div>
 							<div class="input-field col s4">
 								{{ field }}
 								{{ field.errors }}
 							</div>
 							<div class = "col s4">
-								<a class="btn-large" style="width: 100%" onclick="if(document.getElementById('{{ field.auto_id}}').value>0){document.getElementById('{{ field.auto_id}}').stepDown()}"><i class="material-icons">remove</i></a>
+								<a class="btn-large" style="width: 100%" onclick="document.getElementById('{{ field.auto_id}}').stepUp()"><i class="material-icons">add</i></a>
 							</div>
 						</div>
 					{% else %}
@@ -44,5 +45,5 @@
 	{% endfor %}
 	<button class="btn waves-effect waves-light" type="submit" name="action">Submit<i class="material-icons right">send</i></button>
 	</form>	
-
+</div>
 {% endblock content %}

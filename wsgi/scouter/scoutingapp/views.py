@@ -1,10 +1,10 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from .forms import (SignUpForm, LoginForm, ScoutingForm, FieldSetupForm,
+from .forms import (SignUpForm, LoginForm, ScoutingForm,
                     SortViewMatchForm, MatchNumberAttribs,
                     MatchViewFormMetaOptions, importTeamForm, importEventForm,
                     UserControlForm, AllianceScoutingForm, AllianceMatch)
-from .models import (FieldSetup, Match, Tournament, Team, CredentialsModel,
+from .models import (Match, Tournament, Team, CredentialsModel,
 EndGameState, MyUser)
 from django.contrib.auth import logout, login
 from django.contrib import messages
@@ -250,10 +250,8 @@ def alliance_scout(request):
     if request.user.is_authenticated():
         if request.method == 'POST':
             form = AllianceScoutingForm(request.POST)
-            fieldsetform = FieldSetupForm(request.POST)
-            if form.is_valid() and fieldsetform.is_valid():
+            if form.is_valid():
                 match = form.save(commit=False)
-                fieldset = fieldsetform.save()
                 match.scouted_by = request.user
                 match.field_setup = fieldset
                 match.save()
@@ -263,26 +261,22 @@ def alliance_scout(request):
                 print(form.errors)
         else:
             form = AllianceScoutingForm()
-            fieldsetform = FieldSetupForm()
 
         if request.session.get('fsetup'):
             return render(
                 request, 'scoutingapp/alliancescout.html',
-                {'form': form, 'fieldsetform': fieldsetform,
-                 'setupkey': FieldSetup.objects.get(
-                     id=request.session.get('fsetup'))})
+                {'form': form
+                })
         return render(
             request, 'scoutingapp/alliancescout.html',
-            {'form': form, 'fieldsetform': fieldsetform})
+            {'form': form})
     else:
         return HttpResponseRedirect('/scoutingapp/userlogin/')
 
 def demo_scout_page(request):
-    fieldsetform = FieldSetupForm()
     form = ScoutingForm()
     return render(request, 'scoutingapp/scout.html', {'form': form,
-                                                      'fieldsetform':
-                                                      fieldsetform})
+                                                      })
 
 
 def import_from_TBA(request):

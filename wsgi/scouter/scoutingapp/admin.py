@@ -8,14 +8,13 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.forms.widgets import TextInput
 
-from scoutingapp.models import (MyUser, Team, Match, FieldSetup, Defense,
+from scoutingapp.models import (MyUser, Team, Match, Defense,
                                 Tournament, Alliance, AllianceMatch,
-                                EndGameState, Card)
-
+                                EndGameState, Card, HighEfficiency, 
+                                HopperLoad)
 
 class DefenseAdmin(admin.ModelAdmin):
     list_display = ('name', 'code')
-
 
 class TeamCreateForm(forms.ModelForm):
 
@@ -125,12 +124,13 @@ admin.site.register(MyUser, UserAdmin)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(Match, MatchAdmin)
 admin.site.register(Defense, DefenseAdmin)
-admin.site.register(FieldSetup)
 admin.site.register(Tournament)
 admin.site.register(Alliance)
 admin.site.register(AllianceMatch)
 admin.site.register(EndGameState)
 admin.site.register(Card)
+admin.site.register(HopperLoad)
+admin.site.register(HighEfficiency)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
 admin.site.unregister(Group)
