@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from .forms import (SignUpForm, LoginForm, ScoutingForm,
@@ -132,21 +133,9 @@ def viewrounds(request):
             if matchattribform.cleaned_data['scouted_team']:
                 teamlist = matchattribform.cleaned_data['scouted_team']
                 matchlist = matchlist.filter(scouted_team__in=teamlist)
-            if matchattribform.cleaned_data['crossed_def'] is not None:
-                crossdef = matchattribform.cleaned_data['crossed_def']
-                matchlist = matchlist.filter(crossed_defense_on_auto=crossdef)
-            if matchattribform.cleaned_data['auto_defense_crossed'] is not None:
-                crossdef = matchattribform.cleaned_data['auto_defense_crossed']
-                matchlist = matchlist.filter(auto_defense_crossed=crossdef)
         viewoptionsform = MatchViewFormMetaOptions(request.POST)
         if viewoptionsform.is_valid():
-            print(viewoptionsform.cleaned_data['show_defense_count'])
-            if viewoptionsform.cleaned_data['show_defense_count'] is False:
-                fieldstoexclude = (
-                    'defense1_crossed', 'defense2_crossed', 'defense3_crossed',
-                    'defense4_crossed', 'defense5_crossed'
-                )
-                print('exclude defenses')
+            pass;
         else:
             print(viewoptionsform.errors)
     matches = MatchTable(matchlist, exclude=fieldstoexclude)
@@ -231,10 +220,14 @@ def scout(request):
             else:
                 print(form.errors)
         else:
-            form = ScoutingForm(initial = {'robot_end_game':
-                                           EndGameState.objects.get(state="Missed"+
-                                                                    " End Game")})
 
+            try:
+                form = ScoutingForm(initial = {'robot_end_game':
+                                               EndGameState.objects.get(state="Missed Game")})
+
+            except ObjectDoesNotExist:
+                print("Missed game missing")
+                form = ScoutingForm()
         if request.session.get('fsetup'):
             return render(
                 request, 'scoutingapp/scout.html',
@@ -253,7 +246,6 @@ def alliance_scout(request):
             if form.is_valid():
                 match = form.save(commit=False)
                 match.scouted_by = request.user
-                match.field_setup = fieldset
                 match.save()
                 # proccess form
                 return HttpResponseRedirect('/scoutingapp/')

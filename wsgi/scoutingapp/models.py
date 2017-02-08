@@ -13,6 +13,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 from oauth2client.contrib.django_util.models import CredentialsField
+from django.core.validators import validate_comma_separated_integer_list
 
 class Tournament(models.Model):
     name = models.CharField(max_length=200, default="UNAMED")
@@ -100,7 +101,7 @@ class MyUser(AbstractBaseUser):
         # The user is identified by their email address
         return self.email
 
-    def __str__(self):              # __unicode__ on Python 2
+    def __str__(self):  # __unicode__ on Python 2
         return self.email
 
     def has_perm(self, perm, obj=None):
@@ -119,13 +120,6 @@ class MyUser(AbstractBaseUser):
         # Simplest possible answer: All admins are staff
         return self.is_admin
 
-
-class Defense(models.Model):
-    name = models.CharField(max_length=100)
-    code = models.CharField(max_length=2)
-
-    def __str__(self):
-        return self.name
 
 class EndGameState(models.Model):
     state = models.CharField(max_length=20)
@@ -154,52 +148,35 @@ class Match(models.Model):
     match_number = models.DecimalField(max_digits=100, decimal_places=0,
                                        default=0)
     scouted_team = models.ForeignKey(Team, on_delete=models.CASCADE)
-    team_missed_match = models.BooleanField(default=False)
     auto_move_yn = models.BooleanField(default=False)
     auto_score_gear_yn = models.BooleanField(default=False)
-    auto_low_goal= models.BooleanField(default=False)
-    auto_trigger_hopper = models.DecimalField(default = 0, max_digits=1,
-                                              decimal_places = 0,)
-    auto_hopper_load = models.ForeignKey(HopperLoad)
+    auto_low_goal = models.BooleanField(default=False)
+    auto_trigger_hopper = models.DecimalField(default=0, max_digits=1,
+                                              decimal_places=0,null=True)
+    auto_hopper_load = models.ForeignKey(HopperLoad, null=True)
     auto_high_efficiency_load = models.ForeignKey(HighEfficiency,
-                                                  related_name="auto_high_efficiency_load")
-    auto_low_efficiency_load = models.ForeignKey(HighEfficiency)
-    trigger_hopper = models.DecimalField(max_digits=1, decimal_places = 0,
-                                         default = 0)
-    gears_aquired = models.DecimalField(max_digits=1, decimal_places = 0,
-                                         default = 0)
-    gears_scored= models.DecimalField(max_digits=1, decimal_places = 0,
-                                         default = 0)
+                                                  related_name="auto_high_efficiency_load", null=True)
+    auto_low_efficiency_load = models.ForeignKey(HighEfficiency, null=True)
+    trigger_hopper = models.DecimalField(max_digits=1, decimal_places=0,
+                                         default=0, null=True)
+    gears_aquired = models.DecimalField(max_digits=1, decimal_places=0,
+                                         default=0, null=True)
+    gears_scored = models.DecimalField(max_digits=1, decimal_places=0,
+                                         default=0, null=True)
+    gears_picked_up = models.DecimalField(max_digits=1, decimal_places=0,
+                                         default=0, null=True)
+    hopper_load = models.CharField(max_length=999, validators=[validate_comma_separated_integer_list], null=True)
+    high_efficiency_load = models.ForeignKey(HighEfficiency,
+                                                  related_name="high_efficiency_load", null=True)
+    low_efficiency_load = models.ForeignKey(HighEfficiency, related_name="low_efficiency_load", null=True)
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
                                    null=True, blank=True)
-    low_bar_crossed = models.DecimalField(max_digits=10, decimal_places=0,
-                                           default=0, verbose_name="Low bar")
-    defense2_crossed = models.DecimalField(max_digits=10, decimal_places=0,
-                                           default=0, verbose_name="Defense 2")
-    defense3_crossed = models.DecimalField(max_digits=10, decimal_places=0,
-                                           default=0, verbose_name="Defense 3")
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
                                    null=True, blank=True)
-    low_bar_crossed = models.DecimalField(max_digits=10, decimal_places=0,
-                                           default=0, verbose_name="Low bar")
-    defense2_crossed = models.DecimalField(max_digits=10, decimal_places=0,
-                                           default=0, verbose_name="Defense 2")
-    defense3_crossed = models.DecimalField(max_digits=10, decimal_places=0,
-                                           default=0, verbose_name="Defense 3")
-    defense4_crossed = models.DecimalField(max_digits=10, decimal_places=0,
-                                           default=0, verbose_name="Defense 4")
-    defense5_crossed = models.DecimalField(max_digits=10, decimal_places=0,
-                                           default=0, verbose_name="Defense 5")
-    fed_boulder = models.DecimalField(max_digits=10, decimal_places=0,
-                                      default=0)
     high_goals_missed = models.DecimalField(max_digits=10, decimal_places=0,
-                                     default=0)
-    high_goals_scored= models.DecimalField(max_digits=10, decimal_places=0,
-                                     default=0)
-    dropped_boulders = models.DecimalField(max_digits=10, decimal_places=0,
-                                    default=0)
-    low_goals_scored= models.DecimalField(max_digits=10, decimal_places=0,
-                                    default=0)
+                                     default=0, null=True)
+    high_goals_scored = models.DecimalField(max_digits=10, decimal_places=0,
+                                     default=0, null=True)
     robot_end_game = models.ForeignKey(EndGameState,
                                      on_delete=models.CASCADE,
                                      related_name='robot1endgame',

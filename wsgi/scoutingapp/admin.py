@@ -8,9 +8,9 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.forms.widgets import TextInput
 
-from scoutingapp.models import (MyUser, Team, Match, Defense,
+from scoutingapp.models import (MyUser, Team, Match,
                                 Tournament, Alliance, AllianceMatch,
-                                EndGameState, Card, HighEfficiency, 
+                                EndGameState, Card, HighEfficiency,
                                 HopperLoad)
 
 class DefenseAdmin(admin.ModelAdmin):
@@ -123,7 +123,6 @@ class MatchAdmin(admin.ModelAdmin):
 admin.site.register(MyUser, UserAdmin)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(Match, MatchAdmin)
-admin.site.register(Defense, DefenseAdmin)
 admin.site.register(Tournament)
 admin.site.register(Alliance)
 admin.site.register(AllianceMatch)

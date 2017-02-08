@@ -1,10 +1,11 @@
 """
 this module handles how forms are generated and sent to views
 """
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate
 from django.forms import ModelForm
 from django import forms
-from scoutingapp.models import (MyUser, Match, Defense, Tournament,
+from scoutingapp.models import (MyUser, Match, Tournament,
                                 Team, AllianceMatch, EndGameState)
 
 
@@ -32,7 +33,6 @@ class MatchNumberAttribs(forms.Form):
     def __init__(self, *args, **kwargs):
         super(MatchNumberAttribs, self).__init__(*args, **kwargs)
         self.fields['scouted_team'].required = False
-        self.fields['crossed_def'].required = False
 
 
 class SignUpForm(ModelForm):
@@ -86,11 +86,13 @@ class LoginForm(forms.Form):
 
 class ScoutingForm(ModelForm):
     """ generates the scouting form """
-    initial = {'robot_end_game': EndGameState.objects.get(state="Missed" +
-                                                          " End Game")}
+    try:
+        initial = {'robot_end_game': EndGameState.objects.get(state="Missed Game")}
+    except ObjectDoesNotExist:
+            print("Missed game missing")
 
     class Meta:
-        def getSelect(min, max):
+        def getSelect(min, max):  # @NoSelf
             return forms.Select(choices=[(x,x) for x in range (min, max)])
 
         """ controls which model and fields are displayed """
@@ -99,13 +101,14 @@ class ScoutingForm(ModelForm):
         widgets = {'auto_trigger_hopper': getSelect(0,6),
                    'trigger_hopper': getSelect(0,6),
                    'gears_aquired': getSelect(1,14),
-                   'gears_scored': getSelect(1,14)}
+                   'gears_scored': getSelect(1,14), 'gears_picked_up': getSelect(1, 14)}
 
 
 
     def __init__(self, *args, **kwargs):
         super(ScoutingForm, self).__init__(*args, **kwargs)
         self.fields['robot_card'].required = False
+        self.fields['hopper_load'].widget.attrs['class'] = 'customListMaker'
         #self.fields['tournament'].required = False
         """
         self.fields['defense1_crossed'].widget = forms.NumberInput(attrs={'class': 'col s6', })
