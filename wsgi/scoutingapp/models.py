@@ -165,7 +165,9 @@ class Match(models.Model):
                                          default=0, null=True)
     gears_picked_up = models.DecimalField(max_digits=1, decimal_places=0,
                                          default=0, null=True)
-    hopper_load = models.CharField(max_length=999, validators=[validate_comma_separated_integer_list], null=True)
+    hopper_load = models.CharField(max_length=999
+                                   #validators=[validate_comma_separated_integer_list]
+                                   , null=True)
     high_efficiency_load = models.ForeignKey(HighEfficiency,
                                                   related_name="high_efficiency_load", null=True)
     low_efficiency_load = models.ForeignKey(HighEfficiency, related_name="low_efficiency_load", null=True)

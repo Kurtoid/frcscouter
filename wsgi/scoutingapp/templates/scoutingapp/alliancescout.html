@@ -6,6 +6,7 @@
 	<br>
 	<form action="{% url 'scoutingapp:alliance_scout' %}" method="POST">
 		{% csrf_token %}
+		{{ form.errors }}
 			<ul class="collapsible" data-collapsible="accordion">
 				<li>
 					<div class="collapsible-header active">Field Setup</div>
@@ -56,6 +57,7 @@
 	{% endfor %}
 	<button class="btn waves-effect waves-light" type="submit" name="action">Submit<i class="material-icons right">send</i></button>
 	</form>	
+			<br>
 </div>
 
 {% endblock content %}

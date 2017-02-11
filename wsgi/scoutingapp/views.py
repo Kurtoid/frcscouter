@@ -211,6 +211,7 @@ def scout(request):
     if request.user.is_authenticated():
         if request.method == 'POST':
             form = ScoutingForm(request.POST)
+            form.use_required_attribute=False
             if form.is_valid():
                 match = form.save(commit=False)
                 match.scouted_by = request.user
@@ -228,6 +229,7 @@ def scout(request):
             except ObjectDoesNotExist:
                 print("Missed game missing")
                 form = ScoutingForm()
+        form.use_required_attribute=False
         if request.session.get('fsetup'):
             return render(
                 request, 'scoutingapp/scout.html',

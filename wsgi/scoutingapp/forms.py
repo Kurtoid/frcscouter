@@ -139,7 +139,7 @@ class AllianceScoutingForm(ModelForm):
 
     def clean(self):
         print("clean called")
-        cleaned_data = super(ScoutingForm, self).clean()
+        cleaned_data = super(AllianceScoutingForm, self).clean()
         match_num = cleaned_data.get("match_number")
         if match_num < 1:
             raise forms.ValidationError("Match must be more than 0!!")
