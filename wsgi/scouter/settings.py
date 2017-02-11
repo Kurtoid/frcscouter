@@ -16,6 +16,7 @@ WSGI_DIR = os.path.dirname(BASE_DIR)
 REPO_DIR = os.path.dirname(WSGI_DIR)
 
 ON_OPENSHIFT = False
+
 if 'OPENSHIFT_REPO_DIR' in os.environ:
     ON_OPENSHIFT = True
 if ON_OPENSHIFT:

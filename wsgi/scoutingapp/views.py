@@ -1,4 +1,4 @@
-from django.core.exceptions import ObjectDoesNotExist
+from django.utils.encoding import smart_str
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from .forms import (SignUpForm, LoginForm, ScoutingForm,
@@ -379,3 +379,13 @@ def allianceexporthtml(request, team_number):
     return render(request, 'scoutingapp/exporthtml.html', {
         'rounds': matches,
     })
+def gethoppertypes(request):
+    path = os.path.join(settings.DJ_PROJECT_DIR, "hoppertypes.txt")
+    print(path)
+    val = ""
+    with  open(path) as f:
+        for line in f:
+            print (line)
+            val += line
+    return HttpResponse(val, content_type='text/plain')
+    

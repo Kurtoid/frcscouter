@@ -25,5 +25,6 @@ urlpatterns = [
     url(r'^exporthtml/(?P<team_number>[0-9]+)', views.exporthtml,
         name='exporthtml'),
     url(r'^allianceexporthtml/(?P<team_number>[0-9]+)', views.allianceexporthtml,
-        name='allianceexporthtml')
+        name='allianceexporthtml'),
+    url(r'^gethoppertypes/$', views.gethoppertypes, name='hoppertypes')
 ]
