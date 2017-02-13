@@ -391,3 +391,25 @@ def gethoppertypes(request):
             val += line
     return HttpResponse(val, content_type='text/plain')
     
+def getshottypes(request):
+    path = os.path.join(settings.DJ_PROJECT_DIR, "goaltypes.txt")
+    print(path)
+    val = ""
+    with  open(path) as f:
+        for line in f:
+            print (line)
+            val += line
+    return HttpResponse(val, content_type='text/plain')
+
+
+def getveff(request):
+    path = os.path.join(settings.DJ_PROJECT_DIR, "ballEfficiencies.txt")
+    print(path)
+    val = ""
+    with  open(path) as f:
+        for line in f:
+            print (line)
+            val += line
+    return HttpResponse(val, content_type='text/plain')
+
+

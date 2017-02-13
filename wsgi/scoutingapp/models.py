@@ -5,7 +5,6 @@ from django.contrib.auth.models import (
 
 # Create your models here.
 
-import pickle
 import base64
 
 from django.contrib import admin
@@ -143,7 +142,7 @@ class HighEfficiency(models.Model):
     name = models.CharField(max_length=100)
     def __str__(self):
         return self.name
-
+    
 class Match(models.Model):
     match_number = models.DecimalField(max_digits=100, decimal_places=0,
                                        default=0)
@@ -159,18 +158,19 @@ class Match(models.Model):
     auto_low_efficiency_load = models.ForeignKey(HighEfficiency, null=True)
     trigger_hopper = models.DecimalField(max_digits=1, decimal_places=0,
                                          default=0, null=True)
-    gears_aquired = models.DecimalField(max_digits=1, decimal_places=0,
-                                         default=0, null=True)
-    gears_scored = models.DecimalField(max_digits=1, decimal_places=0,
-                                         default=0, null=True)
-    gears_picked_up = models.DecimalField(max_digits=1, decimal_places=0,
-                                         default=0, null=True)
     hopper_load = models.CharField(max_length=999
                                    #validators=[validate_comma_separated_integer_list]
                                    , null=True)
     high_efficiency_load = models.ForeignKey(HighEfficiency,
                                                   related_name="high_efficiency_load", null=True)
     low_efficiency_load = models.ForeignKey(HighEfficiency, related_name="low_efficiency_load", null=True)
+
+    gears_aquired = models.DecimalField(max_digits=1, decimal_places=0,
+                                         default=0, null=True)
+    gears_scored = models.DecimalField(max_digits=1, decimal_places=0,
+                                         default=0, null=True)
+    gears_picked_up = models.DecimalField(max_digits=1, decimal_places=0,
+                                         default=0, null=True)
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
                                    null=True, blank=True)
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,

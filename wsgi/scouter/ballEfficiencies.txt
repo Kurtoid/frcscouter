@@ -1,0 +1,6 @@
+Amazing (95-100%)
+Great (75-95%)
+Good (50-75%)
+Poor (25-50%)
+Horrible (1-25%)
+None (0)
