@@ -24,6 +24,8 @@ urlpatterns = [
         name='import_event_from_TBA'),
     url(r'^exporthtml/(?P<team_number>[0-9]+)', views.exporthtml,
         name='exporthtml'),
+    url(r'^exportballs/(?P<team_number>[0-9]+)', views.exportballs,
+        name='exportballs'),
     url(r'^allianceexporthtml/(?P<team_number>[0-9]+)', views.allianceexporthtml,
         name='allianceexporthtml'),
     url(r'^gethoppertypes/$', views.gethoppertypes, name='hoppertypes'),

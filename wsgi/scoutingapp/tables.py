@@ -1,5 +1,5 @@
 import django_tables2 as tables
-from .models import Match, AllianceMatch, MyUser
+from .models import Match, AllianceMatch, MyUser, Volley
 
 
 class UserTable(tables.Table):
@@ -17,6 +17,15 @@ class MatchTable(tables.Table):
         attrs = {'class': 'bordered responsive-table'}  # materialze class
         exclude = ('tournament', 'score', 'id')
 
+class VolleyTable(tables.Table):
+
+    team_number= tables.Column(accessor='match.scouted_team.team_number')
+    class Meta:
+        model = Volley 
+        # add class="bordered"
+        attrs = {'class': 'bordered responsive-table'}  # materialze class
+#         fields = ('goal_type', 'accuracy', 'ball_count','match', 'team_number')
+        exclude = ()
 
 class AllianceMatchTable(tables.Table):
     class Meta:

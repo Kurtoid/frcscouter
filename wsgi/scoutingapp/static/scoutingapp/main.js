@@ -18,8 +18,10 @@ $(document)
                $("#id_hopper_load").replaceWith(function () {
                    return $("<select />", attrs).append($(this).contents());
                });
-               $("<div class =\"col s4\"><select id=\"volleyType\" /></div> ").insertAfter($(".customListMaker").parent())
-               $("<div class =\"col s4\"><select id=\"volleyEff\" /></div> ").insertAfter($("#volleyType").parent())
+               $("<div class =\"col s4\"><select id=\"volleyType\" /></div> ")
+               .insertAfter($(".customListMaker").parent())
+               $("<div class =\"col s4\"><select id=\"volleyEff\" /></div> ")
+               .insertAfter($("#volleyType").parent())
                $(
                  '<div class="row s4"><a class="waves-effect waves-light btn" id="volleyAdd">Add</a></div>')
                .insertAfter($("#volleyEff").parent())
@@ -54,10 +56,9 @@ $(document)
                          for (var i = 0; i < list.length; i++) {
                              // code here using lines[i] which will give you each line
                              $("#volleyType").append(
-                                                         $("<option value=\""
-                                                           + i + "\">"
-                                                           + list[i]
-                                                           + "</option>"));
+                                                     $("<option value=\"" + i
+                                                       + "\">" + list[i]
+                                                       + "</option>"));
                              console.log(i);
                          }
                          $('select').material_select();
@@ -72,10 +73,9 @@ $(document)
                          for (var i = 0; i < list.length; i++) {
                              // code here using lines[i] which will give you each line
                              $("#volleyEff").append(
-                                                         $("<option value=\""
-                                                           + i + "\">"
-                                                           + list[i]
-                                                           + "</option>"));
+                                                    $("<option value=\"" + i
+                                                      + "\">" + list[i]
+                                                      + "</option>"));
                              console.log(i);
                          }
                          $('select').material_select();
@@ -128,8 +128,8 @@ $('#mainForm')
             var t = ""
             $(".hitem").each(function (index) {
 
-                alert($(this).text());
-                t += $(this).text() +";";
+//                alert($(this).text());
+                t += $(this).text() + ";";
             })
 
             $('#mainForm input[name="hopper_load"]').val(t);

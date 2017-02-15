@@ -9,7 +9,7 @@ from .models import (Match, Tournament, Team, CredentialsModel,
 EndGameState, MyUser)
 from django.contrib.auth import logout, login
 from django.contrib import messages
-from .tables import MatchTable, AllianceMatchTable, UserTable
+from .tables import MatchTable, AllianceMatchTable, UserTable, VolleyTable
 from scouter import settings
 from django_tables2 import RequestConfig
 from django.core.exceptions import ObjectDoesNotExist
@@ -26,6 +26,7 @@ from oauth2client.contrib import xsrfutil
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.contrib.django_util.storage import DjangoORMStorage
 from apiclient.http import MediaFileUpload
+from scoutingapp.models import Volley
 
 # CLIENT_SECRETS, name of a file containing the OAuth 2.0 information for this
 # application, including client_id and client_secret, which are found
@@ -119,8 +120,8 @@ def viewrounds(request):
     matchattribform = MatchNumberAttribs()
     viewoptionsform = MatchViewFormMetaOptions()
     matchlist = Match.objects.all()
-    #currentTeam = request.user.team
-    #matchlist = matchlist.filter(scouted_by__team=currentTeam)
+    # currentTeam = request.user.team
+    # matchlist = matchlist.filter(scouted_by__team=currentTeam)
     fieldstoexclude = (None,)
     # enables ordering
     if request.method == "POST":
@@ -176,6 +177,7 @@ def signup(request):
             form.save(commit=False)
             form.scouted_by = request.user
             form.save()
+
             # proccess form
             return HttpResponseRedirect('/scoutingapp/')
     else:
@@ -211,11 +213,25 @@ def scout(request):
     if request.user.is_authenticated():
         if request.method == 'POST':
             form = ScoutingForm(request.POST)
-            form.use_required_attribute=False
+            form.use_required_attribute = False
             if form.is_valid():
                 match = form.save(commit=False)
                 match.scouted_by = request.user
                 match.save()
+                hopper_data = request.POST.get('hopper_load', 'no data')
+                print(hopper_data)
+                split_data = hopper_data.split(" ;");
+                for i in split_data:
+                    tmp = i.split(" ")
+                    if(len(tmp)==3):
+                        print(tmp)
+                        volley = Volley()
+                        volley.ball_count = tmp[0]
+                        volley.goal_type = tmp[1]
+                        volley.accuracy= tmp[2]
+                        volley.match = match;
+                        volley.save()
+
                 # proccess form
                 return HttpResponseRedirect('/scoutingapp/')
             else:
@@ -223,13 +239,13 @@ def scout(request):
         else:
 
             try:
-                form = ScoutingForm(initial = {'robot_end_game':
+                form = ScoutingForm(initial={'robot_end_game':
                                                EndGameState.objects.get(state="Missed Game")})
 
             except ObjectDoesNotExist:
                 print("Missed game missing")
                 form = ScoutingForm()
-        form.use_required_attribute=False
+        form.use_required_attribute = False
         if request.session.get('fsetup'):
             return render(
                 request, 'scoutingapp/scout.html',
@@ -358,6 +374,16 @@ def exporthtml(request, team_number):
     })
 
 
+def exportballs(request, team_number):
+    volleylist = Volley.objects.all()
+#     volleylist = volleylist.filter(scouted_by__team__team_number=team_number)
+    # enables ordering
+    volleys= VolleyTable(volleylist)
+    RequestConfig(request, paginate={'per_page': 9999}).configure(volleys)
+
+    return render(request, 'scoutingapp/exporthtml.html', {
+        'rounds': volleys,
+    })
 
 def exportusers(request):
     users = MyUser.objects.all();

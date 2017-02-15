@@ -1,2 +1,2 @@
-High Goal
-Low Goal
+High_Goal
+Low_Goal

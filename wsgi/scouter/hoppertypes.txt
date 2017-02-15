@@ -1,7 +1,6 @@
-None
-Monster (100+)
-Extra Large (75-100)
-Large (50-75)
-Medium (25-50)
-Small (10-25)
-Start (10)
+Monster_(100+)
+Extra_Large_(75-100)
+Large_(50-75)
+Medium_(25-50)
+Small_(10-25)
+Start_(10)

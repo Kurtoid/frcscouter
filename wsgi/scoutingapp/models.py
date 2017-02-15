@@ -143,27 +143,26 @@ class HighEfficiency(models.Model):
     def __str__(self):
         return self.name
     
+    
 class Match(models.Model):
     match_number = models.DecimalField(max_digits=100, decimal_places=0,
                                        default=0)
     scouted_team = models.ForeignKey(Team, on_delete=models.CASCADE)
-    auto_move_yn = models.BooleanField(default=False)
-    auto_score_gear_yn = models.BooleanField(default=False)
+    auto_move_yn = models.BooleanField(default=False, verbose_name="Moved on auto?")
+    auto_score_gear_yn = models.BooleanField(default=False, verbose_name="Did it score on auto?")
     auto_low_goal = models.BooleanField(default=False)
     auto_trigger_hopper = models.DecimalField(default=0, max_digits=1,
-                                              decimal_places=0,null=True)
+                                              decimal_places=0, null=True)
     auto_hopper_load = models.ForeignKey(HopperLoad, null=True)
     auto_high_efficiency_load = models.ForeignKey(HighEfficiency,
                                                   related_name="auto_high_efficiency_load", null=True)
     auto_low_efficiency_load = models.ForeignKey(HighEfficiency, null=True)
     trigger_hopper = models.DecimalField(max_digits=1, decimal_places=0,
                                          default=0, null=True)
-    hopper_load = models.CharField(max_length=999
-                                   #validators=[validate_comma_separated_integer_list]
-                                   , null=True)
-    high_efficiency_load = models.ForeignKey(HighEfficiency,
-                                                  related_name="high_efficiency_load", null=True)
-    low_efficiency_load = models.ForeignKey(HighEfficiency, related_name="low_efficiency_load", null=True)
+#     hopper_load = models.CharField(max_length=999
+#                                    # validators=[validate_comma_separated_integer_list]
+#                                    , null=True)
+    
 
     gears_aquired = models.DecimalField(max_digits=1, decimal_places=0,
                                          default=0, null=True)
@@ -195,6 +194,12 @@ class Match(models.Model):
         return str(self.match_number)
 
 
+class Volley(models.Model):
+    goal_type = models.CharField(max_length=100)
+    accuracy = models.CharField(max_length=100)
+    ball_count = models.CharField(max_length=100)
+    match = models.ForeignKey(Match, on_delete=models.CASCADE)
+    
 
 class Alliance(models.Model):
     color = models.CharField(max_length=10)

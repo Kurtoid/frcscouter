@@ -91,6 +91,7 @@ class ScoutingForm(ModelForm):
     except ObjectDoesNotExist:
             print("Missed game missing")
 
+    hopper_load = forms.CharField(max_length=999)
     class Meta:
         def getSelect(min, max):  # @NoSelf
             return forms.Select(choices=[(x,x) for x in range (min, max)])
@@ -107,8 +108,9 @@ class ScoutingForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ScoutingForm, self).__init__(*args, **kwargs)
-        self.fields['robot_card'].required = False
         self.fields['hopper_load'].widget.attrs['class'] = 'customListMaker'
+        self.fields['robot_card'].required = False
+#         self.fields['hopper_load'].widget.attrs['class'] = 'customListMaker'
         #self.fields['tournament'].required = False
         """
         self.fields['defense1_crossed'].widget = forms.NumberInput(attrs={'class': 'col s6', })
