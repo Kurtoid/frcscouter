@@ -1,4 +1,4 @@
-django
+django==1.8
 django_tables2
 requests
 codeclimate-test-reporter
