@@ -110,6 +110,10 @@ class ScoutingForm(ModelForm):
         super(ScoutingForm, self).__init__(*args, **kwargs)
         self.fields['hopper_load'].widget.attrs['class'] = 'customListMaker'
         self.fields['robot_card'].required = False
+        self.fields['auto_high_efficiency_load'].required = False
+        self.fields['auto_low_efficiency_load'].required = False
+        self.fields['auto_hopper_load'].required = False
+        self.fields['hopper_load'].required = False
 #         self.fields['hopper_load'].widget.attrs['class'] = 'customListMaker'
         #self.fields['tournament'].required = False
         """

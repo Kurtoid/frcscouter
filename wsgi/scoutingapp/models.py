@@ -172,8 +172,6 @@ class Match(models.Model):
                                          default=0, null=True)
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
                                    null=True, blank=True)
-    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
-                                   null=True, blank=True)
     high_goals_missed = models.DecimalField(max_digits=10, decimal_places=0,
                                      default=0, null=True)
     high_goals_scored = models.DecimalField(max_digits=10, decimal_places=0,
