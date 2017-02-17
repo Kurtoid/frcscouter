@@ -53,8 +53,8 @@ else:
     STATIC_ROOT = os.path.join(WSGI_DIR, 'static')
 #STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
 #STATIC_ROOT = os.path.join(BASE_DIR, '../static')
-    GOOGLE_OAUTH2_CLIENT_SECRETS_JSON=BASE_DIR+'/scoutingapp/client_secrets.json'
-    AUTH_USER_MODEL = 'scoutingapp.MyUser'
+GOOGLE_OAUTH2_CLIENT_SECRETS_JSON=BASE_DIR+'/scoutingapp/client_secrets.json'
+AUTH_USER_MODEL = 'scoutingapp.MyUser'
 
 if ON_OPENSHIFT:
     from socket import gethostname
