@@ -36,6 +36,14 @@ OAUTH_REDIR = 'http://localhost:8000/scoutingapp/oauth2callback'
 if ON_OPENSHIFT:
     DEBUG = os.environ.get('DEBUG') == 'True'
     OAUTH_REDIR = 'http://scouter-team179.rhcloud.com/scoutingapp/oauth2callback'
+
+    # Static files (CSS, JavaScript, Images)
+    # https://docs.djangoproject.com/en/1.8/howto/static-files/
+
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(DATA_DIR, 'wsgi/static')
+    #STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
+    #STATIC_ROOT = os.path.join(BASE_DIR, '../static')
 else:
     DEBUG = True
 GOOGLE_OAUTH2_CLIENT_SECRETS_JSON=BASE_DIR+'/scoutingapp/client_secrets.json'
