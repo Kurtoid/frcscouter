@@ -88,7 +88,7 @@ auto_gear_choices = (
     ('Boiler Side', 'Boiler Side'),
     ('Middle', 'Middle'),
     ('Feeder Side', 'Feeder Side'),
-    ('Two Ball Auto', 'Two Ball Auto'),
+    ('Two Gear Auto', 'Two Gear Auto'),
 )
 class ScoutingForm(ModelForm):
     """ generates the scouting form """

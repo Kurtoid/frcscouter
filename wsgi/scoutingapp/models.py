@@ -149,7 +149,7 @@ class Match(models.Model):
                                        default=0)
     scouted_team = models.ForeignKey(Team, on_delete=models.CASCADE)
     auto_gears_scored = models.CharField(max_length=100)
-    auto_move_yn = models.BooleanField(default=False, verbose_name="Moved on auto?")
+    auto_move_yn = models.BooleanField(default=False, verbose_name="Auto Move")
     auto_score_gear_yn = models.BooleanField(default=False, verbose_name="Did it score on auto?")
     auto_low_goal = models.BooleanField(default=False)
     auto_trigger_hopper = models.DecimalField(default=0, max_digits=1,
