@@ -9,7 +9,7 @@ from .models import (Match, Tournament, Team, CredentialsModel,
 EndGameState, MyUser)
 from django.contrib.auth import logout, login
 from django.contrib import messages
-from .tables import MatchTable, AllianceMatchTable, UserTable, VolleyTable
+from .tables import MatchTable, AllianceMatchTable, UserTable, VolleyTable, GearTable
 from scouter import settings
 from django_tables2 import RequestConfig
 from django.core.exceptions import ObjectDoesNotExist
@@ -402,6 +402,17 @@ def exportballs(request, team_number):
 
     return render(request, 'scoutingapp/exporthtml.html', {
         'rounds': volleys,
+    })
+
+def exportgears(request, team_number):
+    gearlist = Gear.objects.all()
+#     volleylist = volleylist.filter(scouted_by__team__team_number=team_number)
+    # enables ordering
+    gears= GearTable(gearlist)
+    RequestConfig(request, paginate={'per_page': 9999}).configure(gears)
+
+    return render(request, 'scoutingapp/exporthtml.html', {
+        'rounds': gears,
     })
 
 def exportusers(request):
