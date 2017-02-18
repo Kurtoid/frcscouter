@@ -195,7 +195,7 @@ $('#mainForm')
             var t = ""
             $(".hitem").each(function (index) {
 
-                 alert($(this).text());
+                //                 alert($(this).text());
                 t += $(this).text() + ";";
             })
 

@@ -6,7 +6,7 @@ from .models import MyUser
 
 
 class NoUserRedirect(TestCase):
-
+#     fixtures = ['fixtures.json']
     def test_redirect_on_scout(self):
         self.client.logout()
         response = self.client.get('/scoutingapp/scout/')
