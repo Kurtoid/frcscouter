@@ -118,6 +118,15 @@ class MatchAdmin(admin.ModelAdmin):
         )
     list_display = ('match_number', 'scouted_team', 'scouted_by')
 
+class VolleyAdmin(admin.ModelAdmin):
+
+#     def formfield_for_foreignkey(self, db_field, request, **kwargs):
+#         if db_field.name == 'scouted_by':
+#             kwargs['initial'] = request.user.id
+#         return super(MatchAdmin, self).formfield_for_foreignkey(
+#             db_field, request, **kwargs
+#         )
+    list_display = ('match', 'goal_type', 'ball_count', 'accuracy',)
 
 # Now register the new UserAdmin...
 admin.site.register(MyUser, UserAdmin)
@@ -130,7 +139,7 @@ admin.site.register(EndGameState)
 admin.site.register(Card)
 admin.site.register(HopperLoad)
 admin.site.register(HighEfficiency)
-admin.site.register(Volley)
+admin.site.register(Volley, VolleyAdmin)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
 admin.site.unregister(Group)

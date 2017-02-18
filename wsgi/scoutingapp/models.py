@@ -194,6 +194,9 @@ class Volley(models.Model):
     accuracy = models.CharField(max_length=100)
     ball_count = models.CharField(max_length=100)
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
+    def __str__(self):
+        return str("Match " + str(self.match) + ": " + str(self.match.scouted_team))
+
     
 class Gear(models.Model):
     source = models.CharField(max_length=100)
