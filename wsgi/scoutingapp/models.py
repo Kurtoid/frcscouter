@@ -165,12 +165,12 @@ class Match(models.Model):
 #                                    , null=True)
     
 
-    gears_aquired = models.DecimalField(max_digits=1, decimal_places=0,
-                                         default=0, null=True)
-    gears_scored = models.DecimalField(max_digits=1, decimal_places=0,
-                                         default=0, null=True)
-    gears_picked_up = models.DecimalField(max_digits=1, decimal_places=0,
-                                         default=0, null=True)
+#     gears_aquired = models.DecimalField(max_digits=1, decimal_places=0,
+#                                          default=0, null=True)
+#     gears_scored = models.DecimalField(max_digits=1, decimal_places=0,
+#                                          default=0, null=True)
+#     gears_picked_up = models.DecimalField(max_digits=1, decimal_places=0,
+#                                          default=0, null=True)
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
                                    null=True, blank=True)
     robot_end_game = models.ForeignKey(EndGameState,
