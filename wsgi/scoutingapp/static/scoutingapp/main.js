@@ -4,7 +4,7 @@ $(document)
            var $fuel_initial = $("#id_fuel");
            if ($fuel_initial.length > 0) { // if scouting page
                // detected
-
+               console.log("Detected");
                var $gear_initial = $("#id_gears_scout");
                // add hopper volley list
                $("<ul class=\"collection\" id =\"hopper_load_list\"><br>")
@@ -34,12 +34,14 @@ $(document)
                .insertAfter($(".customListMaker").parent())
                $("<div class =\"col s4\"><select id=\"volleyEff\" /></div> ")
                .insertAfter($("#volleyType").parent())
-               $('<div class="row s4"><a class="waves-effect waves-light btn" id="volleyAdd">Add</a></div>')
+               $(
+                 '<div class="row s4"><a class="waves-effect waves-light btn" id="volleyAdd">Add</a></div>')
                .insertAfter($("#volleyEff").parent())
 
                $("<div class =\"col s4\"><select id=\"gear_dropped\" /></div> ")
                .insertAfter($(".customListMaker2").parent())
-               $('<div class="row s4"><a class="waves-effect waves-light btn" id="gearAdd">Add</a></div>')
+               $(
+                 '<div class="row s4"><a class="waves-effect waves-light btn" id="gearAdd">Add</a></div>')
                .insertAfter($("#gear_dropped").parent())
                // now a select object
                console.log("starting request")
@@ -105,9 +107,10 @@ $(document)
                          for (var i = 0; i < list.length; i++) {
                              // code here using lines[i] which will give you each line
                              $("#id_gears_scout").append(
-                                                    $("<option value=\"" + i
-                                                      + "\">" + list[i]
-                                                      + "</option>"));
+                                                         $("<option value=\""
+                                                           + i + "\">"
+                                                           + list[i]
+                                                           + "</option>"));
                              console.log(i);
                          }
                          $('select').material_select();
@@ -122,9 +125,9 @@ $(document)
                          for (var i = 0; i < list.length; i++) {
                              // code here using lines[i] which will give you each line
                              $("#gear_dropped").append(
-                                                    $("<option value=\"" + i
-                                                      + "\">" + list[i]
-                                                      + "</option>"));
+                                                       $("<option value=\"" + i
+                                                         + "\">" + list[i]
+                                                         + "</option>"));
                              console.log(i);
                          }
                          $('select').material_select();
@@ -195,7 +198,7 @@ $('#mainForm')
             var t = ""
             $(".hitem").each(function (index) {
 
-                //                 alert($(this).text());
+                // alert($(this).text());
                 t += $(this).text() + ";";
             })
 
@@ -214,7 +217,7 @@ $('#mainForm')
             var t = ""
             $(".gitem").each(function (index) {
 
-//                 alert($(this).text());
+                // alert($(this).text());
                 t += $(this).text() + ";";
             })
 
