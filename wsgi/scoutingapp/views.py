@@ -206,6 +206,7 @@ def usercontrolpanel(request):
 def logoutuser(request):
     if request.user.is_authenticated():
         logout(request)
+        messages.add_message(request, messages.INFO, 'Logged out!')
         return HttpResponseRedirect("/scoutingapp/")
 
 
@@ -252,6 +253,7 @@ def scout(request):
 #                         volley.match = match;
 #                         volley.save()
                 # proccess form
+                messages.add_message(request, messages.INFO, 'Match Recorded')
                 return HttpResponseRedirect('/scoutingapp/')
             else:
                 print(form.errors)
@@ -285,6 +287,7 @@ def alliance_scout(request):
                 match.scouted_by = request.user
                 match.save()
                 # proccess form
+                messages.add_message(request, messages.INFO, 'Alliance Match Recorded')
                 return HttpResponseRedirect('/scoutingapp/')
             else:
                 print(form.errors)
