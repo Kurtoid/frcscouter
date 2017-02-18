@@ -214,7 +214,7 @@ $('#mainForm')
             var t = ""
             $(".gitem").each(function (index) {
 
-                 alert($(this).text());
+//                 alert($(this).text());
                 t += $(this).text() + ";";
             })
 
