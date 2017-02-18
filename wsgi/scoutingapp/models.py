@@ -179,7 +179,7 @@ class Match(models.Model):
                                      null=True)
     robot_card = models.ForeignKey(Card, on_delete=models.CASCADE, null=True,
                                      related_name='Robot1card')
-    scouted_by = models.ForeignKey(MyUser, on_delete=models.CASCADE)
+    scouted_by = models.ForeignKey(MyUser)
 
     class Meta:
         verbose_name = "Match"
