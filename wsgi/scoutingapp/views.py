@@ -207,7 +207,7 @@ def logoutuser(request):
     if request.user.is_authenticated():
         logout(request)
         messages.add_message(request, messages.INFO, 'Logged out!')
-        return HttpResponseRedirect("/scoutingapp/")
+    return HttpResponseRedirect("/scoutingapp/")
 
 
 def scout(request):
