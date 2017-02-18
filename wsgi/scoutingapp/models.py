@@ -203,7 +203,6 @@ class Gear(models.Model):
     source = models.CharField(max_length=100)
     dropped = models.CharField(max_length=100)
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
-    per_match_id = models.DecimalField(decimal_places=0, max_digits=100)
 
 class Alliance(models.Model):
     color = models.CharField(max_length=10)
