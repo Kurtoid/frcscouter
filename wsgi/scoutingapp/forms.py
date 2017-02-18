@@ -123,6 +123,7 @@ class ScoutingForm(ModelForm):
         self.fields['auto_low_efficiency_load'].required = False
         self.fields['auto_hopper_load'].required = False
         self.fields['fuel'].required = False
+        self.fields['robot_end_game'].required = False
         self.fields['gears_scout'].required = False
 #         self.fields['hopper_load'].widget.attrs['class'] = 'customListMaker'
         # self.fields['tournament'].required = False
