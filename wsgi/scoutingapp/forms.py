@@ -83,7 +83,13 @@ class LoginForm(forms.Form):
         user = authenticate(email=email, password=password)
         return user
 
-
+auto_gear_choices = (
+    ('None', 'None'),
+    ('Boiler Side', 'Boiler Side'),
+    ('Middle', 'Middle'),
+    ('Feeder Side', 'Feeder Side'),
+    ('Two Ball Auto', 'Two Ball Auto'),
+)
 class ScoutingForm(ModelForm):
     """ generates the scouting form """
     try:
@@ -104,6 +110,7 @@ class ScoutingForm(ModelForm):
 #                    'trigger_hopper': getSelect(0, 6),
 #                    'gears_aquired': getSelect(1, 14),
 #                    'gears_scored': getSelect(1, 14), 'gears_picked_up': getSelect(1, 14)}
+        widgets = {'auto_gears_scored': forms.Select(choices=auto_gear_choices)}
 
 
 

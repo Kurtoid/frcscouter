@@ -148,6 +148,7 @@ class Match(models.Model):
     match_number = models.DecimalField(max_digits=100, decimal_places=0,
                                        default=0)
     scouted_team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    auto_gears_scored = models.CharField(max_length=100)
     auto_move_yn = models.BooleanField(default=False, verbose_name="Moved on auto?")
     auto_score_gear_yn = models.BooleanField(default=False, verbose_name="Did it score on auto?")
     auto_low_goal = models.BooleanField(default=False)
