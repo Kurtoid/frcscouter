@@ -236,14 +236,17 @@ def scout(request):
                 gear_data= request.POST.get('gears_scout', 'no data')
                 print(gear_data)
                 split_data = gear_data.split(" ;");
+                j = 0
                 for i in split_data:
                     tmp = i.split(" ")
+                    j=j+1;
                     if(len(tmp)==2):
                         print(tmp)
                         gear = Gear()
                         gear.source = tmp[0]
                         gear.dropped = tmp[1]
                         gear.match = match
+                        gear.per_match_id=j
                         gear.save()
                         
 #                         volley = Volley()
