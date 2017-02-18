@@ -35,6 +35,7 @@ class GearTable(tables.Table):
         # add class="bordered"
         attrs = {'class': 'bordered responsive-table'}  # materialze class
 #         fields = ('goal_type', 'accuracy', 'ball_count','match', 'team_number')
+        sequence=('match','team_number', 'source', 'dropped', 'id' )
         exclude = ()
 
 class AllianceMatchTable(tables.Table):
