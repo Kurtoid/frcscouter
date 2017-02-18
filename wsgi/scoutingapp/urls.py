@@ -31,4 +31,6 @@ urlpatterns = [
     url(r'^gethoppertypes/$', views.gethoppertypes, name='hoppertypes'),
     url(r'^getshottypes/$', views.getshottypes, name='getshottypes'),
     url(r'^getveff/$', views.getveff, name='getveff'),
+    url(r'^getgearsource/$', views.gearsource, name='gearsource'),
+    url(r'^getgeardropped/$', views.geardropped, name='geardropped'),
 ]

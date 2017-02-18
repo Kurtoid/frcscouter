@@ -91,31 +91,33 @@ class ScoutingForm(ModelForm):
     except ObjectDoesNotExist:
             print("Missed game missing")
 
-    hopper_load = forms.CharField(max_length=999)
+    fuel = forms.CharField(max_length=999)
+    gears_scout = forms.CharField(max_length=999)
     class Meta:
         def getSelect(min, max):  # @NoSelf
-            return forms.Select(choices=[(x,x) for x in range (min, max)])
+            return forms.Select(choices=[(x, x) for x in range (min, max)])
 
         """ controls which model and fields are displayed """
         model = Match
         exclude = ['scouted_by', 'field_setup', 'tournament']
-        widgets = {'auto_trigger_hopper': getSelect(0,6),
-                   'trigger_hopper': getSelect(0,6),
-                   'gears_aquired': getSelect(1,14),
-                   'gears_scored': getSelect(1,14), 'gears_picked_up': getSelect(1, 14)}
+#         widgets = {'auto_trigger_hopper': getSelect(0, 6),
+#                    'trigger_hopper': getSelect(0, 6),
+#                    'gears_aquired': getSelect(1, 14),
+#                    'gears_scored': getSelect(1, 14), 'gears_picked_up': getSelect(1, 14)}
 
 
 
     def __init__(self, *args, **kwargs):
         super(ScoutingForm, self).__init__(*args, **kwargs)
-        self.fields['hopper_load'].widget.attrs['class'] = 'customListMaker'
+        self.fields['fuel'].widget.attrs['class'] = 'customListMaker'
+        self.fields['gears_scout'].widget.attrs['class'] = 'customListMaker2'
         self.fields['robot_card'].required = False
         self.fields['auto_high_efficiency_load'].required = False
         self.fields['auto_low_efficiency_load'].required = False
         self.fields['auto_hopper_load'].required = False
-        self.fields['hopper_load'].required = False
+        self.fields['fuel'].required = False
 #         self.fields['hopper_load'].widget.attrs['class'] = 'customListMaker'
-        #self.fields['tournament'].required = False
+        # self.fields['tournament'].required = False
         """
         self.fields['defense1_crossed'].widget = forms.NumberInput(attrs={'class': 'col s6', })
         self.fields['defense2_crossed'].widget = forms.NumberInput(attrs={'class': 'col s6', })
@@ -161,7 +163,7 @@ class UserControlForm(ModelForm):
 
 class importTeamForm(forms.Form):
     team_number_begin = forms.IntegerField()
-    team_number_end= forms.IntegerField()
+    team_number_end = forms.IntegerField()
 
 
 class importEventForm(forms.Form):

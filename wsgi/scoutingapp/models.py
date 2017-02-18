@@ -172,10 +172,6 @@ class Match(models.Model):
                                          default=0, null=True)
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
                                    null=True, blank=True)
-    high_goals_missed = models.DecimalField(max_digits=10, decimal_places=0,
-                                     default=0, null=True)
-    high_goals_scored = models.DecimalField(max_digits=10, decimal_places=0,
-                                     default=0, null=True)
     robot_end_game = models.ForeignKey(EndGameState,
                                      on_delete=models.CASCADE,
                                      related_name='robot1endgame',
@@ -198,6 +194,10 @@ class Volley(models.Model):
     ball_count = models.CharField(max_length=100)
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
     
+class Gear(models.Model):
+    source = models.CharField(max_length=100)
+    dropped = models.CharField(max_length=100)
+    match = models.ForeignKey(Match, on_delete=models.CASCADE)
 
 class Alliance(models.Model):
     color = models.CharField(max_length=10)

@@ -26,7 +26,7 @@ from oauth2client.contrib import xsrfutil
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.contrib.django_util.storage import DjangoORMStorage
 from apiclient.http import MediaFileUpload
-from scoutingapp.models import Volley
+from scoutingapp.models import Volley, Gear
 
 # CLIENT_SECRETS, name of a file containing the OAuth 2.0 information for this
 # application, including client_id and client_secret, which are found
@@ -218,7 +218,7 @@ def scout(request):
                 match = form.save(commit=False)
                 match.scouted_by = request.user
                 match.save()
-                hopper_data = request.POST.get('hopper_load', 'no data')
+                hopper_data = request.POST.get('fuel', 'no data')
                 print(hopper_data)
                 split_data = hopper_data.split(" ;");
                 for i in split_data:
@@ -232,6 +232,25 @@ def scout(request):
                         volley.match = match;
                         volley.save()
 
+                gear_data= request.POST.get('gears_scout', 'no data')
+                print(gear_data)
+                split_data = gear_data.split(" ;");
+                for i in split_data:
+                    tmp = i.split(" ")
+                    if(len(tmp)==2):
+                        print(tmp)
+                        gear = Gear()
+                        gear.source = tmp[0]
+                        gear.dropped = tmp[1]
+                        gear.match = match
+                        gear.save()
+                        
+#                         volley = Volley()
+#                         volley.ball_count = tmp[0]
+#                         volley.goal_type = tmp[1]
+#                         volley.accuracy= tmp[2]
+#                         volley.match = match;
+#                         volley.save()
                 # proccess form
                 return HttpResponseRedirect('/scoutingapp/')
             else:
@@ -438,4 +457,23 @@ def getveff(request):
             val += line
     return HttpResponse(val, content_type='text/plain')
 
+def gearsource(request):
+    path = os.path.join(settings.DJ_PROJECT_DIR, "gearSource.txt")
+    print(path)
+    val = ""
+    with  open(path) as f:
+        for line in f:
+            print (line)
+            val += line
+    return HttpResponse(val, content_type='text/plain')
 
+
+def geardropped(request):
+    path = os.path.join(settings.DJ_PROJECT_DIR, "gearDropped.txt")
+    print(path)
+    val = ""
+    with  open(path) as f:
+        for line in f:
+            print (line)
+            val += line
+    return HttpResponse(val, content_type='text/plain')
