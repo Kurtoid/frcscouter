@@ -218,13 +218,14 @@ def scout(request):
             if form.is_valid():
                 match = form.save(commit=False)
                 match.scouted_by = request.user
+                duped = 0
+                duped_matches = Match.objects.filter(match_number=match.match_number, scouted_team=match.scouted_team).exclude(scouted_by=match.scouted_by)
+                if(len(duped_matches)>0):
+                    duped = len(duped_matches)
+                match.duplicate=duped
                 match.save()
                 hopper_data = request.POST.get('fuel', 'no data')
                 split_data = hopper_data.split(" ;");
-                duped = 0
-                duped_matches = Match.objects.filter(match_number=match.match_number, scouted_team=match.scouted_team).exclude(pk=match.pk).exclude(scouted_by=match.scouted_by)
-                if(len(duped_matches)>0):
-                    duped = len(duped_matches)
 
                 if(len(split_data)>0):
                     print(hopper_data)

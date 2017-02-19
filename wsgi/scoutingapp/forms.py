@@ -105,7 +105,7 @@ class ScoutingForm(ModelForm):
 
         """ controls which model and fields are displayed """
         model = Match
-        exclude = ['scouted_by', 'field_setup', 'tournament']
+        exclude = ['scouted_by', 'field_setup', 'tournament', 'duplicate']
 #         widgets = {'auto_trigger_hopper': getSelect(0, 6),
 #                    'trigger_hopper': getSelect(0, 6),
 #                    'gears_aquired': getSelect(1, 14),

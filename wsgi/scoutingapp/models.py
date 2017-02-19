@@ -180,6 +180,7 @@ class Match(models.Model):
     robot_card = models.ForeignKey(Card, on_delete=models.CASCADE, null=True,
                                      related_name='Robot1card')
     scouted_by = models.ForeignKey(MyUser)
+    duplicate = models.DecimalField(max_digits=100, decimal_places=0, null=True)
 
     class Meta:
         verbose_name = "Match"
