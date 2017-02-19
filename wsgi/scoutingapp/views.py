@@ -1,4 +1,5 @@
 from django.utils.encoding import smart_str
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from .forms import (SignUpForm, LoginForm, ScoutingForm,
@@ -46,6 +47,7 @@ def index(request):
     return render(request, 'scoutingapp/index.html')
 
 
+@login_required
 def export_to_gdocs(request):
     qs = Match.objects.all()
     outfile_path = os.path.join(settings.DATA_DIR, 'exported_data.csv')
@@ -115,6 +117,7 @@ def auth_return(request):
     return HttpResponseRedirect("/scoutingapp/exporttogdocs")
 
 
+@login_required
 def viewrounds(request):
     tform = SortViewMatchForm()
     matchattribform = MatchNumberAttribs()
@@ -169,7 +172,6 @@ def userlogin(request):
         form = LoginForm()
     return render(request, 'scoutingapp/userlogin.html', {'form': form})
 
-
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -185,7 +187,7 @@ def signup(request):
 
     return render(request, 'scoutingapp/signup.html', {'form': form})
 
-
+@login_required
 def usercontrolpanel(request):
     if request.user.is_authenticated():
         if request.method == 'POST':
@@ -277,7 +279,7 @@ def scout(request):
     else:
         return HttpResponseRedirect('/scoutingapp/userlogin/')
 
-
+@login_required
 def alliance_scout(request):
     if request.user.is_authenticated():
         if request.method == 'POST':
