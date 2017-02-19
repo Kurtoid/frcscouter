@@ -35,14 +35,14 @@ $(document)
                $("<div class =\"col s4\"><select id=\"volleyEff\" /></div> ")
                .insertAfter($("#volleyType").parent())
                $(
-                 '<div class="row s4"><a class="waves-effect waves-light btn" id="volleyAdd">Add</a></div>')
-               .insertAfter($("#volleyEff").parent())
+                 '<div class="row"><a class="waves-effect waves-light red accent-4 btn" id="volleyAdd">Add</a></div>')
+               .insertAfter($("#volleyEff").parent().parent())
 
                $("<div class =\"col s4\"><select id=\"gear_dropped\" /></div> ")
                .insertAfter($(".customListMaker2").parent())
                $(
-                 '<div class="row s4"><a class="waves-effect waves-light btn" id="gearAdd">Add</a></div>')
-               .insertAfter($("#gear_dropped").parent())
+                 '<div class="row"><a class="waves-effect waves-light red accent-4 btn" id="gearAdd">Add</a></div>')
+               .insertAfter($("#gear_dropped").parent().parent())
                // now a select object
                console.log("starting request")
                var list = ""
