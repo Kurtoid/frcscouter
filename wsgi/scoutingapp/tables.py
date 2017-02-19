@@ -25,7 +25,7 @@ class VolleyTable(tables.Table):
         model = Volley 
         # add class="bordered"
         attrs = {'class': 'bordered responsive-table'}  # materialze class
-        fields = ('scouted_by', 'goal_type', 'accuracy','ball_count', 'match',"team_number")
+        fields = ('scouted_by', 'goal_type', 'accuracy','ball_count', 'match','team_number', 'duplicate')
         exclude = ('id')
         
 class GearTable(tables.Table):
@@ -37,7 +37,7 @@ class GearTable(tables.Table):
         # add class="bordered"
         attrs = {'class': 'bordered responsive-table'}  # materialze class
 #         fields = ('goal_type', 'accuracy', 'ball_count','match', 'team_number')
-        sequence=('match','team_number', 'source', 'dropped', 'scouted_by' )
+        sequence=('match','team_number', 'source', 'dropped', 'scouted_by', 'duplicate' )
         exclude = ('id')
 
 class AllianceMatchTable(tables.Table):

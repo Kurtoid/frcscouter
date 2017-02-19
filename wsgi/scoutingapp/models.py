@@ -194,6 +194,7 @@ class Volley(models.Model):
     accuracy = models.CharField(max_length=100)
     ball_count = models.CharField(max_length=100)
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
+    duplicate = models.DecimalField(max_digits=100, decimal_places=0, null=True)
     
     def __str__(self):
         return str("Match " + str(self.match) + ": " + str(self.match.scouted_team))
@@ -203,6 +204,7 @@ class Gear(models.Model):
     source = models.CharField(max_length=100)
     dropped = models.CharField(max_length=100)
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
+    duplicate = models.DecimalField(max_digits=100, decimal_places=0, null=True)
 
 class Alliance(models.Model):
     color = models.CharField(max_length=10)
