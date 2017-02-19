@@ -20,23 +20,25 @@ class MatchTable(tables.Table):
 class VolleyTable(tables.Table):
 
     team_number= tables.Column(accessor='match.scouted_team.team_number')
+    scouted_by = tables.Column(accessor='match.scouted_by')
     class Meta:
         model = Volley 
         # add class="bordered"
         attrs = {'class': 'bordered responsive-table'}  # materialze class
-#         fields = ('goal_type', 'accuracy', 'ball_count','match', 'team_number')
-        exclude = ()
+        fields = ('scouted_by', 'goal_type', 'accuracy','ball_count', 'match',"team_number")
+        exclude = ('id')
         
 class GearTable(tables.Table):
 
     team_number= tables.Column(accessor='match.scouted_team.team_number')
+    scouted_by = tables.Column(accessor='match.scouted_by')
     class Meta:
         model = Gear
         # add class="bordered"
         attrs = {'class': 'bordered responsive-table'}  # materialze class
 #         fields = ('goal_type', 'accuracy', 'ball_count','match', 'team_number')
-        sequence=('match','team_number', 'source', 'dropped', 'id' )
-        exclude = ()
+        sequence=('match','team_number', 'source', 'dropped', 'scouted_by' )
+        exclude = ('id')
 
 class AllianceMatchTable(tables.Table):
     class Meta:
