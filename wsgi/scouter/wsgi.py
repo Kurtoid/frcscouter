@@ -12,6 +12,7 @@ import os
 from django.core.wsgi import get_wsgi_application
 
 # GETTING-STARTED: change 'myproject' to your project name:
+os.environ['HTTPS'] = "on"
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scouter.settings")
 
 application = get_wsgi_application()
