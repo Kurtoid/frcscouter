@@ -1,2 +1,2 @@
-wsgi/scouter/scoutingapp/static/scoutingapp/* linguist-vendored
+wsgi/scoutingapp/static/scoutingapp/* linguist-vendored
 .openshift/* linguist-vendored
