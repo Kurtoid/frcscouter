@@ -218,33 +218,43 @@ def scout(request):
             if form.is_valid():
                 match = form.save(commit=False)
                 match.scouted_by = request.user
+                duped = 1
+                duped_matches = Match.objects.filter(match_number=match.match_number, scouted_team=match.scouted_team).exclude(scouted_by=match.scouted_by)
+                if(len(duped_matches)>0):
+                    duped = len(duped_matches)+1
+                match.duplicate=duped
                 match.save()
                 hopper_data = request.POST.get('fuel', 'no data')
-                print(hopper_data)
                 split_data = hopper_data.split(" ;");
-                for i in split_data:
-                    tmp = i.split(" ")
-                    if(len(tmp)==3):
-                        print(tmp)
-                        volley = Volley()
-                        volley.ball_count = tmp[0]
-                        volley.goal_type = tmp[1]
-                        volley.accuracy= tmp[2]
-                        volley.match = match;
-                        volley.save()
+
+                if(len(split_data)>0):
+                    print(hopper_data)
+                    for i in split_data:
+                        tmp = i.split(" ")
+                        if(len(tmp)==3):
+                            print(tmp)
+                            volley = Volley()
+                            volley.ball_count = tmp[0]
+                            volley.goal_type = tmp[1]
+                            volley.accuracy= tmp[2]
+                            volley.match = match;
+                            volley.duplicate=duped
+                            volley.save()
 
                 gear_data= request.POST.get('gears_scout', 'no data')
-                print(gear_data)
                 split_data = gear_data.split(" ;");
-                for i in split_data:
-                    tmp = i.split(" ")
-                    if(len(tmp)==2):
-                        print(tmp)
-                        gear = Gear()
-                        gear.source = tmp[0]
-                        gear.dropped = tmp[1]
-                        gear.match = match
-                        gear.save()
+                if(len(split_data)>0):
+                    print(gear_data)
+                    for i in split_data:
+                        tmp = i.split(" ")
+                        if(len(tmp)==2):
+                            print(tmp)
+                            gear = Gear()
+                            gear.source = tmp[0]
+                            gear.dropped = tmp[1]
+                            gear.match = match
+                            gear.duplicate=duped
+                            gear.save()
                         
 #                         volley = Volley()
 #                         volley.ball_count = tmp[0]

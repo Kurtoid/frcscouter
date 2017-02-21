@@ -105,8 +105,8 @@ class ScoutingForm(ModelForm):
 
         """ controls which model and fields are displayed """
         model = Match
-        exclude = ['scouted_by', 'field_setup', 'tournament']
-#         widgets = {'auto_trigger_hopper': getSelect(0, 6),
+        exclude = ['scouted_by', 'field_setup', 'tournament', 'duplicate']
+#         widgets = {'auto_teleop_hoppers_triggered': getSelect(0, 6),
 #                    'trigger_hopper': getSelect(0, 6),
 #                    'gears_aquired': getSelect(1, 14),
 #                    'gears_scored': getSelect(1, 14), 'gears_picked_up': getSelect(1, 14)}
@@ -119,8 +119,8 @@ class ScoutingForm(ModelForm):
         self.fields['fuel'].widget.attrs['class'] = 'customListMaker'
         self.fields['gears_scout'].widget.attrs['class'] = 'customListMaker2'
         self.fields['robot_card'].required = False
-        self.fields['auto_high_efficiency_load'].required = False
-        self.fields['auto_low_efficiency_load'].required = False
+        self.fields['auto_high_goal_accuracy'].required = False
+        self.fields['auto_low_goal_accuracy'].required = False
         self.fields['auto_hopper_load'].required = False
         self.fields['fuel'].required = False
         self.fields['robot_end_game'].required = False

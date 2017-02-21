@@ -152,13 +152,13 @@ class Match(models.Model):
     auto_move_yn = models.BooleanField(default=False, verbose_name="Auto Move")
 #     auto_score_gear_yn = models.BooleanField(default=False, verbose_name="Did it score on auto?")
 #     auto_low_goal = models.BooleanField(default=False)
-    auto_trigger_hopper = models.DecimalField(default=0, max_digits=1,
+    auto_hoppers_triggered = models.DecimalField(default=0, max_digits=1,
                                               decimal_places=0, null=True)
     auto_hopper_load = models.ForeignKey(HopperLoad, null=True)
-    auto_high_efficiency_load = models.ForeignKey(HighEfficiency,
-                                                  related_name="auto_high_efficiency_load", null=True)
-    auto_low_efficiency_load = models.ForeignKey(HighEfficiency, null=True)
-    trigger_hopper = models.DecimalField(max_digits=1, decimal_places=0,
+    auto_high_goal_accuracy = models.ForeignKey(HighEfficiency,
+                                                  related_name="auto_high_goal_accuracy", null=True)
+    auto_low_goal_accuracy = models.ForeignKey(HighEfficiency, null=True)
+    teleop_hoppers_triggered = models.DecimalField(max_digits=1, decimal_places=0,
                                          default=0, null=True)
 #     hopper_load = models.CharField(max_length=999
 #                                    # validators=[validate_comma_separated_integer_list]
@@ -180,6 +180,7 @@ class Match(models.Model):
     robot_card = models.ForeignKey(Card, on_delete=models.CASCADE, null=True,
                                      related_name='Robot1card')
     scouted_by = models.ForeignKey(MyUser)
+    duplicate = models.DecimalField(max_digits=100, decimal_places=0, null=True)
 
     class Meta:
         verbose_name = "Match"
@@ -194,6 +195,7 @@ class Volley(models.Model):
     accuracy = models.CharField(max_length=100)
     ball_count = models.CharField(max_length=100)
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
+    duplicate = models.DecimalField(max_digits=100, decimal_places=0, null=True)
     
     def __str__(self):
         return str("Match " + str(self.match) + ": " + str(self.match.scouted_team))
@@ -203,6 +205,7 @@ class Gear(models.Model):
     source = models.CharField(max_length=100)
     dropped = models.CharField(max_length=100)
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
+    duplicate = models.DecimalField(max_digits=100, decimal_places=0, null=True)
 
 class Alliance(models.Model):
     color = models.CharField(max_length=10)
