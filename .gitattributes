@@ -1,3 +1,4 @@
-wsgi/scoutingapp/static/scoutingapp/materialize* linguist-vendored
-wsgi/scoutingapp/static/scoutingapp/jquery* linguist-vendored
+wsgi/scoutingapp/static/scoutingapp/materialize/* linguist-vendored
+wsgi/scoutingapp/static/scoutingapp/materialize.old/* linguist-vendored
+wsgi/scoutingapp/static/scoutingapp/jquery-2.2.4.js linguist-vendored
 .openshift/* linguist-vendored
