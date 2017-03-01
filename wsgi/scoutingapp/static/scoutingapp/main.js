@@ -152,8 +152,8 @@ $(document)
                       // add item to list
                       $("#hopper_load_list")
                       .append(
-                              $("<li class=\"collection-item hitem dismissable\">" + str
-                                + "</li>"));
+                              $("<li class=\"collection-item hitem dismissable\"><div >" + str
+                                + "<a class = \"secondary-content\" href=\"#!\" onClick=\"$(this).parent().parent().remove()\"><i class=\"material-icons\">cancel</i></a></div></li>"));
                       console.log("done!")
                   });
            $('#gearAdd')
@@ -170,8 +170,8 @@ $(document)
                       // add item to list
                       $("#gear_list")
                       .append(
-                              $("<li class=\"collection-item gitem dismissable\">" + str
-                                + "</li>"));
+                              $("<li class=\"collection-item hitem dismissable\"><div >" + str
+                                + "<a class = \"secondary-content\" href=\"#!\" onClick=\"$(this).parent().parent().remove()\"><i class=\"material-icons\">cancel</i></a></div></li>"));
                       console.log("done!")
                   });
            $('select').material_select();
