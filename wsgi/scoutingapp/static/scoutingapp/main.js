@@ -152,7 +152,7 @@ $(document)
                       // add item to list
                       $("#hopper_load_list")
                       .append(
-                              $("<li class=\"collection-item hitem\">" + str
+                              $("<li class=\"collection-item hitem dismissable\">" + str
                                 + "</li>"));
                       console.log("done!")
                   });
@@ -170,7 +170,7 @@ $(document)
                       // add item to list
                       $("#gear_list")
                       .append(
-                              $("<li class=\"collection-item gitem\">" + str
+                              $("<li class=\"collection-item gitem dismissable\">" + str
                                 + "</li>"));
                       console.log("done!")
                   });
