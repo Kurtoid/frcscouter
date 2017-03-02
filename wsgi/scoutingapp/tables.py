@@ -45,10 +45,10 @@ class AllianceMatchTable(tables.Table):
         model = AllianceMatch
         # add class="bordered"
         attrs = {'class': 'bordered responsive-table'}  # materialze class
-        sequence = ('match_number', 'alliance', 'scouted_by',
-                    'robot_1_driver_skill',
-                    'robot_2_driver_skill', 'robot_3_driver_skill',
-                    'robot_1_breach_ability', 'robot_2_breach_ability',
-                    'robot_3_breach_ability',
-                   )
+#         sequence = ('match_number', 'alliance', 'scouted_by',
+#                     'robot_1_driver_skill',
+#                     'robot_2_driver_skill', 'robot_3_driver_skill',
+#                     'robot_1_breach_ability', 'robot_2_breach_ability',
+#                     'robot_3_breach_ability',
+#                    )
         exclude = ('id', 'field_setup')
