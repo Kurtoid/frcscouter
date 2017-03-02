@@ -223,6 +223,8 @@ class AllianceMatch(models.Model):
     match_number = models.DecimalField(max_digits=100, decimal_places=0,
                                        default=0)
     alliance = models.ForeignKey(Alliance, on_delete=models.CASCADE)
+    pilot_1_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="p1team")
+    pilot_2_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="p2team")
     scouted_by = models.ForeignKey(MyUser, on_delete=models.CASCADE)
     auto_pilot_1_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0)
     auto_pilot_2_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0)
