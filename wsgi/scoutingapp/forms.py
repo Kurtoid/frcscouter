@@ -111,6 +111,9 @@ class ScoutingForm(ModelForm):
 #                    'gears_aquired': getSelect(1, 14),
 #                    'gears_scored': getSelect(1, 14), 'gears_picked_up': getSelect(1, 14)}
         widgets = {'auto_gears_scored': forms.Select(choices=auto_gear_choices)}
+        fields = (
+            'match_number', 'scouted_team', 'auto_gears_scored', 'auto_move_yn', 'auto_hoppers_triggered', 'auto_hopper_load', 'auto_high_goal_accuracy', 'auto_low_goal_accuracy', 'teleop_hoppers_triggered', 'fuel', 'gears_scout', 'robot_end_game', 'robot_card',
+            )
 
 
 
@@ -153,10 +156,10 @@ class AllianceScoutingForm(ModelForm):
         model = AllianceMatch
         exclude = ['scouted_by', 'field_setup']
         widgets = {
-            'auto_pilot_1_gears_acquired': getSelect(0, 4),'auto_pilot_2_gears_acquired': getSelect(0, 4),
-            'auto_pilot_1_rotors_engaged': getSelect(0, 3),'auto_pilot_2_rotors_engaged': getSelect(0, 3),
-            'pilot_1_gears_acquired': getSelect(0, 14),'pilot_2_gears_acquired': getSelect(0, 14),
-            'pilot_1_rotors_engaged': getSelect(0, 5),'pilot_2_rotors_engaged': getSelect(0, 5),
+            'auto_pilot_1_gears_acquired': getSelect(0, 4), 'auto_pilot_2_gears_acquired': getSelect(0, 4),
+            'auto_pilot_1_rotors_engaged': getSelect(0, 3), 'auto_pilot_2_rotors_engaged': getSelect(0, 3),
+            'pilot_1_gears_acquired': getSelect(0, 14), 'pilot_2_gears_acquired': getSelect(0, 14),
+            'pilot_1_rotors_engaged': getSelect(0, 5), 'pilot_2_rotors_engaged': getSelect(0, 5),
             }
 
     def __init__(self, *args, **kwargs):
