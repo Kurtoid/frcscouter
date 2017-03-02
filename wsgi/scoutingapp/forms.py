@@ -147,9 +147,17 @@ class ScoutingForm(ModelForm):
 class AllianceScoutingForm(ModelForm):
     """ generates the scouting form """
     class Meta:
+        def getSelect(min, max):  # @NoSelf
+            return forms.Select(choices=[(x, x) for x in range (min, max)])
         """ controls which model and fields are displayed """
         model = AllianceMatch
         exclude = ['scouted_by', 'field_setup']
+        widgets = {
+            'auto_pilot_1_gears_acquired': getSelect(0, 4),'auto_pilot_2_gears_acquired': getSelect(0, 4),
+            'auto_pilot_1_rotors_engaged': getSelect(0, 3),'auto_pilot_2_rotors_engaged': getSelect(0, 3),
+            'pilot_1_gears_acquired': getSelect(0, 14),'pilot_2_gears_acquired': getSelect(0, 14),
+            'pilot_1_rotors_engaged': getSelect(0, 5),'pilot_2_rotors_engaged': getSelect(0, 5),
+            }
 
     def __init__(self, *args, **kwargs):
         super(AllianceScoutingForm, self).__init__(*args, **kwargs)
