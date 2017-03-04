@@ -118,7 +118,7 @@ class MatchAdmin(admin.ModelAdmin):
             db_field, request, **kwargs
         )
     list_display = ('match_number', 'scouted_team', 'scouted_by')
-    list_per_page = sys.maxsize();
+    list_per_page = sys.maxsize;
 
 class VolleyAdmin(admin.ModelAdmin):
 
