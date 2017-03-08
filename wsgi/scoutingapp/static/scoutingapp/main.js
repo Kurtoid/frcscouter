@@ -35,14 +35,14 @@ $(document)
                $("<div class =\"col s4\"><select id=\"volleyEff\" /></div> ")
                .insertAfter($("#volleyType").parent())
                $(
-                 '<div class="row s4"><a class="waves-effect waves-light btn" id="volleyAdd">Add</a></div>')
-               .insertAfter($("#volleyEff").parent())
+                 '<div class="row"><a class="waves-effect waves-light red accent-4 btn" id="volleyAdd">Add</a></div>')
+               .insertAfter($("#volleyEff").parent().parent())
 
                $("<div class =\"col s4\"><select id=\"gear_dropped\" /></div> ")
                .insertAfter($(".customListMaker2").parent())
                $(
-                 '<div class="row s4"><a class="waves-effect waves-light btn" id="gearAdd">Add</a></div>')
-               .insertAfter($("#gear_dropped").parent())
+                 '<div class="row"><a class="waves-effect waves-light red accent-4 btn" id="gearAdd">Add</a></div>')
+               .insertAfter($("#gear_dropped").parent().parent())
                // now a select object
                console.log("starting request")
                var list = ""
@@ -152,8 +152,8 @@ $(document)
                       // add item to list
                       $("#hopper_load_list")
                       .append(
-                              $("<li class=\"collection-item hitem\">" + str
-                                + "</li>"));
+                              $("<li class=\"collection-item hitem dismissable\"><div ><div class=\"kListItemF\">" + str
+                                + "</div><a class = \"secondary-content\" href=\"#!\" onClick=\"$(this).parent().parent().remove()\"><i class=\"material-icons\">cancel</i></a></div></li>"));
                       console.log("done!")
                   });
            $('#gearAdd')
@@ -170,8 +170,8 @@ $(document)
                       // add item to list
                       $("#gear_list")
                       .append(
-                              $("<li class=\"collection-item gitem\">" + str
-                                + "</li>"));
+                              $("<li class=\"collection-item hitem dismissable\"><div ><div class=\"kListItemG\">" + str
+                                + "</div><a class = \"secondary-content\" href=\"#!\" onClick=\"$(this).parent().parent().remove()\"><i class=\"material-icons\">cancel</i></a></div></li>"));
                       console.log("done!")
                   });
            $('select').material_select();
@@ -196,7 +196,7 @@ $('#mainForm')
                 return $("<input />", attrs).append($(this).contents());
             });
             var t = ""
-            $(".hitem").each(function (index) {
+            $(".kListItemF").each(function (index) {
 
                 // alert($(this).text());
                 t += $(this).text() + ";";
@@ -215,7 +215,7 @@ $('#mainForm')
                 return $("<input />", attrs).append($(this).contents());
             });
             var t = ""
-            $(".gitem").each(function (index) {
+            $(".kListItemG").each(function (index) {
 
                 // alert($(this).text());
                 t += $(this).text() + ";";

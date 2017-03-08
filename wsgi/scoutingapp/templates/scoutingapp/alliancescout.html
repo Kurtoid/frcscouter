@@ -7,19 +7,6 @@
 	<form action="{% url 'scoutingapp:alliance_scout' %}" method="POST">
 		{% csrf_token %}
 		{{ form.errors }}
-			<ul class="collapsible" data-collapsible="accordion">
-				<li>
-					<div class="collapsible-header active">Field Setup</div>
-					<div class="collapsible-body" style="padding: 2rem">
-						{% for field in fieldsetform %}
-							<div class = "input-field">
-							 {{ field }} {{ field.label_tag }}
-							 {{ field.errors }}
-							</div>
-						{% endfor %}
-					</div>
-				</li>
-			</ul>
 		<br>
 		{% for field in form %}
 					{% if field.field.widget|klass == "NumberInput" %}

@@ -1,6 +1,7 @@
 """
 admin control settings
 """
+import sys;
 from django import forms
 from django.contrib import admin
 from django.contrib.auth.models import Group
@@ -11,7 +12,7 @@ from django.forms.widgets import TextInput
 from scoutingapp.models import (MyUser, Team, Match,
                                 Tournament, Alliance, AllianceMatch,
                                 EndGameState, Card, HighEfficiency,
-                                HopperLoad, Volley)
+                                HopperLoad, Volley, Gear, RopeType)
 
 class DefenseAdmin(admin.ModelAdmin):
     list_display = ('name', 'code')
@@ -117,6 +118,7 @@ class MatchAdmin(admin.ModelAdmin):
             db_field, request, **kwargs
         )
     list_display = ('match_number', 'scouted_team', 'scouted_by')
+    list_per_page = sys.maxsize;
 
 class VolleyAdmin(admin.ModelAdmin):
 
@@ -140,6 +142,8 @@ admin.site.register(Card)
 admin.site.register(HopperLoad)
 admin.site.register(HighEfficiency)
 admin.site.register(Volley, VolleyAdmin)
+admin.site.register(Gear)
+admin.site.register(RopeType)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
 admin.site.unregister(Group)

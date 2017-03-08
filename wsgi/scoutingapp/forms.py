@@ -105,12 +105,15 @@ class ScoutingForm(ModelForm):
 
         """ controls which model and fields are displayed """
         model = Match
-        exclude = ['scouted_by', 'field_setup', 'tournament']
-#         widgets = {'auto_trigger_hopper': getSelect(0, 6),
+        exclude = ['scouted_by', 'field_setup', 'tournament', 'duplicate']
+#         widgets = {'auto_teleop_hoppers_triggered': getSelect(0, 6),
 #                    'trigger_hopper': getSelect(0, 6),
 #                    'gears_aquired': getSelect(1, 14),
 #                    'gears_scored': getSelect(1, 14), 'gears_picked_up': getSelect(1, 14)}
         widgets = {'auto_gears_scored': forms.Select(choices=auto_gear_choices)}
+        fields = (
+            'match_number', 'scouted_team', 'auto_gears_scored', 'auto_move_yn', 'auto_hoppers_triggered', 'auto_hopper_load', 'auto_high_goal_accuracy', 'auto_low_goal_accuracy', 'teleop_hoppers_triggered', 'fuel', 'gears_scout', 'robot_end_game', 'robot_card',
+            )
 
 
 
@@ -119,8 +122,8 @@ class ScoutingForm(ModelForm):
         self.fields['fuel'].widget.attrs['class'] = 'customListMaker'
         self.fields['gears_scout'].widget.attrs['class'] = 'customListMaker2'
         self.fields['robot_card'].required = False
-        self.fields['auto_high_efficiency_load'].required = False
-        self.fields['auto_low_efficiency_load'].required = False
+        self.fields['auto_high_goal_accuracy'].required = False
+        self.fields['auto_low_goal_accuracy'].required = False
         self.fields['auto_hopper_load'].required = False
         self.fields['fuel'].required = False
         self.fields['robot_end_game'].required = False
@@ -147,9 +150,17 @@ class ScoutingForm(ModelForm):
 class AllianceScoutingForm(ModelForm):
     """ generates the scouting form """
     class Meta:
+        def getSelect(min, max):  # @NoSelf
+            return forms.Select(choices=[(x, x) for x in range (min, max)])
         """ controls which model and fields are displayed """
         model = AllianceMatch
         exclude = ['scouted_by', 'field_setup']
+        widgets = {
+            'auto_pilot_1_gears_acquired': getSelect(0, 4), 'auto_pilot_2_gears_acquired': getSelect(0, 4),
+            'auto_pilot_1_rotors_engaged': getSelect(0, 3), 'auto_pilot_2_rotors_engaged': getSelect(0, 3),
+            'pilot_1_gears_acquired': getSelect(0, 14), 'pilot_2_gears_acquired': getSelect(0, 14),
+            'pilot_1_rotors_engaged': getSelect(0, 5), 'pilot_2_rotors_engaged': getSelect(0, 5),
+            }
 
     def __init__(self, *args, **kwargs):
         super(AllianceScoutingForm, self).__init__(*args, **kwargs)
