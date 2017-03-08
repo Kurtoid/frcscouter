@@ -443,8 +443,6 @@ def exportusers(request):
         'rounds': usertable,
     })
 
-
-
 def allianceexporthtml(request, team_number):
     matchlist = AllianceMatch.objects.all()
     matchlist = matchlist.filter(scouted_by__team__team_number=team_number)
@@ -455,6 +453,9 @@ def allianceexporthtml(request, team_number):
     return render(request, 'scoutingapp/exporthtml.html', {
         'rounds': matches,
     })
+    
+    
+# raw text return methods
 def gethoppertypes(request):
     path = os.path.join(settings.DJ_PROJECT_DIR, "hoppertypes.txt")
     print(path)

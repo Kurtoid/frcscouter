@@ -43,6 +43,15 @@ class Team(models.Model):
     def __str__(self):
         return str(self.team_number) + ": " + self.team_name
 
+class Collaboration(models.Model):
+    event = models.ForeignKey(Tournament, on_delete=models.CASCADE)
+    teams = models.ManyToManyField(Team, related_name="collaborationTeamRel")
+
+    
+class CollaborationRequest(models.Model):
+    fromTeam = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="fromteamcollabrequest")
+    toTeam = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="toteamcollabrequest")
+
 
 class MyUserManager(BaseUserManager):
 
@@ -87,6 +96,7 @@ class MyUser(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
+    team_admins = models.ManyToManyField(Team, related_name="teamAdminRel")
     team = models.ForeignKey(Team, on_delete=models.CASCADE, null=True)
 
     objects = MyUserManager()
