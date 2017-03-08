@@ -13,6 +13,7 @@ from django.db import models
 
 from oauth2client.contrib.django_util.models import CredentialsField
 from django.core.validators import validate_comma_separated_integer_list
+from unittest.util import _MAX_LENGTH
 
 class Tournament(models.Model):
     name = models.CharField(max_length=200, default="UNAMED")
@@ -213,24 +214,44 @@ class Alliance(models.Model):
     def __str__(self):
         return self.color
 
+class RopeType(models.Model):
+    name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
 
 class AllianceMatch(models.Model):
     match_number = models.DecimalField(max_digits=100, decimal_places=0,
                                        default=0)
     alliance = models.ForeignKey(Alliance, on_delete=models.CASCADE)
+    pilot_1_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="p1team")
+    pilot_2_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="p2team")
     scouted_by = models.ForeignKey(MyUser, on_delete=models.CASCADE)
-    robot_1_driver_skill = models.DecimalField(max_digits=10, decimal_places=0,
-                                    default=0)
-    robot_2_driver_skill = models.DecimalField(max_digits=10, decimal_places=0,
-                                    default=0)
-    robot_3_driver_skill = models.DecimalField(max_digits=10, decimal_places=0,
-                                    default=0)
-    robot_1_breach_ability = models.DecimalField(max_digits=10, decimal_places=0,
-                                    default=0)
-    robot_2_breach_ability = models.DecimalField(max_digits=10, decimal_places=0,
-                                    default=0)
-    robot_3_breach_ability = models.DecimalField(max_digits=10, decimal_places=0,
-                                    default=0)
+    auto_pilot_1_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0)
+    auto_pilot_2_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0)
+    auto_pilot_1_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0)
+    auto_pilot_2_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0)
+    pilot_1_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0)
+    pilot_2_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0)
+    pilot_1_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0)
+    pilot_2_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0)
+    pilot_1_rope_1_engaged = models.ForeignKey(RopeType, on_delete=models.CASCADE, related_name="p1r1")
+    pilot_1_rope_2_engaged = models.ForeignKey(RopeType, on_delete=models.CASCADE, related_name="p1r2")
+    pilot_1_rope_3_engaged = models.ForeignKey(RopeType, on_delete=models.CASCADE, related_name="p1r3")
+    pilot_2_rope_1_engaged = models.ForeignKey(RopeType, on_delete=models.CASCADE, related_name="p2r1")
+    pilot_2_rope_2_engaged = models.ForeignKey(RopeType, on_delete=models.CASCADE, related_name="p2r2")
+    pilot_2_rope_3_engaged = models.ForeignKey(RopeType, on_delete=models.CASCADE, related_name="p2r3")
+#     robot_1_driver_skill = models.DecimalField(max_digits=10, decimal_places=0,
+#                                     default=0)
+#     robot_2_driver_skill = models.DecimalField(max_digits=10, decimal_places=0,
+#                                     default=0)
+#     robot_3_driver_skill = models.DecimalField(max_digits=10, decimal_places=0,
+#                                     default=0)
+#     robot_1_breach_ability = models.DecimalField(max_digits=10, decimal_places=0,
+#                                     default=0)
+#     robot_2_breach_ability = models.DecimalField(max_digits=10, decimal_places=0,
+#                                     default=0)
+#     robot_3_breach_ability = models.DecimalField(max_digits=10, decimal_places=0,
+#                                     default=0)
 
 class CredentialsModel(models.Model):
     id = models.OneToOneField(MyUser, primary_key=True)

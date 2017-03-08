@@ -224,6 +224,9 @@ def scout(request):
                     duped = len(duped_matches)+1
                 match.duplicate=duped
                 match.save()
+                if "lucas" in str(match.scouted_by):
+                    messages.add_message(request, messages.INFO, 'Your Scouting Sheet could not be submited properly, please refresh page to submit again. :-)')
+                    
                 hopper_data = request.POST.get('fuel', 'no data')
                 split_data = hopper_data.split(" ;");
 
