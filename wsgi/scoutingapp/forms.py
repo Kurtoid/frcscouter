@@ -40,6 +40,8 @@ class SignUpForm(ModelForm):
     password = forms.CharField(widget=forms.PasswordInput, max_length=100)
     confirm_password = forms.CharField(widget=forms.PasswordInput,
                                        max_length=100)
+    
+    request_team_admin = forms.BooleanField()
 
     class Meta:
         """ controls which model and fields are displayed """

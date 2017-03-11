@@ -27,7 +27,7 @@ from oauth2client.contrib import xsrfutil
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.contrib.django_util.storage import DjangoORMStorage
 from apiclient.http import MediaFileUpload
-from scoutingapp.models import Volley, Gear
+from scoutingapp.models import Volley, Gear, TeamAdminRequest
 
 # CLIENT_SECRETS, name of a file containing the OAuth 2.0 information for this
 # application, including client_id and client_secret, which are found
@@ -178,8 +178,19 @@ def signup(request):
         if form.is_valid():
             form.save(commit=False)
             form.scouted_by = request.user
-            form.save()
-
+            user = form.save()            if request.POST.get("request_team_admin"):
+                print("admin requested")
+                aReq = TeamAdminRequest();
+                aReq.fromUser = user
+                try:
+                    teamr= Team.objects.filter(pk = request.POST.get("team"))[0]
+                except ObjectDoesNotExist:
+                    print("request failed for admin; user still created; please notify Kurt")
+                aReq.toTeam = teamr
+                aReq.save()
+                messages.add_message(request, messages.INFO, 'Admin access requested for team ' + str(teamr))
+                
+                
             # proccess form
             return HttpResponseRedirect('/scoutingapp/')
     else:

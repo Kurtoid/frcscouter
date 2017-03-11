@@ -53,6 +53,7 @@ class CollaborationRequest(models.Model):
     toTeam = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="toteamcollabrequest")
 
 
+
 class MyUserManager(BaseUserManager):
 
     def create_user(self, email, password=None):
@@ -130,6 +131,9 @@ class MyUser(AbstractBaseUser):
         # Simplest possible answer: All admins are staff
         return self.is_admin
 
+class TeamAdminRequest(models.Model):
+    fromUser = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name="fromuseradminrequest")
+    toTeam = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="toteamadminrequest")
 
 class EndGameState(models.Model):
     state = models.CharField(max_length=20)
