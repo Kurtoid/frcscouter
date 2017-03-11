@@ -129,6 +129,10 @@ class VolleyAdmin(admin.ModelAdmin):
 #             db_field, request, **kwargs
 #         )
     list_display = ('match', 'goal_type', 'ball_count', 'accuracy',)
+    
+    
+class GearAdmin(admin.ModelAdmin):
+    list_display = ('match', 'source', 'dropped', 'duplicate')
 
 # Now register the new UserAdmin...
 admin.site.register(MyUser, UserAdmin)
@@ -142,7 +146,7 @@ admin.site.register(Card)
 admin.site.register(HopperLoad)
 admin.site.register(HighEfficiency)
 admin.site.register(Volley, VolleyAdmin)
-admin.site.register(Gear)
+admin.site.register(Gear, GearAdmin)
 admin.site.register(RopeType)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
