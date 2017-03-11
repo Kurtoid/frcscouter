@@ -122,17 +122,21 @@ class MatchAdmin(admin.ModelAdmin):
 
 class VolleyAdmin(admin.ModelAdmin):
 
+    def team(self, obj):
+        return obj.match.scouted_team
 #     def formfield_for_foreignkey(self, db_field, request, **kwargs):
 #         if db_field.name == 'scouted_by':
 #             kwargs['initial'] = request.user.id
 #         return super(MatchAdmin, self).formfield_for_foreignkey(
 #             db_field, request, **kwargs
 #         )
-    list_display = ('match', 'goal_type', 'ball_count', 'accuracy',)
+    list_display = ('match','team', 'goal_type', 'ball_count', 'accuracy',)
     
     
 class GearAdmin(admin.ModelAdmin):
-    list_display = ('match', 'source', 'dropped', 'duplicate')
+    def team(self, obj):
+        return obj.match.scouted_team
+    list_display = ('match','team',  'source', 'dropped', 'duplicate')
 
 # Now register the new UserAdmin...
 admin.site.register(MyUser, UserAdmin)
