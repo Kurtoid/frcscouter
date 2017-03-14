@@ -44,7 +44,14 @@ FLOW = flow_from_clientsecrets(
 
 def index(request):
     # return HttpResponse("Hello World!")
+    if request.user.is_authenticated:
+        if(len(TeamAdminRequest.objects.filter(toTeam=request.user.team))>0):
+            return render(request, 'scoutingapp/index.html', {'arg':None})
+            
     return render(request, 'scoutingapp/index.html')
+
+def viewteamadminrequest(request):
+    pass
 
 
 @login_required
@@ -185,7 +192,7 @@ def signup(request):
                 try:
                     teamr= Team.objects.filter(pk = request.POST.get("team"))[0]
                 except ObjectDoesNotExist:
-                    print("request failed for admin; user still created; please notify Kurt")
+                    print("Request failed for admin; user still created; please notify Kurt")
                 aReq.toTeam = teamr
                 aReq.save()
                 messages.add_message(request, messages.INFO, 'Admin access requested for team ' + str(teamr))
