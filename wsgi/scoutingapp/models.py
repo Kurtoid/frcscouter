@@ -88,6 +88,9 @@ class MyUser(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
 
     team = models.ForeignKey(Team, on_delete=models.CASCADE, null=True)
+    
+    first_name = models.CharField(max_length= 100, default = "")
+    last_name = models.CharField(max_length=100, null = True, default = "")
 
     objects = MyUserManager()
 
@@ -102,7 +105,8 @@ class MyUser(AbstractBaseUser):
         return self.email
 
     def __str__(self):  # __unicode__ on Python 2
-        return self.email
+        return self.first_name + " " + self.last_name + " (" + str(self.team.team_number) + ")"
+
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
