@@ -44,7 +44,7 @@ class SignUpForm(ModelForm):
     class Meta:
         """ controls which model and fields are displayed """
         model = MyUser
-        fields = ['email', 'team']
+        fields = ['first_name', 'last_name', 'email', 'team']
 
     def clean(self):
         cleaned_data = super(SignUpForm, self).clean()
