@@ -1,0 +1,1 @@
+bash $OPENSHIFT_REPO_DIR/scripts/backup.sh
