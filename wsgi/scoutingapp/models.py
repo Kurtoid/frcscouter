@@ -195,10 +195,6 @@ class Match(models.Model):
         return str(self.match_number)
 
     
-    def __str__(self):
-        return str("Match " + str(self.match) + ": " + str(self.match.scouted_team))
-
-    
 class Gear(models.Model):
     source = models.CharField(max_length=100)
     dropped = models.CharField(max_length=100)
