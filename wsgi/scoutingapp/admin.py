@@ -12,7 +12,7 @@ from django.forms.widgets import TextInput
 from scoutingapp.models import (MyUser, Team, Match,
                                 Tournament, Alliance, AllianceMatch,
                                 EndGameState, Card, HighEfficiency,
-                                HopperLoad, Gear, RopeType)
+                                HopperLoad, RopeType)
 
 class DefenseAdmin(admin.ModelAdmin):
     list_display = ('name', 'code')
@@ -122,11 +122,6 @@ class MatchAdmin(admin.ModelAdmin):
     list_per_page = sys.maxsize;
 
     
-class GearAdmin(admin.ModelAdmin):
-    def team(self, obj):
-        return obj.match.scouted_team
-    list_display = ('match','team',  'source', 'dropped', 'duplicate')
-
 # Now register the new UserAdmin...
 admin.site.register(MyUser, UserAdmin)
 admin.site.register(Team, TeamAdmin)
@@ -138,7 +133,6 @@ admin.site.register(EndGameState)
 admin.site.register(Card)
 admin.site.register(HopperLoad)
 admin.site.register(HighEfficiency)
-admin.site.register(Gear, GearAdmin)
 admin.site.register(RopeType)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.

@@ -97,8 +97,6 @@ class ScoutingForm(ModelForm):
     except ObjectDoesNotExist:
             print("Missed game missing")
 
-    fuel = forms.CharField(max_length=999)
-    gears_scout = forms.CharField(max_length=999)
     class Meta:
         def getSelect(min, max):  # @NoSelf
             return forms.Select(choices=[(x, x) for x in range (min, max)])
@@ -112,22 +110,18 @@ class ScoutingForm(ModelForm):
 #                    'gears_scored': getSelect(1, 14), 'gears_picked_up': getSelect(1, 14)}
         widgets = {'auto_gears_scored': forms.Select(choices=auto_gear_choices)}
         fields = (
-            'match_number', 'scouted_team', 'auto_gears_scored', 'auto_move_yn', 'auto_hoppers_triggered', 'auto_hopper_load', 'auto_high_goal_accuracy', 'auto_low_goal_accuracy', 'teleop_hoppers_triggered', 'fuel', 'gears_scout', 'robot_end_game', 'robot_card',
+            'match_number', 'scouted_team', 'auto_gears_scored', 'auto_move_yn', 'auto_hoppers_triggered', 'auto_hopper_load', 'auto_high_goal_accuracy', 'auto_low_goal_accuracy', 'teleop_hoppers_triggered', 'robot_end_game', 'robot_card',
             )
 
 
 
     def __init__(self, *args, **kwargs):
         super(ScoutingForm, self).__init__(*args, **kwargs)
-        self.fields['fuel'].widget.attrs['class'] = 'customListMaker'
-        self.fields['gears_scout'].widget.attrs['class'] = 'customListMaker2'
         self.fields['robot_card'].required = False
         self.fields['auto_high_goal_accuracy'].required = False
         self.fields['auto_low_goal_accuracy'].required = False
         self.fields['auto_hopper_load'].required = False
-        self.fields['fuel'].required = False
         self.fields['robot_end_game'].required = False
-        self.fields['gears_scout'].required = False
 #         self.fields['hopper_load'].widget.attrs['class'] = 'customListMaker'
         # self.fields['tournament'].required = False
         """

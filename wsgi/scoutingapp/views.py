@@ -9,7 +9,7 @@ from .models import (Match, Tournament, Team, CredentialsModel,
 EndGameState, MyUser)
 from django.contrib.auth import logout, login
 from django.contrib import messages
-from .tables import MatchTable, AllianceMatchTable, UserTable, GearTable
+from .tables import MatchTable, AllianceMatchTable, UserTable
 from scouter import settings
 from django_tables2 import RequestConfig
 from django.core.exceptions import ObjectDoesNotExist
@@ -26,7 +26,6 @@ from oauth2client.contrib import xsrfutil
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.contrib.django_util.storage import DjangoORMStorage
 from apiclient.http import MediaFileUpload
-from scoutingapp.models import Gear
 
 # CLIENT_SECRETS, name of a file containing the OAuth 2.0 information for this
 # application, including client_id and client_secret, which are found
@@ -224,23 +223,6 @@ def scout(request):
                     duped = len(duped_matches)+1
                 match.duplicate=duped
                 match.save()
-                hopper_data = request.POST.get('fuel', 'no data')
-                split_data = hopper_data.split(" ;");
-
-                gear_data= request.POST.get('gears_scout', 'no data')
-                split_data = gear_data.split(" ;");
-                if(len(split_data)>0):
-                    print(gear_data)
-                    for i in split_data:
-                        tmp = i.split(" ")
-                        if(len(tmp)==2):
-                            print(tmp)
-                            gear = Gear()
-                            gear.source = tmp[0]
-                            gear.dropped = tmp[1]
-                            gear.match = match
-                            gear.duplicate=duped
-                            gear.save()
                         
                 # proccess form
                 messages.add_message(request, messages.INFO, 'Match Recorded')
@@ -385,17 +367,6 @@ def exporthtml(request, team_number):
         'rounds': matches,
     })
 
-
-def exportgears(request, team_number):
-    gearlist = Gear.objects.all()
-#     volleylist = volleylist.filter(scouted_by__team__team_number=team_number)
-    # enables ordering
-    gears= GearTable(gearlist)
-    RequestConfig(request, paginate={'per_page': 9999}).configure(gears)
-
-    return render(request, 'scoutingapp/exporthtml.html', {
-        'rounds': gears,
-    })
 
 def exportusers(request):
     users = MyUser.objects.all();
