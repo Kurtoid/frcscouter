@@ -119,7 +119,7 @@ class ScoutingForm(ModelForm):
             'gears_type' : forms.RadioSelect(choices=gear_c),
             }
         fields = (
-            'match_number', 'scouted_team', 'auto_gears_scored', 'auto_move_yn', 'auto_hoppers_triggered', 'auto_hopper_load', 'auto_high_goal_accuracy', 'auto_low_goal_accuracy', 'teleop_hoppers_triggered', 'gears_type', 'robot_end_game', 'robot_card',
+            'match_number', 'scouted_team', 'auto_gears_scored', 'auto_move_yn', 'auto_hoppers_triggered', 'auto_hopper_load', 'auto_high_goal_accuracy', 'auto_low_goal_accuracy', 'teleop_hoppers_triggered','gears_scored', 'gears_type', 'robot_end_game', 'robot_card',
             )
 
 
