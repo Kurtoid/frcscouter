@@ -94,7 +94,7 @@ auto_gear_choices = (
     ('Feeder Side', 'Feeder Side'),
     ('Two Gear Auto', 'Two Gear Auto'),
 )
-gear_c= [('Human Player Station Only', 'Human Player Station Only'),
+gear_c= [('Feeder Station Only', 'Feeder Station Only'),
            ('Both', 'Both'),
            ('Ground', 'Ground Only'),]
 

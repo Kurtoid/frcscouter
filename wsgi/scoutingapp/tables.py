@@ -16,7 +16,7 @@ class MatchTable(tables.Table):
         # add class="bordered"
         attrs = {'class': 'bordered responsive-table'}  # materialze class
         exclude = ('tournament', 'score', 'id')
-        sequence = ('match_number', 'scouted_team', 'auto_gears_scored', 'auto_move_yn', 'auto_hoppers_triggered', 'auto_hopper_load', 'auto_high_goal_accuracy', 'auto_low_goal_accuracy', 'teleop_hoppers_triggered', 'robot_end_game', 'robot_card', 'scouted_by', 'duplicate')
+        sequence = ('match_number', 'scouted_team', 'auto_gears_scored', 'auto_move_yn', 'auto_hoppers_triggered', 'auto_hopper_load', 'auto_high_goal_accuracy', 'auto_low_goal_accuracy', 'teleop_hoppers_triggered', 'robot_end_game', 'robot_card', 'scouted_by', 'duplicate', 'gears_scored', 'gears_dropped', 'gears_type')
 
 class AllianceMatchTable(tables.Table):
     class Meta:
