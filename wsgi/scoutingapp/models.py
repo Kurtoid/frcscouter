@@ -87,7 +87,7 @@ class MyUser(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
-    team = models.ForeignKey(Team, on_delete=models.CASCADE, null=True)
+    team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True)
     
     first_name = models.CharField(max_length= 100, default = "")
     last_name = models.CharField(max_length=100, null = True, default = "")
@@ -176,18 +176,18 @@ class Match(models.Model):
 #                                          default=0, null=True)
 #     gears_picked_up = models.DecimalField(max_digits=1, decimal_places=0,
 #                                          default=0, null=True)
-    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
+    tournament = models.ForeignKey(Tournament, on_delete=models.SET_NULL,
                                    null=True, blank=True)
     gears_scored = models.DecimalField(max_digits=100, decimal_places=0)
     gears_dropped = models.DecimalField(max_digits=100, decimal_places=0)
     gears_type = models.CharField(max_length = 100)
     robot_end_game = models.ForeignKey(EndGameState,
-                                     on_delete=models.CASCADE,
+                                     on_delete=models.SET_NULL,
                                      related_name='robot1endgame',
                                      null=True)
-    robot_card = models.ForeignKey(Card, on_delete=models.CASCADE, null=True,
+    robot_card = models.ForeignKey(Card, on_delete=models.SET_NULL, null=True,
                                      related_name='Robot1card')
-    scouted_by = models.ForeignKey(MyUser)
+    scouted_by = models.ForeignKey(MyUser, on_delete=SET_NULL)
     duplicate = models.DecimalField(max_digits=100, decimal_places=0, null=True)
 
     class Meta:
@@ -212,10 +212,10 @@ class RopeType(models.Model):
 class AllianceMatch(models.Model):
     match_number = models.DecimalField(max_digits=100, decimal_places=0,
                                        default=0)
-    alliance = models.ForeignKey(Alliance, on_delete=models.CASCADE)
-    pilot_1_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="p1team")
-    pilot_2_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="p2team")
-    scouted_by = models.ForeignKey(MyUser, on_delete=models.CASCADE)
+    alliance = models.ForeignKey(Alliance, on_delete=models.SET_NULL)
+    pilot_1_team = models.ForeignKey(Team, on_delete=models.SET_NULL, related_name="p1team")
+    pilot_2_team = models.ForeignKey(Team, on_delete=models.SET_NULL, related_name="p2team")
+    scouted_by = models.ForeignKey(MyUser, on_delete=models.SET_NULL)
     auto_pilot_1_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0)
     auto_pilot_2_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0)
     auto_pilot_1_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0)
@@ -224,12 +224,12 @@ class AllianceMatch(models.Model):
     pilot_2_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0)
     pilot_1_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0)
     pilot_2_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0)
-    pilot_1_rope_1_engaged = models.ForeignKey(RopeType, on_delete=models.CASCADE, related_name="p1r1")
-    pilot_1_rope_2_engaged = models.ForeignKey(RopeType, on_delete=models.CASCADE, related_name="p1r2")
-    pilot_1_rope_3_engaged = models.ForeignKey(RopeType, on_delete=models.CASCADE, related_name="p1r3")
-    pilot_2_rope_1_engaged = models.ForeignKey(RopeType, on_delete=models.CASCADE, related_name="p2r1")
-    pilot_2_rope_2_engaged = models.ForeignKey(RopeType, on_delete=models.CASCADE, related_name="p2r2")
-    pilot_2_rope_3_engaged = models.ForeignKey(RopeType, on_delete=models.CASCADE, related_name="p2r3")
+    pilot_1_rope_1_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p1r1")
+    pilot_1_rope_2_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p1r2")
+    pilot_1_rope_3_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p1r3")
+    pilot_2_rope_1_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p2r1")
+    pilot_2_rope_2_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p2r2")
+    pilot_2_rope_3_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p2r3")
 #     robot_1_driver_skill = models.DecimalField(max_digits=10, decimal_places=0,
 #                                     default=0)
 #     robot_2_driver_skill = models.DecimalField(max_digits=10, decimal_places=0,
