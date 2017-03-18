@@ -179,6 +179,7 @@ class Match(models.Model):
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
                                    null=True, blank=True)
     gears_scored = models.DecimalField(max_digits=100, decimal_places=0)
+    gears_dropped = models.DecimalField(max_digits=100, decimal_places=0)
     gears_type = models.CharField(max_length = 100)
     robot_end_game = models.ForeignKey(EndGameState,
                                      on_delete=models.CASCADE,
