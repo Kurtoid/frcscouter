@@ -89,7 +89,7 @@ class MyUser(AbstractBaseUser):
 
     team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True)
     
-    first_name = models.CharField(max_length= 100, default = "")
+    first_name = models.CharField(max_length= 100, default = "", null=True)
     last_name = models.CharField(max_length=100, null = True, default = "")
 
     objects = MyUserManager()

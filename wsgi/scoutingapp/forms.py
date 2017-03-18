@@ -83,6 +83,9 @@ class LoginForm(forms.Form):
         password = self.cleaned_data.get('password')
         user = authenticate(email=email, password=password)
         return user
+    
+    
+    
 
 auto_gear_choices = (
     ('None', 'None'),
