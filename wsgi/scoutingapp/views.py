@@ -215,6 +215,7 @@ def scout(request):
             form = ScoutingForm(request.POST)
             form.use_required_attribute = False
             if form.is_valid():
+                print(request.POST)
                 match = form.save(commit=False)
                 match.scouted_by = request.user
                 duped = 1

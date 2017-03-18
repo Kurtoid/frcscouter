@@ -24,6 +24,17 @@
 								<a class="btn-large" style="width: 100%" onclick="document.getElementById('{{ field.auto_id}}').stepUp()"><i class="material-icons">add</i></a>
 							</div>
 						</div>
+					{% elif field.field.widget|klass == "RadioSelect" %}
+							<div class="input-field">
+					{% for radio in field %}
+					<p>
+						{{ radio.tag }}
+					    <label for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
+					
+    </label>
+					</p>
+{% endfor %}
+					</div>
 					{% else %}
 						<div class="input-field">
 							<div class=" row">

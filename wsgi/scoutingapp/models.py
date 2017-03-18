@@ -178,6 +178,7 @@ class Match(models.Model):
 #                                          default=0, null=True)
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
                                    null=True, blank=True)
+    gears_type = models.CharField(max_length = 100)
     robot_end_game = models.ForeignKey(EndGameState,
                                      on_delete=models.CASCADE,
                                      related_name='robot1endgame',
