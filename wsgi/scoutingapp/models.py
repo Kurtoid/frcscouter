@@ -187,7 +187,7 @@ class Match(models.Model):
                                      null=True)
     robot_card = models.ForeignKey(Card, on_delete=models.SET_NULL, null=True,
                                      related_name='Robot1card')
-    scouted_by = models.ForeignKey(MyUser, on_delete=models.SET_NULL)
+    scouted_by = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=True)
     duplicate = models.DecimalField(max_digits=100, decimal_places=0, null=True)
 
     class Meta:
@@ -212,10 +212,10 @@ class RopeType(models.Model):
 class AllianceMatch(models.Model):
     match_number = models.DecimalField(max_digits=100, decimal_places=0,
                                        default=0)
-    alliance = models.ForeignKey(Alliance, on_delete=models.SET_NULL)
-    pilot_1_team = models.ForeignKey(Team, on_delete=models.SET_NULL, related_name="p1team")
-    pilot_2_team = models.ForeignKey(Team, on_delete=models.SET_NULL, related_name="p2team")
-    scouted_by = models.ForeignKey(MyUser, on_delete=models.SET_NULL)
+    alliance = models.ForeignKey(Alliance)
+    pilot_1_team = models.ForeignKey(Team, on_delete=models.SET_NULL, related_name="p1team", null=True)
+    pilot_2_team = models.ForeignKey(Team, on_delete=models.SET_NULL, related_name="p2team", null=True)
+    scouted_by = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=True)
     auto_pilot_1_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0)
     auto_pilot_2_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0)
     auto_pilot_1_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0)
@@ -224,12 +224,12 @@ class AllianceMatch(models.Model):
     pilot_2_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0)
     pilot_1_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0)
     pilot_2_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0)
-    pilot_1_rope_1_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p1r1")
-    pilot_1_rope_2_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p1r2")
-    pilot_1_rope_3_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p1r3")
-    pilot_2_rope_1_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p2r1")
-    pilot_2_rope_2_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p2r2")
-    pilot_2_rope_3_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p2r3")
+    pilot_1_rope_1_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p1r1", null=True)
+    pilot_1_rope_2_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p1r2", null=True)
+    pilot_1_rope_3_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p1r3", null=True)
+    pilot_2_rope_1_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p2r1", null=True)
+    pilot_2_rope_2_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p2r2", null=True)
+    pilot_2_rope_3_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p2r3", null=True)
 #     robot_1_driver_skill = models.DecimalField(max_digits=10, decimal_places=0,
 #                                     default=0)
 #     robot_2_driver_skill = models.DecimalField(max_digits=10, decimal_places=0,
