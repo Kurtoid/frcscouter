@@ -26,13 +26,12 @@
 						</div>
 					{% elif field.field.widget|klass == "RadioSelect" %}
 							<div class="input-field">
+									<h5>{{ field.label }} </h5>
 					{% for radio in field %}
-					<p>
 						{{ radio.tag }}
 					    <label for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
 					
     </label>
-					</p>
 {% endfor %}
 					</div>
 					{% else %}

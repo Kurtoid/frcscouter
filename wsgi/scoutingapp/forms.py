@@ -95,9 +95,8 @@ auto_gear_choices = (
     ('Two Gear Auto', 'Two Gear Auto'),
 )
 gear_c= [('Human Player Station Only', 'Human Player Station Only'),
-           ('Ground', 'Ground'),
            ('Both', 'Both'),
-           ('None', 'None')]
+           ('Ground', 'Ground Only'),]
 
 class ScoutingForm(ModelForm):
     """ generates the scouting form """
