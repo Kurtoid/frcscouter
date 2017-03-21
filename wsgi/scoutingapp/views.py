@@ -26,6 +26,8 @@ from oauth2client.contrib import xsrfutil
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.contrib.django_util.storage import DjangoORMStorage
 from apiclient.http import MediaFileUpload
+from scoutingapp.tables import CategoryTable
+from scoutingapp import forms
 
 # CLIENT_SECRETS, name of a file containing the OAuth 2.0 information for this
 # application, including client_id and client_secret, which are found
@@ -449,3 +451,20 @@ def geardropped(request):
             print (line)
             val += line
     return HttpResponse(val, content_type='text/plain')
+
+
+def getcategories(request):
+    data = []
+    gear_choices = forms.auto_gear_choices
+    source_choices = forms.gear_c
+    for c in gear_choices:
+        print(c)
+        data.append(dict({'gearpositions':c[0]}))
+    for c in source_choices:
+        print(c)
+        data.append(dict({'gearsources':c[0]}))
+    print(type(data)) 
+    print(data)
+    table = CategoryTable(data)
+    return render(request, "scoutingapp/exportcategories.html", {"categories" : table})
+    

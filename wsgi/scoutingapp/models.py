@@ -184,7 +184,7 @@ class Match(models.Model):
                                      on_delete=models.SET_NULL,
                                      related_name='robot1endgame',
                                      null=True)
-    robot_card = models.ForeignKey(Card, on_delete=models.SET_NULL, null=True,
+    robot_card = models.ForeignKey(Card, on_delete=models.SET_NULL, null=True, blank=True,
                                      related_name='Robot1card')
     scouted_by = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=True)
     duplicate = models.DecimalField(max_digits=100, decimal_places=0, null=True)

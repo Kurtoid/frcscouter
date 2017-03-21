@@ -30,3 +30,9 @@ class AllianceMatchTable(tables.Table):
 #                     'robot_3_breach_ability',
 #                    )
         exclude = ('id', 'field_setup')
+        
+        
+class CategoryTable(tables.Table):
+    gearpositions = tables.Column()
+    gearsources = tables.Column()
+    
