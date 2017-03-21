@@ -21,10 +21,16 @@ class TeamCreateForm(forms.ModelForm):
 
     class Meta:
         model = Team
-        fields = ('team_name', 'team_number', 'team_color')
+        fields = ('team_name', 'team_number', 'team_color', 'currently_in_event')
         widgets = {
             'team_color': TextInput(attrs={'type': 'color'}),
         }
+        def __init__(self, *args, **kwargs):
+            super(TeamCreateForm, self).__init__(*args, **kwargs)
+            self.fields['team_color'].required=False;
+            self.fields['currently_in_event'].required=False;
+            
+
 
 
 class TeamAdmin(admin.ModelAdmin):
@@ -118,7 +124,7 @@ class MatchAdmin(admin.ModelAdmin):
         return super(MatchAdmin, self).formfield_for_foreignkey(
             db_field, request, **kwargs
         )
-    list_display = ('match_number', 'scouted_team', 'scouted_by')
+    list_display = ('match_number', 'scouted_team', 'scouted_by', 'created_at')
     list_per_page = sys.maxsize;
 
     

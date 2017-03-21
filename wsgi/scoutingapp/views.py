@@ -222,6 +222,9 @@ def scout(request):
                 duped_matches = Match.objects.filter(match_number=match.match_number, scouted_team=match.scouted_team).exclude(scouted_by=match.scouted_by)
                 if(len(duped_matches)>0):
                     duped = len(duped_matches)+1
+                    
+                if(request.user.team.currently_in_event):
+                    match.tournament = request.user.team.currently_in_event
                 match.duplicate=duped
                 match.save()
                         
@@ -357,9 +360,9 @@ def import_event_from_TBA(request):
 
 
 
-def exporthtml(request, team_number):
+def exporthtml(request, event_code):
     matchlist = Match.objects.all()
-    matchlist = matchlist.filter(scouted_by__team__team_number=team_number)
+    matchlist = matchlist.filter(tournament__event_code=event_code)
     # enables ordering
     matches = MatchTable(matchlist)
     RequestConfig(request, paginate={'per_page': 9999}).configure(matches)
@@ -381,9 +384,9 @@ def exportusers(request):
 
 
 
-def allianceexporthtml(request, team_number):
+def allianceexporthtml(request, event_code):
     matchlist = AllianceMatch.objects.all()
-    matchlist = matchlist.filter(scouted_by__team__team_number=team_number)
+    matchlist = matchlist.filter(tournament__event_code=event_code)
     # enables ordering
     matches = AllianceMatchTable(matchlist)
     RequestConfig(request, paginate={'per_page': 9999}).configure(matches)

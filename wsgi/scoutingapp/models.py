@@ -17,12 +17,14 @@ from unittest.util import _MAX_LENGTH
 
 class Tournament(models.Model):
     name = models.CharField(max_length=200, default="UNAMED")
+    event_code = models.CharField(max_length=200, default="UNAMED")
 
     def __str__(self):
         return self.name
 
 
 class Team(models.Model):
+    currently_in_event = models.ForeignKey(Tournament, on_delete=models.SET_NULL, null=True)
     team_number = models.DecimalField(max_digits=5, decimal_places=0,
                                       default=0000, primary_key=True)
     team_name = models.CharField(max_length=200, default="UNNAMED")
@@ -150,6 +152,8 @@ class HighEfficiency(models.Model):
     
     
 class Match(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     match_number = models.DecimalField(max_digits=100, decimal_places=0,
                                        default=0)
     scouted_team = models.ForeignKey(Team, on_delete=models.CASCADE)
@@ -210,6 +214,8 @@ class RopeType(models.Model):
         return self.name
 
 class AllianceMatch(models.Model):
+    tournament = models.ForeignKey(Tournament, on_delete=models.SET_NULL,
+                                   null=True, blank=True)
     match_number = models.DecimalField(max_digits=100, decimal_places=0,
                                        default=0)
     alliance = models.ForeignKey(Alliance)
