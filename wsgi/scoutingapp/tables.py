@@ -35,4 +35,6 @@ class AllianceMatchTable(tables.Table):
 class CategoryTable(tables.Table):
     gearpositions = tables.Column()
     gearsources = tables.Column()
+    endgames = tables.Column()
+    cards = tables.Column()
     

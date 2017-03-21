@@ -28,6 +28,8 @@ from oauth2client.contrib.django_util.storage import DjangoORMStorage
 from apiclient.http import MediaFileUpload
 from scoutingapp.tables import CategoryTable
 from scoutingapp import forms
+from itertools import zip_longest
+from scoutingapp.models import Card
 
 # CLIENT_SECRETS, name of a file containing the OAuth 2.0 information for this
 # application, including client_id and client_secret, which are found
@@ -457,12 +459,11 @@ def getcategories(request):
     data = []
     gear_choices = forms.auto_gear_choices
     source_choices = forms.gear_c
-    for c in gear_choices:
-        print(c)
-        data.append(dict({'gearpositions':c[0]}))
-    for c in source_choices:
-        print(c)
-        data.append(dict({'gearsources':c[0]}))
+    end_games = EndGameState.objects.all()
+    cards = Card.objects.all()
+    for g,s,e,c in zip_longest(gear_choices, source_choices, end_games, cards):
+        values = {'gearpositions': (s or ["",])[0], 'gearsources':(g or ["",])[0], 'endgames' : (e or ""), 'cards' : (c or "")}
+        data.append(values)
     print(type(data)) 
     print(data)
     table = CategoryTable(data)
