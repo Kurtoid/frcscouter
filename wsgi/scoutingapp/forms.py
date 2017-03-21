@@ -121,7 +121,7 @@ class ScoutingForm(ModelForm):
             'gears_type' : forms.RadioSelect(choices=gear_c),
             }
         fields = (
-            'match_number', 'scouted_team', 'auto_gears_scored', 'auto_move_yn', 'auto_hoppers_triggered', 'auto_hopper_load', 'auto_high_goal_accuracy', 'auto_low_goal_accuracy', 'teleop_hoppers_triggered','gears_scored','gears_dropped', 'gears_type', 'robot_end_game', 'robot_card',
+            'match_number', 'scouted_team', 'auto_gears_scored', 'auto_move_yn', 'auto_hopper_triggered','teleop_hoppers_triggered','gears_scored','gears_dropped', 'gears_type', 'robot_end_game', 'robot_card',
             )
 
 
@@ -129,9 +129,6 @@ class ScoutingForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(ScoutingForm, self).__init__(*args, **kwargs)
         self.fields['robot_card'].required = False
-        self.fields['auto_high_goal_accuracy'].required = False
-        self.fields['auto_low_goal_accuracy'].required = False
-        self.fields['auto_hopper_load'].required = False
         self.fields['robot_end_game'].required = False
 #         self.fields['hopper_load'].widget.attrs['class'] = 'customListMaker'
         # self.fields['tournament'].required = False

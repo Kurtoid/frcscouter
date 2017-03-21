@@ -161,11 +161,7 @@ class Match(models.Model):
     auto_move_yn = models.BooleanField(default=False, verbose_name="Auto Move")
 #     auto_score_gear_yn = models.BooleanField(default=False, verbose_name="Did it score on auto?")
 #     auto_low_goal = models.BooleanField(default=False)
-    auto_hoppers_triggered = models.BooleanField(default=False)
-    auto_hopper_load = models.ForeignKey(HopperLoad, null=True)
-    auto_high_goal_accuracy = models.ForeignKey(HighEfficiency,
-                                                  related_name="auto_high_goal_accuracy", null=True)
-    auto_low_goal_accuracy = models.ForeignKey(HighEfficiency, null=True)
+    auto_hopper_triggered = models.BooleanField(default=False)
     teleop_hoppers_triggered = models.DecimalField(max_digits=1, decimal_places=0,
                                          default=0, null=True)
 #     hopper_load = models.CharField(max_length=999
