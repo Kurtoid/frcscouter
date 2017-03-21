@@ -179,7 +179,7 @@ class Match(models.Model):
                                    null=True, blank=True)
     gears_scored = models.DecimalField(max_digits=100, decimal_places=0, default=0)
     gears_dropped = models.DecimalField(max_digits=100, decimal_places=0, default=0)
-    gears_type = models.CharField(max_length = 100, verbose_name="Gear Source")
+    gears_type = models.CharField(max_length = 100, verbose_name="Gear Source", blank=True)
     robot_end_game = models.ForeignKey(EndGameState,
                                      on_delete=models.SET_NULL,
                                      related_name='robot1endgame',
