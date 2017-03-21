@@ -325,15 +325,17 @@ def import_event_from_TBA(request):
         if(request.method == 'POST'):
             importform = importEventForm(request.POST)
             if importform.is_valid():
+                newEvent = None
                 # process and return redirect
                 event_code = importform.cleaned_data['event_code']
                 r = requests.get("http://www.thebluealliance.com/api/v2/event/{}".format(event_code),
                                  headers={'X-TBA-App-Id':
                                           'frc179:scoutingapp:v1'})
                 try:
-                    Tournament.objects.get(name=r.json()['name'])
+                    newEvent = Tournament.objects.get(name=r.json()['name'])
                 except ObjectDoesNotExist:
                     newEvent = Tournament(name=r.json()['name'])
+                    newEvent.event_code = event_code
                     newEvent.save()
                 r = requests.get("http://www.thebluealliance.com/api/v2/event/{}/teams".format(event_code),
                                  headers={'X-TBA-App-Id':
@@ -341,15 +343,17 @@ def import_event_from_TBA(request):
                 if r.status_code == 200:
                     print("Checking {}".format(event_code))
                     for x in r.json():
+                        team = None
                         try:
-                            Team.objects.get(team_number=x['team_number'])
+                            team = Team.objects.get(team_number=x['team_number'])
                         except ObjectDoesNotExist:
                             print('we dont know '
                                   '{}'.format(x['nickname']))
                             if(x['nickname'] is not None):
                                 team = Team(team_number=x['team_number'],
                                             team_name=x['nickname'])
-                                team.save()
+                        team.currently_in_event = newEvent
+                        team.save()
                         if(x['nickname'] is not None):
                             print('{}: {}'.format(
                                 x['team_number'], x['nickname']))
