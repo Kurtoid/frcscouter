@@ -221,9 +221,7 @@ class AllianceMatch(models.Model):
     auto_pilot_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0)
     pilot_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0)
     pilot_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0)
-    pilot_rope_1_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p1r1", null=True)
-    pilot_rope_2_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p1r2", null=True)
-    pilot_rope_3_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p1r3", null=True)
+    pilot_rope_deploy_time = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p1r1", null=True)
 #     robot_1_driver_skill = models.DecimalField(max_digits=10, decimal_places=0,
 #                                     default=0)
 #     robot_2_driver_skill = models.DecimalField(max_digits=10, decimal_places=0,
