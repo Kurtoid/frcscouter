@@ -26,7 +26,7 @@ class Tournament(models.Model):
 class Team(models.Model):
     currently_in_event = models.ForeignKey(Tournament, on_delete=models.SET_NULL, null=True)
     team_number = models.DecimalField(max_digits=5, decimal_places=0,
-                                      default=0000, primary_key=True)
+                                      default=0000, primary_key=True, null=True)
     team_name = models.CharField(max_length=200, default="UNNAMED")
 
     team_color = models.CharField(max_length=7, null=True)
