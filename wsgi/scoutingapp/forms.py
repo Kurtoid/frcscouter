@@ -87,11 +87,11 @@ class LoginForm(forms.Form):
     
     
 
-auto_gear_choices = (
-    ('None', 'None'),
-    ('Middle', 'Middle'),
-    ('Side', 'Side'),
-)
+# auto_gear_choices = (
+#     ('None', 'None'),
+#     ('Middle', 'Middle'),
+#     ('Side', 'Side'),
+# )
 gear_c= [('Feeder Station Only', 'Feeder Station Only'),
            ('Both', 'Both'),
            ('Ground', 'Ground Only'),]
@@ -114,12 +114,13 @@ class ScoutingForm(ModelForm):
 #                    'trigger_hopper': getSelect(0, 6),
 #                    'gears_aquired': getSelect(1, 14),
 #                    'gears_scored': getSelect(1, 14), 'gears_picked_up': getSelect(1, 14)}
-        widgets = {'auto_gears_scored': forms.Select(choices=auto_gear_choices),
+        widgets = {
 #             'gears_type' : forms.ChoiceField(choices=gear_c, widget=forms.RadioSelect),
             'gears_type' : forms.RadioSelect(choices=gear_c),
+            'preloaded_gear_action' : forms.RadioSelect(),
             }
         fields = (
-            'match_number', 'scouted_team', 'auto_gears_scored', 'auto_move_yn', 'auto_hopper_triggered','teleop_hoppers_triggered','gears_scored','gears_dropped', 'gears_type', 'robot_end_game', 'robot_card',
+            'match_number', 'scouted_team', 'auto_gears_scored', 'auto_move_yn', 'auto_hopper_triggered','teleop_hoppers_triggered','preloaded_gear_action', 'gears_scored','gears_dropped', 'gears_type', 'robot_end_game', 'robot_card',
             )
 
 
@@ -128,8 +129,7 @@ class ScoutingForm(ModelForm):
         super(ScoutingForm, self).__init__(*args, **kwargs)
         self.fields['robot_card'].required = False
         self.fields['robot_end_game'].required = False
-#         self.fields['hopper_load'].widget.attrs['class'] = 'customListMaker'
-        # self.fields['tournament'].required = False
+        self.fields['preloaded_gear_action'].empty_label = None
         """
         self.fields['defense1_crossed'].widget = forms.NumberInput(attrs={'class': 'col s6', })
         self.fields['defense2_crossed'].widget = forms.NumberInput(attrs={'class': 'col s6', })

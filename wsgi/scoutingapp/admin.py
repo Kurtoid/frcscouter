@@ -12,7 +12,7 @@ from django.forms.widgets import TextInput
 from scoutingapp.models import (MyUser, Team, Match,
                                 Tournament, Alliance, AllianceMatch,
                                 EndGameState, Card, HighEfficiency,
-                                HopperLoad, RopeType)
+                                HopperLoad, RopeType, PreloadedGearAction)
 
 class DefenseAdmin(admin.ModelAdmin):
     list_display = ('name', 'code')
@@ -143,6 +143,7 @@ admin.site.register(Card)
 admin.site.register(HopperLoad)
 admin.site.register(HighEfficiency)
 admin.site.register(RopeType)
+admin.site.register(PreloadedGearAction)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
 admin.site.unregister(Group)

@@ -133,6 +133,11 @@ class EndGameState(models.Model):
     def __str__(self):
         return self.state
 
+class PreloadedGearAction(models.Model):
+    name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
+
 
 class Card(models.Model):
     card_name = models.CharField(max_length=23)
@@ -141,6 +146,11 @@ class Card(models.Model):
         return self.card_name
 
 class HopperLoad(models.Model):
+    name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
+
+class GearActions(models.Model):
     name = models.CharField(max_length=100)
     def __str__(self):
         return self.name
@@ -157,7 +167,8 @@ class Match(models.Model):
     match_number = models.DecimalField(max_digits=100, decimal_places=0,
                                        default=0)
     scouted_team = models.ForeignKey(Team, on_delete=models.CASCADE)
-    auto_gears_scored = models.CharField(max_length=100)
+#     auto_gears_scored = models.CharField(max_length=100)
+    auto_gears_scored = models.ForeignKey(GearActions)
     auto_move_yn = models.BooleanField(default=False, verbose_name="Auto Move")
 #     auto_score_gear_yn = models.BooleanField(default=False, verbose_name="Did it score on auto?")
 #     auto_low_goal = models.BooleanField(default=False)
@@ -177,9 +188,10 @@ class Match(models.Model):
 #                                          default=0, null=True)
     tournament = models.ForeignKey(Tournament, on_delete=models.SET_NULL,
                                    null=True, blank=True)
+    preloaded_gear_action = models.ForeignKey(PreloadedGearAction, null=False, blank=False, default = 0)
     gears_scored = models.DecimalField(max_digits=100, decimal_places=0, default=0)
     gears_dropped = models.DecimalField(max_digits=100, decimal_places=0, default=0)
-    gears_type = models.CharField(max_length = 100, verbose_name="Gear Source", blank=True)
+    gears_type = models.CharField(max_length = 100, verbose_name="Gear Source", null=True)
     robot_end_game = models.ForeignKey(EndGameState,
                                      on_delete=models.SET_NULL,
                                      related_name='robot1endgame',
@@ -195,7 +207,9 @@ class Match(models.Model):
 
     def __str__(self):
         return str(self.match_number)
-
+    
+    
+    
     
 class Alliance(models.Model):
     color = models.CharField(max_length=10)
