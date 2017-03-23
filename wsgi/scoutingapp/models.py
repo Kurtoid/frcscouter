@@ -43,7 +43,7 @@ class Team(models.Model):
         return self.team_name
 
     def __str__(self):
-        return str(self.team_number) + ": " + self.team_name
+        return str(self.team_number or "") + ": " + self.team_name or ""
 
 
 class MyUserManager(BaseUserManager):
