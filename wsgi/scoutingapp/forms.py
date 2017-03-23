@@ -131,6 +131,7 @@ class ScoutingForm(ModelForm):
         self.fields['robot_card'].required = False
         self.fields['robot_end_game'].required = False
         self.fields['preloaded_gear_action'].empty_label = None
+        self.fields['auto_gears_scored'].empty_label = None
         """
         self.fields['defense1_crossed'].widget = forms.NumberInput(attrs={'class': 'col s6', })
         self.fields['defense2_crossed'].widget = forms.NumberInput(attrs={'class': 'col s6', })
