@@ -247,11 +247,8 @@ def scout(request):
             except ObjectDoesNotExist:
                 print("Missed game missing")
                 form = ScoutingForm()
+            form.fields['scouted_team'].queryset = Team.objects.filter(currently_in_event=request.user.team.currently_in_event)
         form.use_required_attribute = False
-        if request.session.get('fsetup'):
-            return render(
-                request, 'scoutingapp/scout.html',
-                {'form': form, })
         return render(
             request, 'scoutingapp/scout.html',
             {'form': form, })
