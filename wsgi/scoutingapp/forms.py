@@ -166,6 +166,7 @@ class AllianceScoutingForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(AllianceScoutingForm, self).__init__(*args, **kwargs)
+        self.fields['robot_card'].required = False
 
     def clean(self):
         print("clean called")
