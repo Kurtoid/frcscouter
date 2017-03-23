@@ -89,10 +89,8 @@ class LoginForm(forms.Form):
 
 auto_gear_choices = (
     ('None', 'None'),
-    ('Boiler Side', 'Boiler Side'),
     ('Middle', 'Middle'),
-    ('Feeder Side', 'Feeder Side'),
-    ('Two Gear Auto', 'Two Gear Auto'),
+    ('Side', 'Side'),
 )
 gear_c= [('Feeder Station Only', 'Feeder Station Only'),
            ('Both', 'Both'),
