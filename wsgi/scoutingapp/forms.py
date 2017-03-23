@@ -118,6 +118,7 @@ class ScoutingForm(ModelForm):
 #             'gears_type' : forms.ChoiceField(choices=gear_c, widget=forms.RadioSelect),
             'gears_type' : forms.RadioSelect(choices=gear_c),
             'preloaded_gear_action' : forms.RadioSelect(),
+            'auto_gears_scored' : forms.RadioSelect(),
             }
         fields = (
             'match_number', 'scouted_team', 'auto_gears_scored', 'auto_move_yn', 'auto_hopper_triggered','teleop_hoppers_triggered','preloaded_gear_action', 'gears_scored','gears_dropped', 'gears_type', 'robot_end_game', 'robot_card',
