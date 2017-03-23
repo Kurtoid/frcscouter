@@ -30,6 +30,7 @@ from scoutingapp.tables import CategoryTable
 from scoutingapp import forms
 from itertools import zip_longest
 from scoutingapp.models import Card
+from scoutingapp.forms import AlliancePreForm
 
 # CLIENT_SECRETS, name of a file containing the OAuth 2.0 information for this
 # application, including client_id and client_secret, which are found
@@ -261,27 +262,38 @@ def scout(request):
 def alliance_scout(request):
     if request.user.is_authenticated():
         if request.method == 'POST':
-            form = AllianceScoutingForm(request.POST)
-            if form.is_valid():
-                match = form.save(commit=False)
-                match.scouted_by = request.user
-                match.save()
+            form_1 = AllianceScoutingForm(request.POST, prefix = "1")
+            form_2 = AllianceScoutingForm(request.POST, prefix = "2")
+            preform = AlliancePreForm(request.POST, prefix = "pre")
+            if form_1.is_valid() and form_2.is_valid() and preform.is_valid():
+                match_1 = form_1.save(commit=False)
+                match_1.scouted_by = request.user
+                match_1.scouter_number = 1
+                match_1.match_number = preform.cleaned_data['match_number']
+                match_1.alliance = preform.cleaned_data['alliance']
+                match_2 = form_2.save(commit=False)
+                match_2.scouted_by = request.user
+                match_2.scouter_number = 2
+                match_2.match_number = preform.cleaned_data['match_number']
+                match_2.alliance = preform.cleaned_data['alliance']
+                if(request.user.team.currently_in_event):
+                    match_1.tournament = request.user.team.currently_in_event
+                    match_2.tournament = request.user.team.currently_in_event
+                match_1.save()
+                match_2.save()
                 # proccess form
                 messages.add_message(request, messages.INFO, 'Alliance Match Recorded')
                 return HttpResponseRedirect('/scoutingapp/')
             else:
-                print(form.errors)
+                print(form_1.errors)
         else:
-            form = AllianceScoutingForm()
+            form_1 = AllianceScoutingForm(prefix="1")
+            form_2 = AllianceScoutingForm(prefix="2")
+            preform = AlliancePreForm(prefix="pre")
 
-        if request.session.get('fsetup'):
-            return render(
-                request, 'scoutingapp/alliancescout.html',
-                {'form': form
-                })
         return render(
             request, 'scoutingapp/alliancescout.html',
-            {'form': form})
+            {'pilot1': form_1, 'pilot2': form_2, 'preform': preform})
     else:
         return HttpResponseRedirect('/scoutingapp/userlogin/')
 

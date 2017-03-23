@@ -156,12 +156,12 @@ class AllianceScoutingForm(ModelForm):
             return forms.Select(choices=[(x, x) for x in range (min, max)])
         """ controls which model and fields are displayed """
         model = AllianceMatch
-        exclude = ['scouted_by', 'field_setup', 'tournament']
+        exclude = ['scouted_by', 'tournament', 'pilot_number', 'match_number', 'alliance', 'scouter_number']
         widgets = {
-            'auto_pilot_1_gears_acquired': getSelect(0, 4), 'auto_pilot_2_gears_acquired': getSelect(0, 4),
-            'auto_pilot_1_rotors_engaged': getSelect(0, 3), 'auto_pilot_2_rotors_engaged': getSelect(0, 3),
-            'pilot_1_gears_acquired': getSelect(0, 14), 'pilot_2_gears_acquired': getSelect(0, 14),
-            'pilot_1_rotors_engaged': getSelect(0, 5), 'pilot_2_rotors_engaged': getSelect(0, 5),
+            'auto_pilot_1_gears_acquired': getSelect(0, 4),
+            'auto_pilot_1_rotors_engaged': getSelect(0, 3),
+            'pilot_1_gears_acquired': getSelect(0, 14),
+            'pilot_1_rotors_engaged': getSelect(0, 5),
             }
 
     def __init__(self, *args, **kwargs):
@@ -171,11 +171,18 @@ class AllianceScoutingForm(ModelForm):
         print("clean called")
         cleaned_data = super(AllianceScoutingForm, self).clean()
         match_num = cleaned_data.get("match_number")
-        if match_num < 1:
-            raise forms.ValidationError("Match must be more than 0!!")
+        if match_num:
+            if match_num < 1:
+                raise forms.ValidationError("Match must be more than 0!!")
         return cleaned_data
-
-
+    
+    
+class AlliancePreForm(ModelForm):
+    class Meta:
+        model = AllianceMatch
+        fields = ['match_number', 'alliance']
+    
+    
 class UserControlForm(ModelForm):
     class Meta:
         model = MyUser
