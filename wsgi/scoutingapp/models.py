@@ -188,7 +188,7 @@ class Match(models.Model):
 #                                          default=0, null=True)
     tournament = models.ForeignKey(Tournament, on_delete=models.SET_NULL,
                                    null=True, blank=True)
-    preloaded_gear_action = models.ForeignKey(PreloadedGearAction, null=False, blank=True, default = 0)
+    preloaded_gear_action = models.ForeignKey(PreloadedGearAction, null=True, blank=True, default = 0)
     gears_scored = models.DecimalField(max_digits=100, decimal_places=0, default=0)
     gears_dropped = models.DecimalField(max_digits=100, decimal_places=0, default=0)
     gears_type = models.CharField(max_length = 100, verbose_name="Gear Source", null=True)
