@@ -26,7 +26,7 @@ class Tournament(models.Model):
 class Team(models.Model):
     currently_in_event = models.ForeignKey(Tournament, on_delete=models.SET_NULL, null=True)
     team_number = models.DecimalField(max_digits=5, decimal_places=0,
-                                      default=0000, primary_key=True, null=True)
+                                      default=0000, primary_key=True)
     team_name = models.CharField(max_length=200, default="UNNAMED")
 
     team_color = models.CharField(max_length=7, null=True)
@@ -107,7 +107,7 @@ class MyUser(AbstractBaseUser):
         return self.email
 
     def __str__(self):  # __unicode__ on Python 2
-        return self.first_name + " " + self.last_name + " (" + str(self.team.team_number) + ")"
+        return self.first_name + " " + self.last_name + " (" + str(self.team.team_number or "") + ")"
 
 
     def has_perm(self, perm, obj=None):
