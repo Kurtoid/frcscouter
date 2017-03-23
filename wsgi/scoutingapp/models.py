@@ -221,6 +221,8 @@ class AllianceMatch(models.Model):
     auto_pilot_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0)
     pilot_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0)
     pilot_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0)
+    forgot_reserve_gear = models.BooleanField(default=False)
+    fails_to_spin_rotors= models.BooleanField(default=False)
     pilot_rope_deploy_time = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p1r1", null=True)
     robot_card = models.ForeignKey(Card, on_delete=models.SET_NULL, null=True, blank=True,
                                      related_name='pilot1card')
