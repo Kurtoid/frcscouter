@@ -95,7 +95,7 @@ class UserAdmin(BaseUserAdmin):
     list_display = ('email', 'is_admin', 'team_name', 'first_name')
 
     def team_name(self, obj):
-        return obj.team.team_name
+        return obj.team.team_name or ""
     list_filter = ('is_admin',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
