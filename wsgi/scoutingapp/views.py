@@ -26,6 +26,11 @@ from oauth2client.contrib import xsrfutil
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.contrib.django_util.storage import DjangoORMStorage
 from apiclient.http import MediaFileUpload
+from scoutingapp.tables import CategoryTable
+from scoutingapp import forms
+from itertools import zip_longest
+from scoutingapp.models import Card
+from scoutingapp.forms import AlliancePreForm
 
 # CLIENT_SECRETS, name of a file containing the OAuth 2.0 information for this
 # application, including client_id and client_secret, which are found
@@ -222,6 +227,9 @@ def scout(request):
                 duped_matches = Match.objects.filter(match_number=match.match_number, scouted_team=match.scouted_team).exclude(scouted_by=match.scouted_by)
                 if(len(duped_matches)>0):
                     duped = len(duped_matches)+1
+                    
+                if(request.user.team.currently_in_event):
+                    match.tournament = request.user.team.currently_in_event
                 match.duplicate=duped
                 match.save()
                         
@@ -254,27 +262,38 @@ def scout(request):
 def alliance_scout(request):
     if request.user.is_authenticated():
         if request.method == 'POST':
-            form = AllianceScoutingForm(request.POST)
-            if form.is_valid():
-                match = form.save(commit=False)
-                match.scouted_by = request.user
-                match.save()
+            form_1 = AllianceScoutingForm(request.POST, prefix = "1")
+            form_2 = AllianceScoutingForm(request.POST, prefix = "2")
+            preform = AlliancePreForm(request.POST, prefix = "pre")
+            if form_1.is_valid() and form_2.is_valid() and preform.is_valid():
+                match_1 = form_1.save(commit=False)
+                match_1.scouted_by = request.user
+                match_1.scouter_number = 1
+                match_1.match_number = preform.cleaned_data['match_number']
+                match_1.alliance = preform.cleaned_data['alliance']
+                match_2 = form_2.save(commit=False)
+                match_2.scouted_by = request.user
+                match_2.scouter_number = 2
+                match_2.match_number = preform.cleaned_data['match_number']
+                match_2.alliance = preform.cleaned_data['alliance']
+                if(request.user.team.currently_in_event):
+                    match_1.tournament = request.user.team.currently_in_event
+                    match_2.tournament = request.user.team.currently_in_event
+                match_1.save()
+                match_2.save()
                 # proccess form
                 messages.add_message(request, messages.INFO, 'Alliance Match Recorded')
                 return HttpResponseRedirect('/scoutingapp/')
             else:
-                print(form.errors)
+                print(form_1.errors)
         else:
-            form = AllianceScoutingForm()
+            form_1 = AllianceScoutingForm(prefix="1")
+            form_2 = AllianceScoutingForm(prefix="2")
+            preform = AlliancePreForm(prefix="pre")
 
-        if request.session.get('fsetup'):
-            return render(
-                request, 'scoutingapp/alliancescout.html',
-                {'form': form
-                })
         return render(
             request, 'scoutingapp/alliancescout.html',
-            {'form': form})
+            {'pilot1': form_1, 'pilot2': form_2, 'preform': preform})
     else:
         return HttpResponseRedirect('/scoutingapp/userlogin/')
 
@@ -322,15 +341,17 @@ def import_event_from_TBA(request):
         if(request.method == 'POST'):
             importform = importEventForm(request.POST)
             if importform.is_valid():
+                newEvent = None
                 # process and return redirect
                 event_code = importform.cleaned_data['event_code']
                 r = requests.get("http://www.thebluealliance.com/api/v2/event/{}".format(event_code),
                                  headers={'X-TBA-App-Id':
                                           'frc179:scoutingapp:v1'})
                 try:
-                    Tournament.objects.get(name=r.json()['name'])
+                    newEvent = Tournament.objects.get(name=r.json()['name'])
                 except ObjectDoesNotExist:
                     newEvent = Tournament(name=r.json()['name'])
+                    newEvent.event_code = event_code
                     newEvent.save()
                 r = requests.get("http://www.thebluealliance.com/api/v2/event/{}/teams".format(event_code),
                                  headers={'X-TBA-App-Id':
@@ -338,15 +359,17 @@ def import_event_from_TBA(request):
                 if r.status_code == 200:
                     print("Checking {}".format(event_code))
                     for x in r.json():
+                        team = None
                         try:
-                            Team.objects.get(team_number=x['team_number'])
+                            team = Team.objects.get(team_number=x['team_number'])
                         except ObjectDoesNotExist:
                             print('we dont know '
                                   '{}'.format(x['nickname']))
                             if(x['nickname'] is not None):
                                 team = Team(team_number=x['team_number'],
                                             team_name=x['nickname'])
-                                team.save()
+                        team.currently_in_event = newEvent
+                        team.save()
                         if(x['nickname'] is not None):
                             print('{}: {}'.format(
                                 x['team_number'], x['nickname']))
@@ -357,9 +380,9 @@ def import_event_from_TBA(request):
 
 
 
-def exporthtml(request, team_number):
+def exporthtml(request, event_code):
     matchlist = Match.objects.all()
-    matchlist = matchlist.filter(scouted_by__team__team_number=team_number)
+    matchlist = matchlist.filter(tournament__event_code=event_code)
     # enables ordering
     matches = MatchTable(matchlist)
     RequestConfig(request, paginate={'per_page': 9999}).configure(matches)
@@ -381,9 +404,9 @@ def exportusers(request):
 
 
 
-def allianceexporthtml(request, team_number):
+def allianceexporthtml(request, event_code):
     matchlist = AllianceMatch.objects.all()
-    matchlist = matchlist.filter(scouted_by__team__team_number=team_number)
+    matchlist = matchlist.filter(tournament__event_code=event_code)
     # enables ordering
     matches = AllianceMatchTable(matchlist)
     RequestConfig(request, paginate={'per_page': 9999}).configure(matches)
@@ -442,3 +465,19 @@ def geardropped(request):
             print (line)
             val += line
     return HttpResponse(val, content_type='text/plain')
+
+
+def getcategories(request):
+    data = []
+    gear_choices = forms.auto_gear_choices
+    source_choices = forms.gear_c
+    end_games = EndGameState.objects.all()
+    cards = Card.objects.all()
+    for g,s,e,c in zip_longest(gear_choices, source_choices, end_games, cards):
+        values = {'gearpositions': (s or ["",])[0], 'gearsources':(g or ["",])[0], 'endgames' : (e or ""), 'cards' : (c or "")}
+        data.append(values)
+    print(type(data)) 
+    print(data)
+    table = CategoryTable(data)
+    return render(request, "scoutingapp/exportcategories.html", {"categories" : table})
+    

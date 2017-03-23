@@ -121,7 +121,7 @@ class ScoutingForm(ModelForm):
             'gears_type' : forms.RadioSelect(choices=gear_c),
             }
         fields = (
-            'match_number', 'scouted_team', 'auto_gears_scored', 'auto_move_yn', 'auto_hoppers_triggered', 'auto_hopper_load', 'auto_high_goal_accuracy', 'auto_low_goal_accuracy', 'teleop_hoppers_triggered','gears_scored','gears_dropped', 'gears_type', 'robot_end_game', 'robot_card',
+            'match_number', 'scouted_team', 'auto_gears_scored', 'auto_move_yn', 'auto_hopper_triggered','teleop_hoppers_triggered','gears_scored','gears_dropped', 'gears_type', 'robot_end_game', 'robot_card',
             )
 
 
@@ -129,9 +129,6 @@ class ScoutingForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(ScoutingForm, self).__init__(*args, **kwargs)
         self.fields['robot_card'].required = False
-        self.fields['auto_high_goal_accuracy'].required = False
-        self.fields['auto_low_goal_accuracy'].required = False
-        self.fields['auto_hopper_load'].required = False
         self.fields['robot_end_game'].required = False
 #         self.fields['hopper_load'].widget.attrs['class'] = 'customListMaker'
         # self.fields['tournament'].required = False
@@ -159,12 +156,12 @@ class AllianceScoutingForm(ModelForm):
             return forms.Select(choices=[(x, x) for x in range (min, max)])
         """ controls which model and fields are displayed """
         model = AllianceMatch
-        exclude = ['scouted_by', 'field_setup']
+        exclude = ['scouted_by', 'tournament', 'pilot_number', 'match_number', 'alliance', 'scouter_number']
         widgets = {
-            'auto_pilot_1_gears_acquired': getSelect(0, 4), 'auto_pilot_2_gears_acquired': getSelect(0, 4),
-            'auto_pilot_1_rotors_engaged': getSelect(0, 3), 'auto_pilot_2_rotors_engaged': getSelect(0, 3),
-            'pilot_1_gears_acquired': getSelect(0, 14), 'pilot_2_gears_acquired': getSelect(0, 14),
-            'pilot_1_rotors_engaged': getSelect(0, 5), 'pilot_2_rotors_engaged': getSelect(0, 5),
+            'auto_pilot_1_gears_acquired': getSelect(0, 4),
+            'auto_pilot_1_rotors_engaged': getSelect(0, 3),
+            'pilot_1_gears_acquired': getSelect(0, 14),
+            'pilot_1_rotors_engaged': getSelect(0, 5),
             }
 
     def __init__(self, *args, **kwargs):
@@ -174,11 +171,18 @@ class AllianceScoutingForm(ModelForm):
         print("clean called")
         cleaned_data = super(AllianceScoutingForm, self).clean()
         match_num = cleaned_data.get("match_number")
-        if match_num < 1:
-            raise forms.ValidationError("Match must be more than 0!!")
+        if match_num:
+            if match_num < 1:
+                raise forms.ValidationError("Match must be more than 0!!")
         return cleaned_data
-
-
+    
+    
+class AlliancePreForm(ModelForm):
+    class Meta:
+        model = AllianceMatch
+        fields = ['match_number', 'alliance']
+    
+    
 class UserControlForm(ModelForm):
     class Meta:
         model = MyUser

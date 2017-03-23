@@ -17,12 +17,14 @@ from unittest.util import _MAX_LENGTH
 
 class Tournament(models.Model):
     name = models.CharField(max_length=200, default="UNAMED")
+    event_code = models.CharField(max_length=200, default="UNAMED")
 
     def __str__(self):
         return self.name
 
 
 class Team(models.Model):
+    currently_in_event = models.ForeignKey(Tournament, on_delete=models.SET_NULL, null=True)
     team_number = models.DecimalField(max_digits=5, decimal_places=0,
                                       default=0000, primary_key=True)
     team_name = models.CharField(max_length=200, default="UNNAMED")
@@ -150,6 +152,8 @@ class HighEfficiency(models.Model):
     
     
 class Match(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     match_number = models.DecimalField(max_digits=100, decimal_places=0,
                                        default=0)
     scouted_team = models.ForeignKey(Team, on_delete=models.CASCADE)
@@ -157,12 +161,7 @@ class Match(models.Model):
     auto_move_yn = models.BooleanField(default=False, verbose_name="Auto Move")
 #     auto_score_gear_yn = models.BooleanField(default=False, verbose_name="Did it score on auto?")
 #     auto_low_goal = models.BooleanField(default=False)
-    auto_hoppers_triggered = models.DecimalField(default=0, max_digits=1,
-                                              decimal_places=0, null=True)
-    auto_hopper_load = models.ForeignKey(HopperLoad, null=True)
-    auto_high_goal_accuracy = models.ForeignKey(HighEfficiency,
-                                                  related_name="auto_high_goal_accuracy", null=True)
-    auto_low_goal_accuracy = models.ForeignKey(HighEfficiency, null=True)
+    auto_hopper_triggered = models.BooleanField(default=False)
     teleop_hoppers_triggered = models.DecimalField(max_digits=1, decimal_places=0,
                                          default=0, null=True)
 #     hopper_load = models.CharField(max_length=999
@@ -180,12 +179,12 @@ class Match(models.Model):
                                    null=True, blank=True)
     gears_scored = models.DecimalField(max_digits=100, decimal_places=0, default=0)
     gears_dropped = models.DecimalField(max_digits=100, decimal_places=0, default=0)
-    gears_type = models.CharField(max_length = 100, verbose_name="Gear Source")
+    gears_type = models.CharField(max_length = 100, verbose_name="Gear Source", blank=True)
     robot_end_game = models.ForeignKey(EndGameState,
                                      on_delete=models.SET_NULL,
                                      related_name='robot1endgame',
                                      null=True)
-    robot_card = models.ForeignKey(Card, on_delete=models.SET_NULL, null=True,
+    robot_card = models.ForeignKey(Card, on_delete=models.SET_NULL, null=True, blank=True,
                                      related_name='Robot1card')
     scouted_by = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=True)
     duplicate = models.DecimalField(max_digits=100, decimal_places=0, null=True)
@@ -210,26 +209,21 @@ class RopeType(models.Model):
         return self.name
 
 class AllianceMatch(models.Model):
+    tournament = models.ForeignKey(Tournament, on_delete=models.SET_NULL,
+                                   null=True, blank=True)
     match_number = models.DecimalField(max_digits=100, decimal_places=0,
                                        default=0)
     alliance = models.ForeignKey(Alliance)
-    pilot_1_team = models.ForeignKey(Team, on_delete=models.SET_NULL, related_name="p1team", null=True)
-    pilot_2_team = models.ForeignKey(Team, on_delete=models.SET_NULL, related_name="p2team", null=True)
+    scouter_number = models.DecimalField(max_digits=1, decimal_places=0)
+    pilot_team = models.ForeignKey(Team, on_delete=models.SET_NULL, related_name="p1team", null=True)
     scouted_by = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=True)
-    auto_pilot_1_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0)
-    auto_pilot_2_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0)
-    auto_pilot_1_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0)
-    auto_pilot_2_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0)
-    pilot_1_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0)
-    pilot_2_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0)
-    pilot_1_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0)
-    pilot_2_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0)
-    pilot_1_rope_1_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p1r1", null=True)
-    pilot_1_rope_2_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p1r2", null=True)
-    pilot_1_rope_3_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p1r3", null=True)
-    pilot_2_rope_1_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p2r1", null=True)
-    pilot_2_rope_2_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p2r2", null=True)
-    pilot_2_rope_3_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p2r3", null=True)
+    auto_pilot_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0)
+    auto_pilot_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0)
+    pilot_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0)
+    pilot_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0)
+    pilot_rope_1_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p1r1", null=True)
+    pilot_rope_2_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p1r2", null=True)
+    pilot_rope_3_engaged = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p1r3", null=True)
 #     robot_1_driver_skill = models.DecimalField(max_digits=10, decimal_places=0,
 #                                     default=0)
 #     robot_2_driver_skill = models.DecimalField(max_digits=10, decimal_places=0,
