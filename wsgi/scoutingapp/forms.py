@@ -130,6 +130,7 @@ class ScoutingForm(ModelForm):
         super(ScoutingForm, self).__init__(*args, **kwargs)
         self.fields['robot_card'].required = False
         self.fields['robot_end_game'].required = False
+        self.fields['gears_type'].required = True
         self.fields['preloaded_gear_action'].empty_label = None
         self.fields['auto_gears_scored'].empty_label = None
         """
