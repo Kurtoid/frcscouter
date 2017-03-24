@@ -12,7 +12,8 @@ from django.contrib.auth.models import User
 from django.db import models
 
 from oauth2client.contrib.django_util.models import CredentialsField
-from django.core.validators import validate_comma_separated_integer_list
+from django.core.validators import validate_comma_separated_integer_list,\
+    MaxValueValidator, MinValueValidator
 from unittest.util import _MAX_LENGTH
 
 class Tournament(models.Model):
@@ -231,10 +232,10 @@ class AllianceMatch(models.Model):
     scouter_number = models.DecimalField(max_digits=1, decimal_places=0)
     pilot_team = models.ForeignKey(Team, on_delete=models.SET_NULL, related_name="p1team", null=True)
     scouted_by = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=True)
-    auto_pilot_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0)
-    auto_pilot_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0)
-    pilot_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0)
-    pilot_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0)
+    auto_pilot_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0, validators=[MaxValueValidator(4), MinValueValidator(0)])
+    auto_pilot_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0, validators=[MaxValueValidator(3), MinValueValidator(0)])
+    pilot_gears_acquired = models.DecimalField(max_digits=1, decimal_places=0, default=0, validators=[MaxValueValidator(14), MinValueValidator(0)])
+    pilot_rotors_engaged= models.DecimalField(max_digits=1, decimal_places=0, default=0, validators=[MaxValueValidator(5), MinValueValidator(0)])
     forgot_reserve_gear = models.BooleanField(default=False)
     fails_to_spin_rotors= models.BooleanField(default=False)
     pilot_rope_deploy_time = models.ForeignKey(RopeType, on_delete=models.SET_NULL, related_name="p1r1", null=True)

@@ -159,10 +159,10 @@ class AllianceScoutingForm(ModelForm):
         model = AllianceMatch
         exclude = ['scouted_by', 'tournament', 'pilot_number', 'match_number', 'alliance', 'scouter_number']
         widgets = {
-            'auto_pilot_gears_acquired': getSelect(0, 4),
-            'auto_pilot_rotors_engaged': getSelect(0, 3),
-            'pilot_gears_acquired': getSelect(0, 14),
-            'pilot_rotors_engaged': getSelect(0, 5),
+#             'auto_pilot_gears_acquired': getSelect(0, 4),
+#             'auto_pilot_rotors_engaged': getSelect(0, 3),
+#             'pilot_gears_acquired': getSelect(0, 14),
+#             'pilot_rotors_engaged': getSelect(0, 5),
             }
 
     def __init__(self, *args, **kwargs):
