@@ -104,6 +104,9 @@ class ScoutingForm(ModelForm):
             print("Missed game missing")
 
     class Meta:
+        help_texts = {
+                'gears_scored': ('Do NOT include preloaded gear!'),
+        }
         def getSelect(min, max):  # @NoSelf
             return forms.Select(choices=[(x, x) for x in range (min, max)])
 
@@ -130,7 +133,7 @@ class ScoutingForm(ModelForm):
         super(ScoutingForm, self).__init__(*args, **kwargs)
         self.fields['robot_card'].required = False
         self.fields['robot_end_game'].required = False
-        self.fields['gears_type'].required = True
+        self.fields['gears_type'].required = False
         self.fields['preloaded_gear_action'].empty_label = None
         self.fields['auto_gears_scored'].empty_label = None
         """
@@ -147,6 +150,10 @@ class ScoutingForm(ModelForm):
         match_num = cleaned_data.get("match_number")
         if match_num < 1:
             raise forms.ValidationError("Match must be more than 0!!")
+        gears_scored = cleaned_data.get("gears_scored")
+        gears_type = cleaned_data.get("gears_type")
+        if(gears_scored>1 and not gears_type):
+            raise forms.ValidationError("Must have a gear type if robot scored gears!!!")
         return cleaned_data
 
 
