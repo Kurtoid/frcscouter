@@ -10,7 +10,9 @@ FILENAME=backup-$TIME.tar.gz    # Here i define Backup file name format.
 if [ -z ${OPENSHIFT_REPO_DIR+x} ]; then THISDIR=$(dirname $PWD); else THISDIR=$OPENSHIFT_REPO_DIR; fi
 echo $THISDIR
 SRCDIR=$THISDIR"/wsgi/scouter"                  # Location of Important Data Directory (Source of backup).
-DESDIR=$THISDIR"/backups"            # Destination of backup file.
+if [ -z ${OPENSHIFT_DATA_DIR+x} ]; then DATADIR=$(dirname $PWD); else DATADIR=$OPENSHIFT_DATA_DIR; fi
+DESDIR=$DATADIR"/backups"            # Destination of backup file.
+mkdir -p $DESDIR # ensure path exists
 echo $SRCDIR
 echo tar -cpzf "$DESDIR/$FILENAME" "$SRCDIR"
 tar -cpzf "$DESDIR/$FILENAME" "$SRCDIR"
