@@ -13,7 +13,7 @@ from scoutingapp.models import (MyUser, Team, Match,
                                 Tournament, Alliance, AllianceMatch,
                                 EndGameState, Card, HighEfficiency,
                                 HopperLoad, RopeType, PreloadedGearAction,
-    GearAction)
+    GearAction, DetailUser)
 
 class DefenseAdmin(admin.ModelAdmin):
     list_display = ('name', 'code')
@@ -30,7 +30,7 @@ class TeamCreateForm(forms.ModelForm):
             super(TeamCreateForm, self).__init__(*args, **kwargs)
             self.fields['team_color'].required=False;
             self.fields['currently_in_event'].required=False;
-            
+
 
 
 
@@ -131,7 +131,9 @@ class MatchAdmin(admin.ModelAdmin):
     list_display = ('match_number', 'scouted_team', 'scouted_by', 'created_at')
     list_per_page = sys.maxsize;
 
-    
+class DetailUserAdmin(admin.ModelAdmin):
+    list_display = ('first_name', 'last_name', 'email', 'phone_number')
+
 # Now register the new UserAdmin...
 admin.site.register(MyUser, UserAdmin)
 admin.site.register(Team, TeamAdmin)
@@ -146,6 +148,7 @@ admin.site.register(HighEfficiency)
 admin.site.register(RopeType)
 admin.site.register(PreloadedGearAction)
 admin.site.register(GearAction)
+admin.site.register(DetailUser, DetailUserAdmin)
 
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.

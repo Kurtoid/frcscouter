@@ -91,7 +91,7 @@ class MyUser(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
 
     team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True)
-    
+
     first_name = models.CharField(max_length= 100, default = "", null=True)
     last_name = models.CharField(max_length=100, null = True, default = "")
 
@@ -164,8 +164,8 @@ class HighEfficiency(models.Model):
     name = models.CharField(max_length=100)
     def __str__(self):
         return self.name
-    
-    
+
+
 class Match(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -183,7 +183,7 @@ class Match(models.Model):
 #     hopper_load = models.CharField(max_length=999
 #                                    # validators=[validate_comma_separated_integer_list]
 #                                    , null=True)
-    
+
 
 #     gears_aquired = models.DecimalField(max_digits=1, decimal_places=0,
 #                                          default=0, null=True)
@@ -212,10 +212,10 @@ class Match(models.Model):
 
     def __str__(self):
         return str(self.match_number)
-    
-    
-    
-    
+
+
+
+
 class Alliance(models.Model):
     color = models.CharField(max_length=10)
 
@@ -268,6 +268,17 @@ class CredentialsModel(models.Model):
 
 class CredentialsAdmin(admin.ModelAdmin):
     pass
+
+class DetailUser(models.Model):
+    first_name = models.CharField(max_length= 100, default = "", null=True)
+    last_name = models.CharField(max_length=100, null = True, default = "")
+    email = models.EmailField(
+        verbose_name='email address',
+        max_length=255,
+        unique=True,
+    )
+    phone_number = models.CharField(max_length=15)
+
 
 
 admin.site.register(CredentialsModel, CredentialsAdmin)

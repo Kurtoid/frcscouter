@@ -32,4 +32,6 @@ urlpatterns = [
     url(r'^getgearsource/$', views.gearsource, name='gearsource'),
     url(r'^getgeardropped/$', views.geardropped, name='geardropped'),
     url(r'^getcategories/$', views.getcategories, name='getcategories'),
+    url(r'^openhouse/$', views.openhousepage, name='openhouse'),
+
 ]

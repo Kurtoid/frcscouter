@@ -1,0 +1,24 @@
+{% extends "scoutingapp/ohbase.html" %}
+{% block content %}
+<form action="{% url 'scoutingapp:openhouse' %}" method="POST">
+	{% csrf_token %}
+	{% for field in form %}
+	<div class = "input-field">
+		{{ field }} {{ field.label_tag }}
+		{{ field.errors }}
+	</div>
+	{% endfor %}
+	<div style="text-align: center">
+<button class="btn waves-effect waves-light" type="submit" name="action">Submit<i class="material-icons right">send</i></button>
+	</div>
+</form>
+
+
+{% if form.subject.errors %}
+    <ol>
+    {% for error in form.subject.errors %}
+        <li><strong>{{ error|escape }}</strong></li>
+    {% endfor %}
+    </ol>
+{% endif %}
+{% endblock content %}

@@ -4,7 +4,7 @@ from django.shortcuts import render
 from .forms import (SignUpForm, LoginForm, ScoutingForm,
                     SortViewMatchForm, MatchNumberAttribs,
                     MatchViewFormMetaOptions, importTeamForm, importEventForm,
-                    UserControlForm, AllianceScoutingForm, AllianceMatch)
+                    UserControlForm, AllianceScoutingForm, AllianceMatch, openHouseForm)
 from .models import (Match, Tournament, Team, CredentialsModel,
 EndGameState, MyUser)
 from django.contrib.auth import logout, login
@@ -227,12 +227,12 @@ def scout(request):
                 duped_matches = Match.objects.filter(match_number=match.match_number, scouted_team=match.scouted_team).exclude(scouted_by=match.scouted_by)
                 if(len(duped_matches)>0):
                     duped = len(duped_matches)+1
-                    
+
                 if(request.user.team.currently_in_event):
                     match.tournament = request.user.team.currently_in_event
                 match.duplicate=duped
                 match.save()
-                        
+
                 # proccess form
                 messages.add_message(request, messages.INFO, 'Match Recorded')
                 return HttpResponseRedirect('/scoutingapp/')
@@ -420,7 +420,7 @@ def gethoppertypes(request):
             print (line)
             val += line
     return HttpResponse(val, content_type='text/plain')
-    
+
 def getshottypes(request):
     path = os.path.join(settings.DJ_PROJECT_DIR, "goaltypes.txt")
     print(path)
@@ -473,8 +473,25 @@ def getcategories(request):
     for g,s,e,c in zip_longest(gear_choices, source_choices, end_games, cards):
         values = {'gearpositions': (s or ["",])[0], 'gearsources':(g or ["",])[0], 'endgames' : (e or ""), 'cards' : (c or "")}
         data.append(values)
-    print(type(data)) 
+    print(type(data))
     print(data)
     table = CategoryTable(data)
     return render(request, "scoutingapp/exportcategories.html", {"categories" : table})
-    
+
+
+def openhousepage(request):
+    if request.method == 'POST':
+        form = openHouseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # proccess form
+            messages.add_message(request, messages.INFO, 'Thank You. You will be contacted soon')
+            return HttpResponseRedirect('/scoutingapp/openhouse')
+        else:
+            print(form.errors)
+    else:
+        form = openHouseForm()
+
+    return render(
+        request, 'scoutingapp/openhouse.html',
+        {'form': form})

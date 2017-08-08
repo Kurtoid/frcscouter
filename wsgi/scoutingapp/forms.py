@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate
 from django.forms import ModelForm
 from django import forms
 from scoutingapp.models import (MyUser, Match, Tournament,
-                                Team, AllianceMatch, EndGameState)
+                                Team, AllianceMatch, EndGameState, DetailUser)
 from django.utils.safestring import mark_safe
 
 
@@ -83,9 +83,9 @@ class LoginForm(forms.Form):
         password = self.cleaned_data.get('password')
         user = authenticate(email=email, password=password)
         return user
-    
-    
-    
+
+
+
 
 # auto_gear_choices = (
 #     ('None', 'None'),
@@ -184,14 +184,14 @@ class AllianceScoutingForm(ModelForm):
             if match_num < 1:
                 raise forms.ValidationError("Match must be more than 0!!")
         return cleaned_data
-    
-    
+
+
 class AlliancePreForm(ModelForm):
     class Meta:
         model = AllianceMatch
         fields = ['match_number', 'alliance']
-    
-    
+
+
 class UserControlForm(ModelForm):
     class Meta:
         model = MyUser
@@ -206,3 +206,8 @@ class importTeamForm(forms.Form):
 
 class importEventForm(forms.Form):
     event_code = forms.CharField()
+
+class openHouseForm(ModelForm):
+    class Meta:
+        model = DetailUser
+        exclude = []
