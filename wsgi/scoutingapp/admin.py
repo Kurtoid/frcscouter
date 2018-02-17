@@ -12,7 +12,7 @@ from django.forms.widgets import TextInput
 from scoutingapp.models import (MyUser, Team, Match,
                                 Tournament, Alliance, AllianceMatch,
                                 EndGameState, Card, HighEfficiency,
-                                HopperLoad, RopeType, PreloadedGearAction,
+                                HopperLoad,  PreloadedGearAction,
     GearAction, DetailUser)
 
 class DefenseAdmin(admin.ModelAdmin):
@@ -145,7 +145,6 @@ admin.site.register(EndGameState)
 admin.site.register(Card)
 admin.site.register(HopperLoad)
 admin.site.register(HighEfficiency)
-admin.site.register(RopeType)
 admin.site.register(PreloadedGearAction)
 admin.site.register(GearAction)
 admin.site.register(DetailUser, DetailUserAdmin)

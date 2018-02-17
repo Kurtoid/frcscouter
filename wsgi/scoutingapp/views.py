@@ -260,7 +260,6 @@ def alliance_scout(request):
     if request.user.is_authenticated():
         if request.method == 'POST':
             form_1 = AllianceScoutingForm(request.POST, prefix = "1")
-            form_2 = AllianceScoutingForm(request.POST, prefix = "2")
             preform = AlliancePreForm(request.POST, prefix = "pre")
             if form_1.is_valid() and form_2.is_valid() and preform.is_valid():
                 match_1 = form_1.save(commit=False)
@@ -268,16 +267,9 @@ def alliance_scout(request):
                 match_1.scouter_number = 1
                 match_1.match_number = preform.cleaned_data['match_number']
                 match_1.alliance = preform.cleaned_data['alliance']
-                match_2 = form_2.save(commit=False)
-                match_2.scouted_by = request.user
-                match_2.scouter_number = 2
-                match_2.match_number = preform.cleaned_data['match_number']
-                match_2.alliance = preform.cleaned_data['alliance']
                 if(request.user.team.currently_in_event):
                     match_1.tournament = request.user.team.currently_in_event
-                    match_2.tournament = request.user.team.currently_in_event
                 match_1.save()
-                match_2.save()
                 # proccess form
                 messages.add_message(request, messages.INFO, 'Alliance Match Recorded')
                 return HttpResponseRedirect('/scoutingapp/')
@@ -285,12 +277,11 @@ def alliance_scout(request):
                 print(form_1.errors)
         else:
             form_1 = AllianceScoutingForm(prefix="1")
-            form_2 = AllianceScoutingForm(prefix="2")
             preform = AlliancePreForm(prefix="pre")
 
         return render(
             request, 'scoutingapp/alliancescout.html',
-            {'pilot1': form_1, 'pilot2': form_2, 'preform': preform})
+            {'form1': form_1,'preform': preform})
     else:
         return HttpResponseRedirect('/scoutingapp/userlogin/')
 

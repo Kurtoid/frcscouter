@@ -124,7 +124,7 @@ class ScoutingForm(ModelForm):
             'auto_gears_scored' : forms.RadioSelect(),
             }
         fields = (
-            'match_number', 'scouted_team', 'auto_gears_scored', 'auto_move_yn', 'auto_hopper_triggered','teleop_hoppers_triggered','preloaded_gear_action', 'gears_scored','gears_dropped', 'gears_type', 'robot_end_game', 'robot_card',
+            'match_number', 'scouted_team', 'auto_move_yn', 'robot_end_game', 'robot_card',
             )
 
 
@@ -133,9 +133,6 @@ class ScoutingForm(ModelForm):
         super(ScoutingForm, self).__init__(*args, **kwargs)
         self.fields['robot_card'].required = False
         self.fields['robot_end_game'].required = False
-        self.fields['gears_type'].required = False
-        self.fields['preloaded_gear_action'].empty_label = None
-        self.fields['auto_gears_scored'].empty_label = None
         """
         self.fields['defense1_crossed'].widget = forms.NumberInput(attrs={'class': 'col s6', })
         self.fields['defense2_crossed'].widget = forms.NumberInput(attrs={'class': 'col s6', })
@@ -164,7 +161,7 @@ class AllianceScoutingForm(ModelForm):
             return forms.Select(choices=[(x, x) for x in range (min, max)])
         """ controls which model and fields are displayed """
         model = AllianceMatch
-        exclude = ['scouted_by', 'tournament', 'pilot_number', 'match_number', 'alliance', 'scouter_number']
+        exclude = ['scouted_by', 'tournament', 'match_number', 'alliance', 'scouter_number']
         widgets = {
 #             'auto_pilot_gears_acquired': getSelect(0, 4),
 #             'auto_pilot_rotors_engaged': getSelect(0, 3),
