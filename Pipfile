@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+
+[packages]
+dj-database-url = "*"
+django = "*"
+gunicorn = "*"
+psycopg2 = "*"
+whitenoise = "*"
+django_tables2 = "*"
+requests = "*"
+codeclimate-test-reporter = "*"
+oauth2client = "*"
+google-api-python-client = "*"
+jsonpickle = "*"
+
+[requires]
+python_version = "3.5"

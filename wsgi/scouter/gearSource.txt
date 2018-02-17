@@ -1,3 +1,0 @@
-Floor
-Human_Player
-Preloaded
