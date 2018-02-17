@@ -93,10 +93,10 @@ class LoginForm(forms.Form):
 class ScoutingForm(ModelForm):
     """ generates the scouting form """
     cube_placeholder = forms.CharField(label= "cubeplace")
-    try:
-        initial = {'robot_end_game': EndGameState.objects.get(state="Missed Game")}
-    except ObjectDoesNotExist:
-            print("Missed game missing")
+    # try:
+        # initial = {'robot_end_game': EndGameState.objects.get(state="Missed Game")}
+    # except ObjectDoesNotExist:
+            # print("Missed game missing")
 
     class Meta:
         help_texts = {

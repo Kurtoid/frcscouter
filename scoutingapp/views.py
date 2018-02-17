@@ -28,7 +28,7 @@ from oauth2client.contrib.django_util.storage import DjangoORMStorage
 from apiclient.http import MediaFileUpload
 from scoutingapp.tables import CategoryTable
 from scoutingapp import forms
-from itertools import zip_longest
+# from itertools import zip_longest
 from scoutingapp.models import Card
 from scoutingapp.forms import AlliancePreForm
 
@@ -468,19 +468,19 @@ def geardropped(request):
     return HttpResponse(val, content_type='text/plain')
 
 
-def getcategories(request):
-    data = []
-    gear_choices = forms.auto_gear_choices
-    source_choices = forms.gear_c
-    end_games = EndGameState.objects.all()
-    cards = Card.objects.all()
-    for g,s,e,c in zip_longest(gear_choices, source_choices, end_games, cards):
-        values = {'gearpositions': (s or ["",])[0], 'gearsources':(g or ["",])[0], 'endgames' : (e or ""), 'cards' : (c or "")}
-        data.append(values)
-    print(type(data))
-    print(data)
-    table = CategoryTable(data)
-    return render(request, "scoutingapp/exportcategories.html", {"categories" : table})
+# def getcategories(request):
+#     data = []
+#     gear_choices = forms.auto_gear_choices
+#     source_choices = forms.gear_c
+#     end_games = EndGameState.objects.all()
+#     cards = Card.objects.all()
+#     for g,s,e,c in zip_longest(gear_choices, source_choices, end_games, cards):
+#         values = {'gearpositions': (s or ["",])[0], 'gearsources':(g or ["",])[0], 'endgames' : (e or ""), 'cards' : (c or "")}
+#         data.append(values)
+#     print(type(data))
+#     print(data)
+#     table = CategoryTable(data)
+#     return render(request, "scoutingapp/exportcategories.html", {"categories" : table})
 
 
 def openhousepage(request):
