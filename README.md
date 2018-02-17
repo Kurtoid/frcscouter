@@ -3,4 +3,4 @@
 
 By FRC Team 179
 
-App hosted at http://scouter-team179.rhcloud.com/ on Openshift
+App hosted at http://team179scoutingapp.herokuapp.com/scoutingapp/ on Openshift
