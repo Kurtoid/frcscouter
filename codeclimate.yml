@@ -1,0 +1,35 @@
+---
+engines:
+  pep8:
+    enabled: true
+  csslint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - ruby
+      - javascript
+      - python
+      - php
+  eslint:
+    enabled: true
+  fixme:
+    enabled: true
+  radon:
+    enabled: true
+ratings:
+  paths:
+  - "**.css"
+  - "**.inc"
+  - "**.js"
+  - "**.jsx"
+  - "**.module"
+  - "**.php"
+  - "**.py"
+  - "**.rb"
+exclude_paths:
+  - "wsgi/scouter/scoutingapp/static/scoutingapp/materialize"
+  - "wsgi/scouter/scoutingapp/static/scoutingapp/**.js"
+  - "wsgi/scouter/scoutingapp/migrations/*.py"
+  - "libs"
