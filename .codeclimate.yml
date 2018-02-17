@@ -29,7 +29,8 @@ ratings:
   - "**.py"
   - "**.rb"
 exclude_paths:
-  - "scoutingapp/static/scoutingapp/materialize"
-  - "scoutingapp/static/scoutingapp/**.js"
+  - "static/scoutingapp/materialize/*"
+  - "static/scoutingapp/**.js"
   - "scoutingapp/migrations/*.py"
+  - "scouter/static/*"
   - "libs"
