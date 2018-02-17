@@ -6,10 +6,13 @@ from django.contrib.auth import authenticate
 from django.forms import ModelForm
 from django import forms
 from scoutingapp.models import (MyUser, Match, Tournament,
-                                Team, AllianceMatch, EndGameState, DetailUser)
+                                Team, AllianceMatch, EndGameState, DetailUser, CubePlace)
 from django.utils.safestring import mark_safe
 
-
+class CubePlaceForm(forms.ModelForm):
+    class Meta:
+        model = CubePlace
+        fields = ['acquired', 'scored', 'when']
 class SortViewMatchForm(forms.Form):
     tourney_select = forms.ModelMultipleChoiceField(
         queryset=Tournament.objects.all(), widget=forms.SelectMultiple)
@@ -87,17 +90,9 @@ class LoginForm(forms.Form):
 
 
 
-# auto_gear_choices = (
-#     ('None', 'None'),
-#     ('Middle', 'Middle'),
-#     ('Side', 'Side'),
-# )
-gear_c= [('Feeder Station Only', 'Feeder Station Only'),
-           ('Both', 'Both'),
-           ('Ground', 'Ground Only'),]
-
 class ScoutingForm(ModelForm):
     """ generates the scouting form """
+    cube_placeholder = forms.CharField(label= "cubeplace")
     try:
         initial = {'robot_end_game': EndGameState.objects.get(state="Missed Game")}
     except ObjectDoesNotExist:
@@ -105,7 +100,6 @@ class ScoutingForm(ModelForm):
 
     class Meta:
         help_texts = {
-                'gears_scored': ('Do NOT include preloaded gear!'),
         }
         def getSelect(min, max):  # @NoSelf
             return forms.Select(choices=[(x, x) for x in range (min, max)])
@@ -113,18 +107,10 @@ class ScoutingForm(ModelForm):
         """ controls which model and fields are displayed """
         model = Match
         exclude = ['scouted_by', 'field_setup', 'tournament', 'duplicate']
-#         widgets = {'auto_teleop_hoppers_triggered': getSelect(0, 6),
-#                    'trigger_hopper': getSelect(0, 6),
-#                    'gears_aquired': getSelect(1, 14),
-#                    'gears_scored': getSelect(1, 14), 'gears_picked_up': getSelect(1, 14)}
         widgets = {
-#             'gears_type' : forms.ChoiceField(choices=gear_c, widget=forms.RadioSelect),
-            'gears_type' : forms.RadioSelect(choices=gear_c),
-            'preloaded_gear_action' : forms.RadioSelect(),
-            'auto_gears_scored' : forms.RadioSelect(),
             }
         fields = (
-            'match_number', 'scouted_team', 'auto_move_yn', 'robot_end_game', 'robot_card',
+            'match_number', 'scouted_team', 'auto_move_yn', 'cube_placeholder', 'robot_end_game', 'robot_card',
             )
 
 
@@ -147,10 +133,6 @@ class ScoutingForm(ModelForm):
         match_num = cleaned_data.get("match_number")
         if match_num < 1:
             raise forms.ValidationError("Match must be more than 0!!")
-        gears_scored = cleaned_data.get("gears_scored")
-        gears_type = cleaned_data.get("gears_type")
-        if(gears_scored>1 and not gears_type):
-            raise forms.ValidationError("Must have a gear type if robot scored gears!!!")
         return cleaned_data
 
 

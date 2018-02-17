@@ -4,9 +4,9 @@ from django.shortcuts import render
 from .forms import (SignUpForm, LoginForm, ScoutingForm,
                     SortViewMatchForm, MatchNumberAttribs,
                     MatchViewFormMetaOptions, importTeamForm, importEventForm,
-                    UserControlForm, AllianceScoutingForm, AllianceMatch, openHouseForm)
+                    UserControlForm, AllianceScoutingForm, AllianceMatch, openHouseForm, CubePlaceForm)
 from .models import (Match, Tournament, Team, CredentialsModel,
-EndGameState, MyUser)
+EndGameState, MyUser, CubePlace, CubeAcquired, CubeWhen, CubeScored)
 from django.contrib.auth import logout, login
 from django.contrib import messages
 from .tables import MatchTable, AllianceMatchTable, UserTable
@@ -216,6 +216,7 @@ def logoutuser(request):
 
 def scout(request):
     if request.user.is_authenticated():
+        cubeform = CubePlaceForm()
         if request.method == 'POST':
             form = ScoutingForm(request.POST)
             form.use_required_attribute = False
@@ -232,7 +233,20 @@ def scout(request):
                     match.tournament = request.user.team.currently_in_event
                 match.duplicate=duped
                 match.save()
-
+                cube_data = request.POST.get('cube_placeholder', 'no data')
+                print(cube_data)
+                split_data = cube_data.split(" ;");
+                for i in split_data:
+                    tmp = i.split(",")
+                    if(len(tmp)==3):
+                        tmp = [i.split for i in tmp]
+                        print(tmp)
+                        cube = CubePlace()
+                        cube.acquired = CubeAcquired.objects.filter(name=tmp[0])[0]
+                        cube.scored = CubeScored.objects.filter(name=tmp[1])[0]
+                        cube.when = CubeScored.objects.filter(name=tmp[2])[0]
+                        cube.match = match;
+                        cube.save()
                 # proccess form
                 messages.add_message(request, messages.INFO, 'Match Recorded')
                 return HttpResponseRedirect('/scoutingapp/')
@@ -243,7 +257,6 @@ def scout(request):
             try:
                 form = ScoutingForm(initial={'robot_end_game':
                                                EndGameState.objects.get(state="Missed Game")})
-
             except ObjectDoesNotExist:
                 print("Missed game missing")
                 form = ScoutingForm()
@@ -251,7 +264,7 @@ def scout(request):
         form.use_required_attribute = False
         return render(
             request, 'scoutingapp/scout.html',
-            {'form': form, })
+            {'form': form, 'cubeform': cubeform })
     else:
         return HttpResponseRedirect('/scoutingapp/userlogin/')
 

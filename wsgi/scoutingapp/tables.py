@@ -1,5 +1,5 @@
 import django_tables2 as tables
-from .models import Match, AllianceMatch, MyUser 
+from .models import Match, AllianceMatch, MyUser
 
 
 class UserTable(tables.Table):
@@ -16,7 +16,7 @@ class MatchTable(tables.Table):
         # add class="bordered"
         attrs = {'class': 'bordered responsive-table'}  # materialze class
         exclude = ('tournament', 'score', 'id', 'created_at', 'updated_at')
-        sequence = ('match_number', 'scouted_team', 'auto_gears_scored', 'auto_move_yn', 'auto_hopper_triggered',  'teleop_hoppers_triggered', 'robot_end_game', 'robot_card', 'scouted_by', 'duplicate', 'gears_scored', 'gears_dropped', 'gears_type')
+        sequence = ('match_number', 'scouted_team', 'auto_move_yn', 'robot_end_game', 'robot_card', 'scouted_by', 'duplicate')
 
 class AllianceMatchTable(tables.Table):
     class Meta:
@@ -30,11 +30,10 @@ class AllianceMatchTable(tables.Table):
 #                     'robot_3_breach_ability',
 #                    )
         exclude = ('id', 'field_setup')
-        
-        
+
+
 class CategoryTable(tables.Table):
     gearpositions = tables.Column()
     gearsources = tables.Column()
     endgames = tables.Column()
     cards = tables.Column()
-    

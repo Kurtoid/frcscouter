@@ -150,21 +150,6 @@ class Card(models.Model):
     def __str__(self):
         return self.card_name
 
-class HopperLoad(models.Model):
-    name = models.CharField(max_length=100)
-    def __str__(self):
-        return self.name
-
-class GearAction(models.Model):
-    name = models.CharField(max_length=100)
-    def __str__(self):
-        return self.name
-
-class HighEfficiency(models.Model):
-    name = models.CharField(max_length=100)
-    def __str__(self):
-        return self.name
-
 
 class Match(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -192,7 +177,26 @@ class Match(models.Model):
     def __str__(self):
         return str(self.match_number)
 
+class CubeAcquired(models.Model):
+    name = models.CharField(max_length = 50, unique = True)
+    def __str__(self):
+        return self.name
 
+class CubeScored(models.Model):
+    name = models.CharField(max_length = 50, unique=True)
+    def __str__(self):
+        return self.name
+
+class CubeWhen(models.Model):
+    name = models.CharField(max_length = 50, unique= True)
+    def __str__(self):
+        return self.name
+
+class CubePlace(models.Model):
+    match = models.ForeignKey(Match, on_delete=models.CASCADE)
+    acquired = models.ForeignKey(CubeAcquired, on_delete = models.CASCADE)
+    scored = models.ForeignKey(CubeScored, on_delete=models.CASCADE)
+    when = models.ForeignKey(CubeWhen, on_delete = models.CASCADE)
 
 
 class Alliance(models.Model):

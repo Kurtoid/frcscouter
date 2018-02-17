@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Team 179's Scouting App</title>
-		 <meta name="theme-color" content="#4caf50" /> 
+		 <meta name="theme-color" content="#4caf50" />
 		{% load staticfiles %}
 		<link rel="icon" type="image/ico" href="{% static "scoutingapp/favicon.ico" %}"/>
 		<script>
@@ -13,6 +13,7 @@
 			ga('create', 'UA-79609502-1', 'auto');
 			ga('send', 'pageview');
 		</script>
+		<script type="text/javascript" src="{% static "scoutingapp/jquery-2.2.4.min.js" %}"></script>
 	</head>
   <body>
 		<div class = "">
@@ -32,7 +33,7 @@
 			</nav>
 		</header>
 		<main>
-		
+
 				{% block content %}{% endblock content %}
 		</main>
 
@@ -66,7 +67,6 @@
 		<!--Import materialize.css-->
 		<link type="text/css" rel="stylesheet" href="{% static "scoutingapp/materialize/css/materialize.min.css" %}"  media="screen,projection"/>
 		<link type="text/css" rel="stylesheet" href="{% static "scoutingapp/style.css" %}"  media="screen,projection"/>
-		<script type="text/javascript" src="{% static "scoutingapp/jquery-2.2.4.min.js" %}"></script>
 		<script type="text/javascript" src="{% static "scoutingapp/jquery.smoothState.min.js" %}"></script>
 		<script type="text/javascript" src="{% static "scoutingapp/materialize/js/materialize.min.js" %}"></script>
 		<script type="text/javascript" src="{% static "scoutingapp/main.js" %}"></script>
