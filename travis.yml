@@ -10,4 +10,4 @@ install:
 after_script:
         - codeclimate-test-reporter
 
-script: coverage run --source='.' wsgi/manage.py test scoutingapp
+script: coverage run --source='.' manage.py test scoutingapp

@@ -20,5 +20,3 @@ class UrlRedirects(TestCase):
         response = self.client.get('/')
         self.assertRedirects(response, '/scoutingapp/',
                              status_code=301)
-
-
