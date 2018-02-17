@@ -93,12 +93,12 @@
     <script>
       $('#mainForm').submit(
         function(){
-          alert('sub');
+          // alert('sub');
             var t = ""
             $(".hitem").each(function (index) {
                 t += $(this).text() +";";
             })
-            alert(t);
+            // alert(t);
              $('#mainForm input[name="cube_placeholder"]').val(t);
           return true;
         }
