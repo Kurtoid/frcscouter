@@ -1,0 +1,574 @@
+[2018-02-17 17:02:37 -0500] [406] [INFO] Starting gunicorn 19.7.1
+[2018-02-17 17:02:37 -0500] [406] [INFO] Listening at: http://0.0.0.0:5000 (406)
+[2018-02-17 17:02:37 -0500] [406] [INFO] Using worker: sync
+[2018-02-17 17:02:37 -0500] [415] [INFO] Booting worker with pid: 415
+[2018-02-17 17:02:56 -0500] [406] [INFO] Handling signal: int
+[2018-02-17 22:02:56 +0000] [415] [INFO] Worker exiting (pid: 415)
+[2018-02-17 17:02:57 -0500] [406] [INFO] Shutting down: Master
+"GET /scoutingapp/viewrounds/ HTTP/1.1" 200 10101
+"GET /static/scoutingapp/style.css HTTP/1.1" 200 140
+- Broken pipe from ('127.0.0.1', 35088)
+
+"GET /static/scoutingapp/main.js HTTP/1.1" 200 6900
+- Broken pipe from ('127.0.0.1', 35091)
+
+"GET /static/scoutingapp/materialize/js/materialize.min.js HTTP/1.1" 200 8192
+- Broken pipe from ('127.0.0.1', 35090)
+
+"GET /static/scoutingapp/jquery.smoothState.min.js HTTP/1.1" 200 6888
+- Broken pipe from ('127.0.0.1', 35089)
+
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Bold.woff2 HTTP/1.1" 200 49976
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Regular.woff2 HTTP/1.1" 200 49236
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Light.woff2 HTTP/1.1" 200 49380
+"GET / HTTP/1.1" 301 0
+"GET /scoutingapp/ HTTP/1.1" 200 3280
+"GET /static/scoutingapp/style.css HTTP/1.1" 200 140
+"GET /static/scoutingapp/jquery.smoothState.min.js HTTP/1.1" 200 6888
+"GET /static/scoutingapp/main.js HTTP/1.1" 200 6900
+"GET /static/scoutingapp/materialize/css/materialize.min.css HTTP/1.1" 200 110836
+"GET /static/scoutingapp/jquery-2.2.4.min.js HTTP/1.1" 200 85582
+"GET /static/scoutingapp/materialize/js/materialize.min.js HTTP/1.1" 200 131555
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Thin.woff2 HTTP/1.1" 200 48524
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Light.woff2 HTTP/1.1" 200 49380
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Bold.woff2 HTTP/1.1" 200 49976
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Regular.woff2 HTTP/1.1" 200 49236
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Medium.woff2 HTTP/1.1" 200 50224
+"GET /scoutingapp/userlogin/ HTTP/1.1" 200 3660
+"POST /scoutingapp/userlogin/ HTTP/1.1" 200 3690
+"POST /scoutingapp/userlogin/ HTTP/1.1" 200 3690
+"POST /scoutingapp/userlogin/ HTTP/1.1" 302 0
+"GET /scoutingapp/ HTTP/1.1" 200 4267
+Not Found: /scoutingapp/htmlexport/179
+"GET /scoutingapp/htmlexport/179 HTTP/1.1" 404 6468
+Not Found: /scoutingapp/htmlexport/exporthtml
+"GET /scoutingapp/htmlexport/exporthtml HTTP/1.1" 404 6489
+Not Found: /scoutingapp/exporthtml
+"GET /scoutingapp/exporthtml HTTP/1.1" 404 6456
+"GET /scoutingapp/exporthtml/2018/flor HTTP/1.1" 200 4081
+"GET /scoutingapp/ HTTP/1.1" 200 4177
+"GET /scoutingapp/viewrounds/ HTTP/1.1" 200 10118
+"GET /scoutingapp/ HTTP/1.1" 200 4177
+"GET /scoutingapp/scout/ HTTP/1.1" 200 12487
+"GET /scoutingapp/scout/ HTTP/1.1" 200 12487
+"GET /static/scoutingapp/jquery-2.2.4.min.js HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/css/materialize.min.css HTTP/1.1" 304 0
+"GET /static/scoutingapp/style.css HTTP/1.1" 304 0
+"GET /static/scoutingapp/jquery.smoothState.min.js HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Light.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Thin.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Regular.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Medium.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Bold.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/js/materialize.min.js HTTP/1.1" 304 0
+"GET /static/scoutingapp/main.js HTTP/1.1" 304 0
+"POST /scoutingapp/scout/ HTTP/1.1" 302 0
+"GET /scoutingapp/ HTTP/1.1" 200 4259
+"GET /scoutingapp/viewrounds/ HTTP/1.1" 200 10740
+"GET /scoutingapp/ HTTP/1.1" 200 4177
+"GET /scoutingapp/exporthtml/2018/flor HTTP/1.1" 200 4081
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2192
+"GET /scoutingapp/exporthtml/2018/flor HTTP/1.1" 200 4081
+"GET /static/scoutingapp/jquery-2.2.4.min.js HTTP/1.1" 304 0
+"GET /static/scoutingapp/style.css HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/css/materialize.min.css HTTP/1.1" 304 0
+"GET /static/scoutingapp/jquery.smoothState.min.js HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Thin.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Light.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Regular.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Medium.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Bold.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/js/materialize.min.js HTTP/1.1" 304 0
+"GET /static/scoutingapp/main.js HTTP/1.1" 304 0
+"GET /admin HTTP/1.1" 301 0
+"GET /admin/ HTTP/1.1" 200 8003
+"GET /static/admin/css/dashboard.css HTTP/1.1" 200 412
+"GET /static/admin/css/base.css HTTP/1.1" 200 16066
+"GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+"GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+"GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+"GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 81348
+"GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 82564
+"GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 80304
+"GET /admin/scoutingapp/match/ HTTP/1.1" 200 5312
+"GET /static/admin/css/changelists.css HTTP/1.1" 200 6170
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 6591
+"GET /static/admin/js/core.js HTTP/1.1" 200 7976
+"GET /static/admin/js/jquery.init.js HTTP/1.1" 200 363
+"GET /static/admin/js/actions.js HTTP/1.1" 200 6501
+"GET /static/admin/js/urlify.js HTTP/1.1" 200 8186
+"GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1538
+"GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 258648
+"GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 128820
+"GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+"GET /admin/scoutingapp/match/2/change/ HTTP/1.1" 200 15353
+"GET /static/admin/css/forms.css HTTP/1.1" 200 8173
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 200 392
+"GET /static/admin/js/change_form.js HTTP/1.1" 200 712
+"GET /static/admin/css/widgets.css HTTP/1.1" 200 10340
+"GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 495
+"GET /admin/scoutingapp/match/ HTTP/1.1" 200 5312
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /admin/ HTTP/1.1" 200 8003
+"GET /admin/scoutingapp/tournament/ HTTP/1.1" 200 4262
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /admin/scoutingapp/tournament/1/change/ HTTP/1.1" 200 4670
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /scoutingapp/exporthtml/2018flor HTTP/1.1" 200 5247
+Internal Server Error: /scoutingapp/exporthtml/2018flor
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 249, in _legacy_get_response
+    response = self._get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/d/FRC/frcscouter/scoutingapp/views.py", line 388, in exporthtml
+    cubeList = cubeList.filter(match__event_code = event_code)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 784, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 802, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/query.py", line 1250, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/query.py", line 1276, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/query.py", line 1201, in build_filter
+    raise FieldError('Related Field got invalid lookup: {}'.format(lookups[0]))
+FieldError: Related Field got invalid lookup: event_code
+"GET /scoutingapp/exporthtml/2018flor HTTP/1.1" 500 97526
+Internal Server Error: /scoutingapp/exporthtml/2018flor
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 249, in _legacy_get_response
+    response = self._get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/d/FRC/frcscouter/scoutingapp/views.py", line 388, in exporthtml
+    cubeList = cubeList.filter(match__tournament = event_code)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 784, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 802, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/query.py", line 1250, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/query.py", line 1276, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/query.py", line 1206, in build_filter
+    condition = lookup_class(lhs, value)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/lookups.py", line 24, in __init__
+    self.rhs = self.get_prep_lookup()
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/fields/related_lookups.py", line 112, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/fields/__init__.py", line 966, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: '2018flor'
+"GET /scoutingapp/exporthtml/2018flor HTTP/1.1" 500 110302
+Internal Server Error: /scoutingapp/exporthtml/2018flor
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 249, in _legacy_get_response
+    response = self._get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/d/FRC/frcscouter/scoutingapp/views.py", line 392, in exporthtml
+    cubes = CubeTable(cubeList)
+  File "/home/kurt/.local/lib/python2.7/site-packages/django_tables2/tables.py", line 289, in __init__
+    order_by = self.data.ordering
+  File "/home/kurt/.local/lib/python2.7/site-packages/django_tables2/data.py", line 158, in ordering
+    for bound_column in self.table.columns:
+  File "/home/kurt/.local/lib/python2.7/site-packages/django_tables2/columns/base.py", line 615, in <genexpr>
+    return (x for x in self.iterall() if x.visible)
+  File "/home/kurt/.local/lib/python2.7/site-packages/django_tables2/columns/base.py", line 572, in <genexpr>
+    return (column for name, column in self.iteritems())
+  File "/home/kurt/.local/lib/python2.7/site-packages/django_tables2/columns/base.py", line 589, in iteritems
+    yield (name, self.columns[name])
+KeyError: 'scored'
+"GET /scoutingapp/exporthtml/2018flor HTTP/1.1" 500 92536
+"GET /scoutingapp/exporthtml/2018flor HTTP/1.1" 200 6061
+"GET /admin/scoutingapp/tournament/ HTTP/1.1" 200 4262
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /admin/ HTTP/1.1" 200 8003
+"GET /admin/scoutingapp/match/ HTTP/1.1" 200 5312
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /admin/scoutingapp/match/2/change/ HTTP/1.1" 200 15353
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /admin/scoutingapp/tournament/1/change/?_to_field=id&_popup=1 HTTP/1.1" 200 3382
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /scoutingapp/exporthtml/2018flor HTTP/1.1" 200 6061
+"GET /scoutingapp/exporthtml/2018flor HTTP/1.1" 200 6061
+Internal Server Error: /scoutingapp/exporthtml/2018flor
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 249, in _legacy_get_response
+    response = self._get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/d/FRC/frcscouter/scoutingapp/views.py", line 386, in exporthtml
+    cubeList = cubeList.filter(match__in = matchlist)
+UnboundLocalError: local variable 'cubeList' referenced before assignment
+Internal Server Error: /scoutingapp/exporthtml/2018flor
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 249, in _legacy_get_response
+    response = self._get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/d/FRC/frcscouter/scoutingapp/views.py", line 386, in exporthtml
+    cubeList = cubeList.filter(match__in = matchlist)
+UnboundLocalError: local variable 'cubeList' referenced before assignment
+"GET /scoutingapp/exporthtml/2018flor HTTP/1.1" 500 70465
+"GET /scoutingapp/exporthtml/2018flor HTTP/1.1" 500 70465
+"GET /scoutingapp/exporthtml/2018flor HTTP/1.1" 500 59
+- Broken pipe from ('127.0.0.1', 5479)
+
+Internal Server Error: /scoutingapp/exporthtml/2018flor
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 249, in _legacy_get_response
+    response = self._get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/d/FRC/frcscouter/scoutingapp/views.py", line 386, in exporthtml
+    cubeList = cubeList.filter(match__in = matchlist)
+UnboundLocalError: local variable 'cubeList' referenced before assignment
+"GET /scoutingapp/exporthtml/2018flor HTTP/1.1" 500 70465
+"GET /scoutingapp/exporthtml/2018flor HTTP/1.1" 200 6061
+Internal Server Error: /scoutingapp/exporthtml/2018flor
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 249, in _legacy_get_response
+    response = self._get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/d/FRC/frcscouter/scoutingapp/views.py", line 388, in exporthtml
+    cubeList = cubeList.filter(match__tournament__in = matchlist)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 784, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 802, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/query.py", line 1250, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/query.py", line 1276, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/query.py", line 1179, in build_filter
+    self.check_related_objects(field, value, opts)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/query.py", line 1073, in check_related_objects
+    (value.model._meta.object_name, opts.object_name)
+ValueError: Cannot use QuerySet for "Match": Use a QuerySet for "Tournament".
+"GET /scoutingapp/exporthtml/2018flor HTTP/1.1" 500 102017
+"GET /scoutingapp/exporthtml/2018flor HTTP/1.1" 200 6061
+"GET /static/scoutingapp/favicon.ico HTTP/1.1" 200 1406
+"GET /admin/scoutingapp/match/ HTTP/1.1" 200 5312
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2192
+"GET /admin/scoutingapp/ HTTP/1.1" 200 7873
+"GET /admin/scoutingapp/cubeplace/ HTTP/1.1" 200 3102
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /admin/scoutingapp/ HTTP/1.1" 200 7873
+"GET /admin/scoutingapp/cubescored/ HTTP/1.1" 200 5194
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /admin/scoutingapp/ HTTP/1.1" 200 7873
+"GET /admin/scoutingapp/cubeacquired/ HTTP/1.1" 200 4984
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /admin/scoutingapp/ HTTP/1.1" 200 7873
+"GET /admin/scoutingapp/cubeplace/ HTTP/1.1" 200 3102
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /admin/scoutingapp/ HTTP/1.1" 200 7873
+"GET /admin/scoutingapp/cubescored/ HTTP/1.1" 200 5194
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /admin/scoutingapp/ HTTP/1.1" 200 7873
+"GET /admin/scoutingapp/cubewhen/ HTTP/1.1" 200 4466
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /admin/scoutingapp/ HTTP/1.1" 200 7873
+"GET /admin/scoutingapp/cubeacquired/ HTTP/1.1" 200 4984
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /admin/scoutingapp/ HTTP/1.1" 200 7873
+"GET /admin/scoutingapp/cubeplace/ HTTP/1.1" 200 3102
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /scoutingapp/exporthtml/2018/flor HTTP/1.1" 200 4895
+"GET /scoutingapp/ HTTP/1.1" 200 4177
+"GET /scoutingapp/scout/ HTTP/1.1" 200 12487
+"POST /scoutingapp/scout/ HTTP/1.1" 302 0
+"GET /scoutingapp/ HTTP/1.1" 200 4259
+"GET /scoutingapp/exporthtml/2018flor HTTP/1.1" 200 6628
+"GET /scoutingapp/ HTTP/1.1" 200 4177
+"GET /scoutingapp/scout/ HTTP/1.1" 200 12487
+Internal Server Error: /scoutingapp/scout/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 249, in _legacy_get_response
+    response = self._get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/d/FRC/frcscouter/scoutingapp/views.py", line 245, in scout
+    cube.acquired = CubeAcquired.objects.filter(name=tmp[0])[0]
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 289, in __getitem__
+    return list(qs)[0]
+IndexError: list index out of range
+"POST /scoutingapp/scout/ HTTP/1.1" 500 77888
+"GET /scoutingapp/scout/ HTTP/1.1" 200 12487
+"GET /scoutingapp/scout/ HTTP/1.1" 200 12487
+"GET /static/scoutingapp/jquery-2.2.4.min.js HTTP/1.1" 200 85582
+"GET /static/scoutingapp/style.css HTTP/1.1" 200 140
+"GET /static/scoutingapp/jquery.smoothState.min.js HTTP/1.1" 200 6888
+"GET /static/scoutingapp/materialize/css/materialize.min.css HTTP/1.1" 200 110836
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Thin.woff2 HTTP/1.1" 200 48524
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Bold.woff2 HTTP/1.1" 200 49976
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Regular.woff2 HTTP/1.1" 200 49236
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Medium.woff2 HTTP/1.1" 200 50224
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Light.woff2 HTTP/1.1" 200 49380
+"GET /static/scoutingapp/materialize/js/materialize.min.js HTTP/1.1" 200 131555
+"GET /static/scoutingapp/main.js HTTP/1.1" 200 6900
+"POST /scoutingapp/scout/ HTTP/1.1" 302 0
+"GET /scoutingapp/ HTTP/1.1" 200 4259
+"GET /scoutingapp/scout/ HTTP/1.1" 200 12487
+"POST /scoutingapp/scout/ HTTP/1.1" 200 12694
+"GET /scoutingapp/scout/ HTTP/1.1" 200 12487
+Internal Server Error: /scoutingapp/scout/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 249, in _legacy_get_response
+    response = self._get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/d/FRC/frcscouter/scoutingapp/views.py", line 246, in scout
+    cube.acquired = CubeAcquired.objects.filter(name=tmp[0])[0]
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 289, in __getitem__
+    return list(qs)[0]
+IndexError: list index out of range
+"POST /scoutingapp/scout/ HTTP/1.1" 500 77760
+"GET /admin HTTP/1.1" 301 0
+"GET /admin/ HTTP/1.1" 200 8003
+"GET /admin/ HTTP/1.1" 302 0
+"GET /admin/login/?next=/admin/ HTTP/1.1" 200 1655
+"GET /admin/scoutingapp/cubeacquired/ HTTP/1.1" 200 4984
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /admin/scoutingapp/cubeacquired/4/change/ HTTP/1.1" 200 4146
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /scoutingapp/scout/ HTTP/1.1" 302 0
+"GET /scoutingapp/userlogin/ HTTP/1.1" 200 3660
+"GET /scoutingapp/scout/ HTTP/1.1" 200 12487
+"POST /scoutingapp/scout/ HTTP/1.1" 302 0
+"GET /scoutingapp/ HTTP/1.1" 200 4259
+"GET /scoutingapp/exporthtml/2018flor HTTP/1.1" 200 8904
+"GET /admin HTTP/1.1" 301 0
+"GET /admin/ HTTP/1.1" 200 8003
+"GET /admin/scoutingapp/cubeacquired/ HTTP/1.1" 200 4984
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /admin/scoutingapp/cubeacquired/2/change/ HTTP/1.1" 200 4146
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /admin/scoutingapp/cubeacquired/ HTTP/1.1" 200 4984
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /admin/ HTTP/1.1" 200 8003
+"GET /admin/scoutingapp/cubeplace/ HTTP/1.1" 200 3102
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /admin/ HTTP/1.1" 200 8003
+"GET / HTTP/1.1" 301 0
+"GET /scoutingapp/ HTTP/1.1" 200 4177
+"GET /scoutingapp/scout/ HTTP/1.1" 200 12487
+"GET /scoutingapp/ HTTP/1.1" 200 4177
+"GET /scoutingapp/scout/ HTTP/1.1" 200 12487
+Internal Server Error: /scoutingapp/scout/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 249, in _legacy_get_response
+    response = self._get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/d/FRC/frcscouter/scoutingapp/views.py", line 246, in scout
+    cube.acquired = CubeAcquired.objects.filter(name=tmp[0])[0]
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 289, in __getitem__
+    return list(qs)[0]
+IndexError: list index out of range
+"POST /scoutingapp/scout/ HTTP/1.1" 500 78002
+Internal Server Error: /scoutingapp/scout/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 249, in _legacy_get_response
+    response = self._get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/d/FRC/frcscouter/scoutingapp/views.py", line 246, in scout
+    cube.acquired = CubeAcquired.objects.filter(name__like=tmp[0])[0]
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 784, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 802, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/query.py", line 1250, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/query.py", line 1276, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/query.py", line 1210, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/query.py", line 1102, in build_lookup
+    lhs = self.try_transform(lhs, name, lookups)
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/sql/query.py", line 1120, in try_transform
+    (name, lhs.output_field.__class__.__name__))
+FieldError: Unsupported lookup 'like' for CharField or join on the field not permitted.
+"POST /scoutingapp/scout/ HTTP/1.1" 500 114993
+Internal Server Error: /scoutingapp/scout/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 249, in _legacy_get_response
+    response = self._get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/d/FRC/frcscouter/scoutingapp/views.py", line 246, in scout
+    cube.acquired = CubeAcquired.objects.filter(name=tmp[0])[0]
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 289, in __getitem__
+    return list(qs)[0]
+IndexError: list index out of range
+"POST /scoutingapp/scout/ HTTP/1.1" 500 77711
+Internal Server Error: /scoutingapp/scout/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 249, in _legacy_get_response
+    response = self._get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/d/FRC/frcscouter/scoutingapp/views.py", line 247, in scout
+    cube.when = CubeScored.objects.filter(name=tmp[2])[0]
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 289, in __getitem__
+    return list(qs)[0]
+IndexError: list index out of range
+"POST /scoutingapp/scout/ HTTP/1.1" 500 77523
+Internal Server Error: /scoutingapp/scout/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 249, in _legacy_get_response
+    response = self._get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/d/FRC/frcscouter/scoutingapp/views.py", line 247, in scout
+    cube.when = CubeScored.objects.filter(name=tmp[2])[0]
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 289, in __getitem__
+    return list(qs)[0]
+IndexError: list index out of range
+"POST /scoutingapp/scout/ HTTP/1.1" 500 77523
+"GET /scoutingapp/scout/ HTTP/1.1" 200 12487
+Internal Server Error: /scoutingapp/scout/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/exception.py", line 41, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 249, in _legacy_get_response
+    response = self._get_response(request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/d/FRC/frcscouter/scoutingapp/views.py", line 247, in scout
+    cube.when = CubeScored.objects.filter(name=tmp[2])[0]
+  File "/usr/local/lib/python2.7/dist-packages/django/db/models/query.py", line 289, in __getitem__
+    return list(qs)[0]
+IndexError: list index out of range
+"POST /scoutingapp/scout/ HTTP/1.1" 500 77832
+"GET /admin/scoutingapp/cubeplace/ HTTP/1.1" 200 3102
+"GET /static/admin/css/base.css HTTP/1.1" 304 0
+"GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+"GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /static/admin/js/core.js HTTP/1.1" 304 0
+"GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+"GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+"GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+"GET /static/admin/js/actions.js HTTP/1.1" 304 0
+"GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+"GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+"GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+"GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+"GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+"GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
+"GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+"GET /admin/scoutingapp/ HTTP/1.1" 200 7873
+"GET /admin/scoutingapp/cubewhen/ HTTP/1.1" 200 4466
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"POST /scoutingapp/scout/ HTTP/1.1" 302 0
+"GET /scoutingapp/ HTTP/1.1" 200 4259
+"GET /admin/scoutingapp/ HTTP/1.1" 200 7873
+"GET /admin/scoutingapp/cubeplace/ HTTP/1.1" 200 4738
+"GET /admin/jsi18n/ HTTP/1.1" 200 3217
+"GET /scoutingapp/exporthtml/2018flor HTTP/1.1" 200 14055
+"GET /scoutingapp/exporthtml/2018flor HTTP/1.1" 200 14324
+"GET /static/scoutingapp/jquery-2.2.4.min.js HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/css/materialize.min.css HTTP/1.1" 304 0
+"GET /static/scoutingapp/style.css HTTP/1.1" 304 0
+"GET /static/scoutingapp/jquery.smoothState.min.js HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Thin.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Light.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Regular.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Medium.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Bold.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/js/materialize.min.js HTTP/1.1" 304 0
+"GET /static/scoutingapp/main.js HTTP/1.1" 304 0
+"GET /scoutingapp/exporthtml/2018flor HTTP/1.1" 200 14324
+"GET /static/scoutingapp/jquery-2.2.4.min.js HTTP/1.1" 304 0
+"GET /static/scoutingapp/jquery.smoothState.min.js HTTP/1.1" 304 0
+"GET /static/scoutingapp/style.css HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/css/materialize.min.css HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Thin.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Light.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Medium.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Regular.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Bold.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/js/materialize.min.js HTTP/1.1" 304 0
+"GET /static/scoutingapp/main.js HTTP/1.1" 304 0
+"GET /scoutingapp/exporthtml/2018flor HTTP/1.1" 200 14321
+"GET /static/scoutingapp/jquery-2.2.4.min.js HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/css/materialize.min.css HTTP/1.1" 304 0
+"GET /static/scoutingapp/jquery.smoothState.min.js HTTP/1.1" 304 0
+"GET /static/scoutingapp/style.css HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Thin.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Light.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Regular.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Medium.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/fonts/roboto/Roboto-Bold.woff2 HTTP/1.1" 304 0
+"GET /static/scoutingapp/materialize/js/materialize.min.js HTTP/1.1" 304 0
+"GET /static/scoutingapp/main.js HTTP/1.1" 304 0

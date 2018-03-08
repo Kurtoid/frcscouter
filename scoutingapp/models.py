@@ -177,6 +177,10 @@ class Match(models.Model):
     def __str__(self):
         return str(self.match_number)
 
+    #def has_ground(self):
+
+
+
 class CubeAcquired(models.Model):
     name = models.CharField(max_length = 50, unique = True)
     def __str__(self):
@@ -197,6 +201,9 @@ class CubePlace(models.Model):
     acquired = models.ForeignKey(CubeAcquired, on_delete = models.CASCADE)
     scored = models.ForeignKey(CubeScored, on_delete=models.CASCADE)
     when = models.ForeignKey(CubeWhen, on_delete = models.CASCADE)
+
+    def bot(self):
+        return self.match.scouted_team.team_number
 
 
 class Alliance(models.Model):

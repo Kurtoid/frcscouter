@@ -9,7 +9,7 @@ from .models import (Match, Tournament, Team, CredentialsModel,
 EndGameState, MyUser, CubePlace, CubeAcquired, CubeWhen, CubeScored)
 from django.contrib.auth import logout, login
 from django.contrib import messages
-from .tables import MatchTable, AllianceMatchTable, UserTable
+from .tables import MatchTable, AllianceMatchTable, UserTable, ViewMatchTable, CubeTable
 from scouter import settings
 from django_tables2 import RequestConfig
 from django.core.exceptions import ObjectDoesNotExist
@@ -143,7 +143,7 @@ def viewrounds(request):
             pass;
         else:
             print(viewoptionsform.errors)
-    matches = MatchTable(matchlist, exclude=fieldstoexclude)
+    matches = ViewMatchTable(matchlist, exclude=fieldstoexclude)
     RequestConfig(request).configure(matches)
 
     return render(request, 'scoutingapp/viewrounds.html', {
@@ -235,16 +235,16 @@ def scout(request):
                 match.save()
                 cube_data = request.POST.get('cube_placeholder', 'no data')
                 print(cube_data)
-                split_data = cube_data.split(" ;");
+                split_data = cube_data.split(";");
                 for i in split_data:
-                    tmp = i.split(",")
-                    if(len(tmp)==3):
-                        tmp = [i.split for i in tmp]
+                    tmp = i.split(", ")
+                    print(tmp)
+                    if(len(tmp)>=3):
                         print(tmp)
                         cube = CubePlace()
                         cube.acquired = CubeAcquired.objects.filter(name=tmp[0])[0]
                         cube.scored = CubeScored.objects.filter(name=tmp[1])[0]
-                        cube.when = CubeScored.objects.filter(name=tmp[2])[0]
+                        cube.when = CubeWhen.objects.filter(name=tmp[2])[0]
                         cube.match = match;
                         cube.save()
                 # proccess form
@@ -383,13 +383,19 @@ def import_event_from_TBA(request):
 
 def exporthtml(request, event_code):
     matchlist = Match.objects.all()
+    cubeList = CubePlace.objects.all()
+    tourns = [i.tournament for i in matchlist]
+    cubeList = cubeList.filter(match__tournament__in = tourns)
+
     matchlist = matchlist.filter(tournament__event_code=event_code)
+    print(cubeList)
     # enables ordering
     matches = MatchTable(matchlist)
+    cubes = CubeTable(cubeList)
     RequestConfig(request, paginate={'per_page': 9999}).configure(matches)
-
+    RequestConfig(request, paginate={'per_page: 9999'}).configure(cubes)
     return render(request, 'scoutingapp/exporthtml.html', {
-        'rounds': matches,
+        'rounds': matches, 'cubes': cubes
     })
 
 

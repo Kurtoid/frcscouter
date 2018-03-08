@@ -32,7 +32,7 @@ SECRET_KEY = "boiaHFUVAEIOTR3BevoR"
 # OAUTH_REDIR = 'http://localhost:8000/scoutingapp/oauth2callback'
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.environ.get('DEBUG') == 'True'
-DEBUG=True
+DEBUG = True
 OAUTH_REDIR = 'http://scouter-team179.rhcloud.com/scoutingapp/oauth2callback'
 
 # Static files (CSS, JavaScript, Images)
@@ -45,10 +45,10 @@ STATIC_URL = '/static/'
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
-)#STATIC_ROOT = os.path.join(BASE_DIR, '../static')
+)  # STATIC_ROOT = os.path.join(BASE_DIR, '../static')
 #STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
 #STATIC_ROOT = os.path.join(BASE_DIR, '../static')
-GOOGLE_OAUTH2_CLIENT_SECRETS_JSON=BASE_DIR+'/scoutingapp/client_secrets.json'
+GOOGLE_OAUTH2_CLIENT_SECRETS_JSON = BASE_DIR+'/scoutingapp/client_secrets.json'
 AUTH_USER_MODEL = 'scoutingapp.MyUser'
 
 
@@ -58,15 +58,22 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-    'console': {
-    'class': 'logging.StreamHandler',
-    },
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        'applogfile': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'scouter.log'),
+            'maxBytes': 1024*1024*15,  # 15MB
+            'backupCount': 10,
+        },
     },
     'loggers': {
-    'django': {
-    'handlers': ['console'],
-    'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
-    },
+        'django': {
+            'handlers': ['console', 'applogfile'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+        },
     },
 }
 # Application definition
@@ -122,7 +129,6 @@ WSGI_APPLICATION = 'scouter.wsgi.application'
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 
-
 DATABASES = {
 
     'default': {
@@ -134,7 +140,6 @@ DATABASES = {
     }
 
 }
-
 
 
 db_from_env = dj_database_url.config(conn_max_age=500)
