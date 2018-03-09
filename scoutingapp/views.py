@@ -9,7 +9,7 @@ from .models import (Match, Tournament, Team, CredentialsModel,
 EndGameState, MyUser, CubePlace, CubeAcquired, CubeWhen, CubeScored)
 from django.contrib.auth import logout, login
 from django.contrib import messages
-from .tables import MatchTable, AllianceMatchTable, UserTable, ViewMatchTable, CubeTable
+from .tables import MatchTable, AllianceMatchTable, UserTable, ViewMatchTable, CubeTable, TeamTable
 from scouter import settings
 from django_tables2 import RequestConfig
 from django.core.exceptions import ObjectDoesNotExist
@@ -393,10 +393,19 @@ def exporthtml(request, event_code):
     matches = MatchTable(matchlist)
     cubes = CubeTable(cubeList)
     RequestConfig(request, paginate={'per_page': 9999}).configure(matches)
-    RequestConfig(request, paginate={'per_page: 9999'}).configure(cubes)
+    RequestConfig(request, paginate={'per_page': 9999}).configure(cubes)
     return render(request, 'scoutingapp/exporthtml.html', {
         'rounds': matches, 'cubes': cubes
     })
+
+def exportteam(request):
+    teamlist = Team.objects.all()
+    teams = TeamTable(teamlist)
+    RequestConfig(request, paginate={'per_page: 9999'}).configure(teams)
+    return render(request, 'scoutingapp/exporthtml.html', {
+        'rounds': teams
+    })
+
 
 
 def exportusers(request):
