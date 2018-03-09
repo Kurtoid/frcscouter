@@ -389,7 +389,7 @@ def exporthtml(request, event_code):
     cubeList = cubeList.filter(match__tournament__in = tourns)
 
     matchlist = matchlist.filter(tournament__event_code=event_code)
-    print(cubeList)
+    # print(cubeList)
     # enables ordering
     matches = MatchTable(matchlist)
     cubes = CubeTable(cubeList)
