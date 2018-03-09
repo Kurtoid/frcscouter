@@ -246,6 +246,7 @@ def scout(request):
                         cube.scored = CubeScored.objects.filter(name=tmp[1])[0]
                         cube.when = CubeWhen.objects.filter(name=tmp[2])[0]
                         cube.match = match;
+                        cube.scouted_by = request.user
                         cube.save()
                 # proccess form
                 messages.add_message(request, messages.INFO, 'Match Recorded')

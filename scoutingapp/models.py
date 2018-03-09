@@ -201,6 +201,7 @@ class CubePlace(models.Model):
     acquired = models.ForeignKey(CubeAcquired, on_delete = models.CASCADE)
     scored = models.ForeignKey(CubeScored, on_delete=models.CASCADE)
     when = models.ForeignKey(CubeWhen, on_delete = models.CASCADE)
+    scouted_by = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=True)
 
     def bot(self):
         return self.match.scouted_team.team_number
