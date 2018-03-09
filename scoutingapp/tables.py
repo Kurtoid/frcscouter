@@ -29,7 +29,7 @@ class ViewMatchTable(tables.Table):
         # add class="bordered"
         attrs = {'class': 'bordered responsive-table'}  # materialze class
         exclude = ('tournament', 'score', 'id', 'created_at', 'updated_at')
-        sequence = ('match_number', 'scouted_team', 'auto_move_yn', 'ground',
+        sequence = ('match_number', 'scouted_team', 'auto_move_yn',
                     'robot_end_game', 'robot_card', 'scouted_by', 'duplicate')
 
 
