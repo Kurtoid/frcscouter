@@ -13,6 +13,12 @@ class CubePlaceForm(forms.ModelForm):
     class Meta:
         model = CubePlace
         fields = ['acquired', 'scored', 'when']
+    def __init__(self, *args, **kwargs):
+        super(CubePlaceForm, self).__init__(*args, **kwargs)
+        self.fields['acquired'].required = False
+        self.fields['scored'].required = False
+        self.fields['when'].required = False
+
 class SortViewMatchForm(forms.Form):
     tourney_select = forms.ModelMultipleChoiceField(
         queryset=Tournament.objects.all(), widget=forms.SelectMultiple)
@@ -92,7 +98,7 @@ class LoginForm(forms.Form):
 
 class ScoutingForm(ModelForm):
     """ generates the scouting form """
-    cube_placeholder = forms.CharField(label= "cubeplace")
+    cube_placeholder = forms.CharField(label= "cubeplace", required = False)
     # try:
         # initial = {'robot_end_game': EndGameState.objects.get(state="Missed Game")}
     # except ObjectDoesNotExist:
