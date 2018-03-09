@@ -2,6 +2,10 @@
 {% load render_table from django_tables2 %}
 {% load app_filters %}
 {% block content %}
+{% if rounds %}
 {% render_table rounds %}
+{% endif %}
+{% if cubes %}
 {% render_table cubes %}
+{% endif %}
 {% endblock content %}

@@ -1,5 +1,5 @@
 import django_tables2 as tables
-from .models import Match, AllianceMatch, MyUser, CubePlace, CubeScored, CubeAcquired, CubeWhen
+from .models import Match, AllianceMatch, MyUser, CubePlace, CubeScored, CubeAcquired, CubeWhen, Team
 
 
 class UserTable(tables.Table):
@@ -20,6 +20,14 @@ class MatchTable(tables.Table):
         sequence = ('match_number', 'scouted_team', 'auto_move_yn',
                     'robot_end_game', 'robot_card', 'scouted_by', 'duplicate')
 
+
+class TeamTable(tables.Table):
+
+    class Meta:
+        model = Team
+        # add class="bordered"
+        attrs = {'class': 'bordered responsive-table'}  # materialze class
+        sequence = ('team_number', 'team_name', 'currently_in_event')
 
 class ViewMatchTable(tables.Table):
     # ground = tables.Column(accessor='has_ground', verbose_name='Can pick up from ground')
