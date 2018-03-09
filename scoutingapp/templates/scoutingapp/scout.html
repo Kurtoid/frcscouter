@@ -54,8 +54,8 @@
                   if(num===3){
                   $("#cubesplaced")
                       .append(
-                              $("<li class=\"collection-item hitem\">" + sub
-                                + "</li>"));
+                              $("<li class=\"collection-item hitem\"><div>" + sub
+                                + "<a href = \"#!\" class =\"secondary-content removebutton\"><i class =\"material-icons\">remove</i></a></li>"));
 
                             }
                           }
@@ -104,6 +104,14 @@
           return true;
         }
       );
+
+      $(document).on('click','.removebutton', function(event){
+        event.preventDefault();
+        var a = confirm("delete?")
+        if(a){
+        this.closest('li').remove();
+        }
+      });
     </script>
     <br>
 </div>
