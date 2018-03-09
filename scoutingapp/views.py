@@ -401,7 +401,7 @@ def exporthtml(request, event_code):
 def exportteam(request):
     teamlist = Team.objects.all()
     teams = TeamTable(teamlist)
-    RequestConfig(request, paginate={'per_page: 9999'}).configure(teams)
+    RequestConfig(request, paginate={'per_page': 9999}).configure(teams)
     return render(request, 'scoutingapp/exporthtml.html', {
         'rounds': teams
     })
