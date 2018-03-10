@@ -1,22 +1,32 @@
-from django.test import TestCase
-from django.core.urlresolvers import reverse
-from .models import MyUser
+from django.test import TestCase, RequestFactory, Client
+from django.contrib.auth.models import AnonymousUser
+from scoutingapp.models import MyUser
+from scoutingapp.views import scout
+class ScoutPageRedirect(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.user = AnonymousUser()
 
-# Create your tests here.
+    def test_scout_redirect(self):
+        request = self.factory.get('/scoutingapp/scout')
 
+        request.user = AnonymousUser()
+        response = scout(request)
+        response.client = Client()
 
-class NoUserRedirect(TestCase):
-#     fixtures = ['fixtures.json']
-    def test_redirect_on_scout(self):
-        self.client.logout()
-        response = self.client.get('/scoutingapp/scout/')
-        self.assertRedirects(response, '/scoutingapp/userlogin/',
-                             status_code=302)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/scoutingapp/userlogin/')
 
+class TestUser(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.user = AnonymousUser()
+        testuser = MyUser.objects.create_user("test@example.com", password = "example")
+        testuser.save()
 
-class UrlRedirects(TestCase):
-
-    def test_redirect_on_no_page(self):
-        response = self.client.get('/')
-        self.assertRedirects(response, '/scoutingapp/',
-                             status_code=301)
+    def test_login(self):
+        c = Client()
+        result = c.login(username = "test@example.com", password = "example")
+        self.assertEqual(result, True)
+    def test_user_needs_email(self):
+        self.assertRaises(ValueError, MyUser.objects.create_user(email = None, password="example"))

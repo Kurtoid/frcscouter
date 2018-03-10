@@ -46,7 +46,7 @@ class CubeTable(tables.Table):
     class Meta:
         model = CubePlace
         attrs = {'class': 'bordered responsive-table'}  # materialze class
-        sequence = {'match', 'bot', 'acquired', 'scored', 'when'}
+        sequence = {'match', 'bot', 'acquired', 'scored', 'when', 'scouted_by'}
 
 class AllianceMatchTable(tables.Table):
     class Meta:
