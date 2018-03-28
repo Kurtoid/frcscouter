@@ -11,7 +11,7 @@ from django.forms.widgets import TextInput
 
 from scoutingapp.models import (MyUser, Team, Match,
                                 Tournament, Alliance, AllianceMatch,
-                                EndGameState, Card, DetailUser, CubeWhen, CubePlace, CubeScored, CubeAcquired)
+                                EndGameState, Card, DetailUser, CubeWhen, CubePlace, CubeScored, CubeAcquired, ScheduledMatch)
 
 class DefenseAdmin(admin.ModelAdmin):
     list_display = ('name', 'code')
@@ -145,6 +145,7 @@ admin.site.register(CubePlace)
 admin.site.register(CubeAcquired)
 admin.site.register(CubeWhen)
 admin.site.register(CubeScored)
+admin.site.register(ScheduledMatch)
 admin.site.register(DetailUser, DetailUserAdmin)
 
 # ... and, since we're not using Django's built-in permissions,

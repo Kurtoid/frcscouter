@@ -36,4 +36,7 @@ urlpatterns = [
     # url(r'^getcategories/$', views.getcategories, name='getcategories'),
     url(r'^openhouse/$', views.openhousepage, name='openhouse'),
 
+    url(r'^api/teambyevent/(?P<event_code>[a-zA-Z0-9]+)/(?P<match_id>[0-9]+)', views.api_teambyevent,
+        name = 'api_teambyevent')
+
 ]

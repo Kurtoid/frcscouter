@@ -13,13 +13,13 @@
           -->
 		        <div class="row">
 		            <div class="col s4">
-		                <a class="btn-large" style="width: 100%" onclick="if(document.getElementById('{{ field.auto_id}}').value>0){document.getElementById('{{ field.auto_id}}').stepDown()}"><i class="material-icons">remove</i></a>
+		                <a class="btn-large" style="width: 100%" onclick="if(document.getElementById('{{ field.auto_id}}').value>0){document.getElementById('{{ field.auto_id}}').stepDown();$('#{{ field.auto_id }}').trigger('change');}"><i class="material-icons">remove</i></a>
 		            </div>
 		            <div class="input-field col s4">
 		                {{ field }} {{ field.errors }}
 		            </div>
 		            <div class="col s4">
-		                <a class="btn-large" style="width: 100%" onclick="document.getElementById('{{ field.auto_id}}').stepUp()"><i class="material-icons">add</i></a>
+		                <a class="btn-large" style="width: 100%" onclick="document.getElementById('{{ field.auto_id}}').stepUp();$('#{{ field.auto_id }}').trigger('change');"><i class="material-icons">add</i></a>
 		            </div>
 		        </div>
 	        {% elif field.field.widget|klass == "RadioSelect" %}
@@ -110,6 +110,41 @@
         var a = confirm("delete?")
         if(a){
         this.closest('li').remove();
+        }
+      });
+
+      $("#id_match_number").change(function(event){
+        console.log("changed")
+        if($('#id_filterteams').prop('checked')){
+        console.log("http://" + window.location.host + "/scoutingapp/api/teambyevent/2018flor")
+      var resp =  $.ajax({
+          // type: "POST",
+          // datatype: 'json',
+          // data: "{}",
+          // contentType: "application/json",
+          async : true,
+          url: "http://" + window.location.host + "/scoutingapp/api/teambyevent/2018flor/" + $('#id_match_number').val(),
+          success : function(jsonData){
+            console.log(jsonData);
+            $("#id_scouted_team").children().remove();
+            for(i = 0; i < jsonData.length; i++){
+              console.log(jsonData[i].pk);
+              $("#id_scouted_team").append($('<option>', {
+                value : jsonData[i].pk,
+                text : jsonData[i].pk + ": " + jsonData[i].fields.team_name
+              }))
+            }
+                $('#id_scouted_team').material_select();
+
+          },
+          error: function(xhr, textStatus, err) {
+                console.log("readyState: " + xhr.readyState);
+                console.log("responseText: "+ xhr.responseText);
+                console.log("status: " + xhr.status);
+                console.log("text status: " + textStatus);
+                console.log("error: " + err);
+           },
+        });
         }
       });
     </script>

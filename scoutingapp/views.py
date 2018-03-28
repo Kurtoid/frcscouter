@@ -1,12 +1,14 @@
+# from json import dumps, loads
+from django.core import serializers
 from django.utils.encoding import smart_str
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from .forms import (SignUpForm, LoginForm, ScoutingForm,
                     SortViewMatchForm, MatchNumberAttribs,
                     MatchViewFormMetaOptions, importTeamForm, importEventForm,
                     UserControlForm, AllianceScoutingForm, AllianceMatch, openHouseForm, CubePlaceForm)
 from .models import (Match, Tournament, Team, CredentialsModel,
-EndGameState, MyUser, CubePlace, CubeAcquired, CubeWhen, CubeScored)
+EndGameState, MyUser, CubePlace, CubeAcquired, CubeWhen, CubeScored, ScheduledMatch)
 from django.contrib.auth import logout, login
 from django.contrib import messages
 from .tables import MatchTable, AllianceMatchTable, UserTable, ViewMatchTable, CubeTable, TeamTable
@@ -315,9 +317,9 @@ def import_from_TBA(request):
                 begin = importform.cleaned_data['team_number_begin']
                 end = importform.cleaned_data['team_number_end']
                 for x in range(begin, end):
-                    r = requests.get("http://www.thebluealliance.com/api/v2/team/frc{}".format(x),
-                                     headers={'X-TBA-App-Id':
-                                              'frc179:scoutingapp:v1'})
+                    r = requests.get("http://www.thebluealliance.com/api/v3/team/frc{}".format(x),
+                                     headers={'X-TBA-Auth-Key':
+                                              'ptxL3AMaCfhTGWVX7nbTYp0wfBqYFIu2HkjSr7hu2zxqWfk3B0uCAdALaVohrrxi'})
                     if r.status_code == 200:
                         print("Checking {}".format(x))
                         try:
@@ -331,6 +333,8 @@ def import_from_TBA(request):
                                 team.save()
                         if(r.json()['nickname'] is not None):
                             print('{}: {}'.format(x, r.json()['nickname']))
+                    else:
+                        print(r.status_code)
         return render(request, 'scoutingapp/importfromtba.html', {'form':
                                                                   importform, 'done': importform.is_valid()})
     else:
@@ -346,18 +350,18 @@ def import_event_from_TBA(request):
                 newEvent = None
                 # process and return redirect
                 event_code = importform.cleaned_data['event_code']
-                r = requests.get("http://www.thebluealliance.com/api/v2/event/{}".format(event_code),
-                                 headers={'X-TBA-App-Id':
-                                          'frc179:scoutingapp:v1'})
+                r = requests.get("http://www.thebluealliance.com/api/v3/event/{}".format(event_code),
+                                 headers={'X-TBA-Auth-Key':
+                                          'ptxL3AMaCfhTGWVX7nbTYp0wfBqYFIu2HkjSr7hu2zxqWfk3B0uCAdALaVohrrxi'})
                 try:
                     newEvent = Tournament.objects.get(name=r.json()['name'])
                 except ObjectDoesNotExist:
                     newEvent = Tournament(name=r.json()['name'])
                     newEvent.event_code = event_code
                     newEvent.save()
-                r = requests.get("http://www.thebluealliance.com/api/v2/event/{}/teams".format(event_code),
-                                 headers={'X-TBA-App-Id':
-                                          'frc179:scoutingapp:v1'})
+                r = requests.get("http://www.thebluealliance.com/api/v3/event/{}/teams".format(event_code),
+                                     headers={'X-TBA-Auth-Key':
+                                              'ptxL3AMaCfhTGWVX7nbTYp0wfBqYFIu2HkjSr7hu2zxqWfk3B0uCAdALaVohrrxi'})
                 if r.status_code == 200:
                     print("Checking {}".format(event_code))
                     for x in r.json():
@@ -375,6 +379,34 @@ def import_event_from_TBA(request):
                         if(x['nickname'] is not None):
                             print('{}: {}'.format(
                                 x['team_number'], x['nickname']))
+
+                r = requests.get("http://www.thebluealliance.com/api/v3/event/{}/matches/simple".format(event_code),
+                                     headers={'X-TBA-Auth-Key':
+                                              'ptxL3AMaCfhTGWVX7nbTYp0wfBqYFIu2HkjSr7hu2zxqWfk3B0uCAdALaVohrrxi'})
+                if(r.status_code == 200):
+                    # print(r.json())
+                    for x in r.json():
+                        if x['comp_level'] != "qm":
+                            continue
+                        match_num = x['match_number']
+                        # print(match_num)
+                        team_numbers = []
+                        for team in x["alliances"]["blue"]["team_keys"]:
+                            team_numbers.append(team)
+                        for team in x["alliances"]["red"]["team_keys"]:
+                            team_numbers.append(team)
+                        # print(team_numbers)
+                        for team in team_numbers:
+                            teamNum = int(team[3:])
+                            # print(teamNum)
+                            teamObject = Team.objects.filter(team_number = teamNum)[0]
+                            # this might take too long
+                            if len(ScheduledMatch.objects.filter(team = teamObject, match_number = match_num, event = newEvent)) < 1:
+                                sMatch = ScheduledMatch()
+                                sMatch.event = newEvent
+                                sMatch.match_number = match_num
+                                sMatch.team = teamObject
+                                sMatch.save()
         return render(request, 'scoutingapp/importeventfromtba.html', {'form':
                                                                        importform, 'done': importform.is_valid()})
     else:
@@ -515,3 +547,19 @@ def openhousepage(request):
     return render(
         request, 'scoutingapp/openhouse.html',
         {'form': form})
+
+def api_teambyevent(request, event_code, match_id):
+    teams = []
+    print(match_id)
+    print(event_code)
+    if(int(match_id) < 1):
+        teams = (Team.objects.filter(currently_in_event__event_code = event_code))
+    else:
+        matches = ScheduledMatch.objects.filter(match_number = match_id, event__event_code = event_code)
+        teams = []
+        for match in matches:
+            teams.append(match.team)
+    print(teams)
+    data = serializers.serialize('json', teams)
+    print(data)
+    return HttpResponse(data, content_type="application/json")
