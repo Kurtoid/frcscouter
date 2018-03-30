@@ -415,12 +415,9 @@ def import_event_from_TBA(request):
 
 
 def exporthtml(request, event_code):
-    matchlist = Match.objects.all()
-    cubeList = CubePlace.objects.all()
-    tourns = [i.tournament for i in matchlist]
-    cubeList = cubeList.filter(match__tournament__in = tourns)
-
-    matchlist = matchlist.filter(tournament__event_code=event_code)
+    matchlist = Match.objects.filter(tournament__event_code=event_code)
+    tourn = Tournament.objects.filter(event_code = event_code)
+    cubeList = CubePlace.objects.filter(match__tournament = tourn)
     # print(cubeList)
     # enables ordering
     matches = MatchTable(matchlist)

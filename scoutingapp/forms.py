@@ -99,7 +99,7 @@ class LoginForm(forms.Form):
 class ScoutingForm(ModelForm):
     """ generates the scouting form """
     cube_placeholder = forms.CharField(label= "cubeplace", required = False)
-    filterteams = forms.BooleanField(label = "Filter teams?", initial = True)
+    #filterteams = forms.BooleanField(label = "Filter teams?", initial = True, required = False)
     # try:
         # initial = {'robot_end_game': EndGameState.objects.get(state="Missed Game")}
     # except ObjectDoesNotExist:
@@ -117,7 +117,9 @@ class ScoutingForm(ModelForm):
         widgets = {
             }
         fields = (
-            'match_number', 'filterteams', 'scouted_team', 'auto_move_yn', 'cube_placeholder', 'robot_end_game', 'robot_card',
+            'match_number',
+        #     'filterteams',
+             'scouted_team', 'auto_move_yn', 'cube_placeholder', 'robot_end_game', 'robot_card',
             )
 
 
