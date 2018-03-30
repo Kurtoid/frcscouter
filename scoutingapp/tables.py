@@ -11,7 +11,7 @@ class UserTable(tables.Table):
 
 
 class MatchTable(tables.Table):
-
+    export_formats = ['csv']
     class Meta:
         model = Match
         # add class="bordered"

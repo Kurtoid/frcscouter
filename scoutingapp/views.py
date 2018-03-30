@@ -415,18 +415,28 @@ def import_event_from_TBA(request):
 
 
 def exporthtml(request, event_code):
+    # print(tourn)
     matchlist = Match.objects.filter(tournament__event_code=event_code)
+    output = []
+    response = HttpResponse(content_type = 'text/csv')
+    writer = csv.writer(response)
+    writer.writerow(['Match Number','Scouted Team', 'Auto move', 'end game', 'robot card', 'scouted by', 'duplicate'])
+    for m in matchlist:
+        output.append([m.match_number, m.scouted_team, m.auto_move_yn, m.robot_end_game, m.scouted_by])
+    writer.writerows(output)
+    return response
+
+def exportcubeshtml(request, event_code):
     tourn = Tournament.objects.filter(event_code = event_code)
     cubeList = CubePlace.objects.filter(match__tournament = tourn)
-    # print(cubeList)
-    # enables ordering
-    matches = MatchTable(matchlist)
-    cubes = CubeTable(cubeList)
-    RequestConfig(request, paginate={'per_page': 9999}).configure(matches)
-    RequestConfig(request, paginate={'per_page': 9999}).configure(cubes)
-    return render(request, 'scoutingapp/exporthtml.html', {
-        'rounds': matches, 'cubes': cubes
-    })
+    output = []
+    response = HttpResponse(content_type = 'text/csv')
+    writer = csv.writer(response)
+    writer.writerow(['Match number', 'acquired','scored','when','scouted_by'])
+    for c in cubeList:
+        output.append([c.match, c.acquired, c.scored,c.when, c.scouted_by])
+    writer.writerows(output)
+    return response
 
 def exportteam(request):
     teamlist = Team.objects.all()
