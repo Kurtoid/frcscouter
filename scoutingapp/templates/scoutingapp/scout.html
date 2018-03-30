@@ -116,14 +116,14 @@
       $("#id_match_number").change(function(event){
         console.log("changed")
         if($('#id_filterteams').prop('checked')){
-        console.log("https://" + window.location.host + "/scoutingapp/api/teambyevent/2018flor")
+        console.log("https://" + window.location.host + "/scoutingapp/api/teambyevent/2018flwp")
       var resp =  $.ajax({
           // type: "POST",
           // datatype: 'json',
           // data: "{}",
           // contentType: "application/json",
           async : true,
-          url: "https://" + window.location.host + "/scoutingapp/api/teambyevent/2018flor/" + $('#id_match_number').val(),
+          url: "https://" + window.location.host + "/scoutingapp/api/teambyevent/2018flwp/" + $('#id_match_number').val(),
           success : function(jsonData){
             console.log(jsonData);
             $("#id_scouted_team").children().remove();
