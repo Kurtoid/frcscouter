@@ -422,7 +422,7 @@ def exporthtml(request, event_code):
     writer = csv.writer(response)
     writer.writerow(['Match Number','Scouted Team', 'Auto move', 'end game', 'robot card', 'scouted by', 'duplicate'])
     for m in matchlist:
-        output.append([m.match_number, m.scouted_team, m.auto_move_yn, m.robot_end_game, m.scouted_by])
+        output.append([m.match_number, m.scouted_team, m.auto_move_yn, m.robot_end_game, m.robot_card, m.scouted_by, m.duplicate])
     writer.writerows(output)
     return response
 
@@ -432,9 +432,9 @@ def exportcubeshtml(request, event_code):
     output = []
     response = HttpResponse(content_type = 'text/csv')
     writer = csv.writer(response)
-    writer.writerow(['Match number', 'acquired','scored','when','scouted_by'])
+    writer.writerow(['Match number','team', 'acquired','scored','when','scouted_by'])
     for c in cubeList:
-        output.append([c.match, c.acquired, c.scored,c.when, c.scouted_by])
+        output.append([c.match, c.match.scouted_team, c.acquired, c.scored,c.when, c.scouted_by])
     writer.writerows(output)
     return response
 
