@@ -24,7 +24,7 @@ urlpatterns = [
         name='import_event_from_TBA'),
     url(r'^exporthtml/(?P<event_code>[a-zA-Z0-9]+)', views.exporthtml,
         name='exporthtml'),
-    url(r'^exportcubeshtml/(?P<event_code>[a-zA-Z0-9]+)', views.exportcubeshtml,
+    url(r'^exportcubeshtml/(?P<event_code>[a-zA-Z0-9]+)/(?P<begin>[a-zA-Z0-9]+)/(?P<end>[a-zA-Z0-9]+)', views.exportcubeshtml,
         name='exportcubeshtml'),
     url(r'^exportteam/$', views.exportteam,
         name='exportteam'),

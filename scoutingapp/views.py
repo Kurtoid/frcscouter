@@ -426,14 +426,14 @@ def exporthtml(request, event_code):
     writer.writerows(output)
     return response
 
-def exportcubeshtml(request, event_code):
+def exportcubeshtml(request, event_code, begin, end):
     tourn = Tournament.objects.filter(event_code = event_code)
     cubeList = CubePlace.objects.filter(match__tournament = tourn)
     output = []
     response = HttpResponse(content_type = 'text/csv')
     writer = csv.writer(response)
     writer.writerow(['Match number','team', 'acquired','scored','when','scouted_by'])
-    for c in cubeList:
+    for c in cubeList[begin:end]:
         output.append([c.match, c.match.scouted_team, c.acquired, c.scored,c.when, c.scouted_by])
     writer.writerows(output)
     return response
