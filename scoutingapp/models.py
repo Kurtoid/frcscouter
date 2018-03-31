@@ -206,6 +206,9 @@ class CubePlace(models.Model):
     def bot(self):
         return self.match.scouted_team.team_number
 
+    def __str__(self):
+        return str(self.match.event.event_code) + " " + str(self.match.match_number) + " " + str(self.acquired) + " " + str(self.scored) + " " + str(self.when)
+
 
 class Alliance(models.Model):
     color = models.CharField(max_length=10)
