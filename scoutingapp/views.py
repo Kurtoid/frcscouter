@@ -433,7 +433,7 @@ def exportcubeshtml(request, event_code, begin, end):
     response = HttpResponse(content_type = 'text/csv')
     writer = csv.writer(response)
     writer.writerow(['Match number','team', 'acquired','scored','when','scouted_by'])
-    for c in cubeList[begin:end]:
+    for c in cubeList[int(begin):int(end)]:
         output.append([c.match, c.match.scouted_team, c.acquired, c.scored,c.when, c.scouted_by])
     writer.writerows(output)
     return response
