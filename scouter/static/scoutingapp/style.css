@@ -10,3 +10,12 @@ main {
 	flex: 1 0 auto;
 }
 
+
+li.preanim div{
+	background-color: #2bbbad;
+	color: white;
+}
+
+li.postanim div{
+  transition: all 1.0s ease-in;
+}

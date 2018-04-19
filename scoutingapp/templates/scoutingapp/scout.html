@@ -52,13 +52,15 @@
                   });
                   // alert(sub);
                   if(num===3){
+                  var newItem = $("<li class=\"collection-item hitem preanim\"><div>" + sub+ "<a href = \"#!\" class =\"secondary-content removebutton\"><i class =\"material-icons\">remove</i></a></li>");
                   $("#cubesplaced")
-                      .append(
-                              $("<li class=\"collection-item hitem\"><div>" + sub
-                                + "<a href = \"#!\" class =\"secondary-content removebutton\"><i class =\"material-icons\">remove</i></a></li>"));
-
+                      .append(newItem);
+                  setTimeout(function() {
+                      //newItem.className = "collection-item hitem postanim";
+                      newItem.attr("class","collection-item hitem postanim");
+                    }, 10);
                             }
-                          }
+                }
                 //$("#cubeadd").click(function(){
                 //});
               </script>
