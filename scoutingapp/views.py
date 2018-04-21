@@ -416,7 +416,7 @@ def import_event_from_TBA(request):
 
 def exporthtml(request, event_code):
     # print(tourn)
-    matchlist = Match.objects.filter(tournament__event_code=event_code)
+    matchlist = Match.objects.filter(tournament__event_code=event_code).order_by("match_number")
     output = []
     response = HttpResponse(content_type = 'text/csv')
     writer = csv.writer(response)
@@ -439,7 +439,7 @@ def exportcubeshtml(request, event_code, begin, end):
     return response
 
 def exportteam(request):
-    teamlist = Team.objects.all()
+    teamlist = Team.objects.all().order_by("team_number")
     teams = TeamTable(teamlist)
     RequestConfig(request, paginate={'per_page': 9999}).configure(teams)
     return render(request, 'scoutingapp/exporthtml.html', {
@@ -448,7 +448,7 @@ def exportteam(request):
 
 
 def exportteambyevent(request, event_code):
-    teamlist = Team.objects.filter(currently_in_event__event_code = event_code)
+    teamlist = Team.objects.filter(currently_in_event__event_code = event_code).order_by("team_number")
     teams = TeamTable(teamlist)
     RequestConfig(request, paginate={'per_page': 9999}).configure(teams)
     return render(request, 'scoutingapp/exporthtml.html', {
