@@ -428,7 +428,7 @@ def exporthtml(request, event_code):
 
 def exportcubeshtml(request, event_code, begin, end):
     tourn = Tournament.objects.filter(event_code = event_code)
-    cubeList = CubePlace.objects.filter(match__tournament = tourn)
+    cubeList = CubePlace.objects.filter(match__tournament = tourn).order_by("match__match_number", "match__scouted_team__team_number")
     output = []
     response = HttpResponse(content_type = 'text/csv')
     writer = csv.writer(response)
