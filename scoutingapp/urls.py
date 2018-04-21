@@ -28,6 +28,8 @@ urlpatterns = [
         name='exportcubeshtml'),
     url(r'^exportteam/$', views.exportteam,
         name='exportteam'),
+    url(r'^exportteambyevent/(?P<event_code>[a-zA-Z0-9]+)', views.exportteambyevent,
+        name='exportteambyevent'),
     url(r'^allianceexporthtml/(?P<event_code>[a-zA-Z0-9]+)', views.allianceexporthtml,
         name='allianceexporthtml'),
     url(r'^gethoppertypes/$', views.gethoppertypes, name='hoppertypes'),

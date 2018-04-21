@@ -447,6 +447,13 @@ def exportteam(request):
     })
 
 
+def exportteambyevent(request, event_code):
+    teamlist = Team.objects.filter(currently_in_event__event_code = event_code)
+    teams = TeamTable(teamlist)
+    RequestConfig(request, paginate={'per_page': 9999}).configure(teams)
+    return render(request, 'scoutingapp/exporthtml.html', {
+        'rounds': teams
+    })
 
 def exportusers(request):
     users = MyUser.objects.all();
